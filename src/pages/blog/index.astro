@@ -25,6 +25,7 @@ const posts = await sortedPosts();
       <input
         data-archive-query
         name="q"
+        aria-label="Search the archive"
         placeholder="Search the archive..."
         class="w-full border-0 bg-transparent py-2 outline-none placeholder:text-muted-foreground"
       />
@@ -75,6 +76,7 @@ const posts = await sortedPosts();
 
     <div data-archive-more-wrap class="mt-10 text-center" hidden>
       <button
+        type="button"
         data-archive-more
         class="rounded-md border border-border px-5 py-2.5 text-sm font-medium hover:bg-muted"
       ></button>

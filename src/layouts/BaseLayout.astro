@@ -11,6 +11,7 @@ const {
   ogType = "website",
   ogImage,
   jsonLd,
+  flushFooter = false,
 } = Astro.props;
 
 const ogImageUrl = imageSrc(ogImage);
@@ -65,7 +66,7 @@ const ogImageUrl = imageSrc(ogImage);
       <main class="flex-1">
         <slot />
       </main>
-      <Footer />
+      <Footer flush={flushFooter} />
     </div>
   </body>
 </html>

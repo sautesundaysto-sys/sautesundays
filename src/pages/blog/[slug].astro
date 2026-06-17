@@ -59,6 +59,7 @@ const jsonLd = {
   ogType="article"
   ogImage={post.thumbnail}
   jsonLd={jsonLd}
+  flushFooter
 >
   <div class="fixed left-0 right-0 top-0 z-50 h-0.5 bg-transparent">
     <div data-reading-progress class="h-full bg-primary transition-[width] duration-75" style="width: 0%"></div>
@@ -90,7 +91,7 @@ const jsonLd = {
         {
           author && (
             <a href={`/authors/${author.slug}`} class="flex items-center gap-2 hover:text-foreground">
-              <img src={author.avatar} alt="" class="h-7 w-7 rounded-full" />
+              <img src={author.avatar} alt="" width="28" height="28" class="h-7 w-7 rounded-full" />
               {author.name}
             </a>
           )
@@ -135,7 +136,7 @@ const jsonLd = {
           <span class="text-xs uppercase tracking-wider text-muted-foreground">Share</span>
           <a target="_blank" rel="noreferrer" href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title)}`} class="inline-flex h-8 w-8 items-center justify-center rounded-full border border-border text-muted-foreground hover:text-primary"><Icon name="twitter" class="h-3.5 w-3.5" /></a>
           <a target="_blank" rel="noreferrer" href="https://www.linkedin.com/sharing/share-offsite/?url=" class="inline-flex h-8 w-8 items-center justify-center rounded-full border border-border text-muted-foreground hover:text-primary"><Icon name="link" class="h-3.5 w-3.5" /></a>
-          <button data-copy-link class="ml-auto inline-flex items-center gap-2 rounded-full border border-border px-3 py-1.5 text-xs text-muted-foreground hover:text-foreground">
+          <button type="button" data-copy-link class="ml-auto inline-flex items-center gap-2 rounded-full border border-border px-3 py-1.5 text-xs text-muted-foreground hover:text-foreground">
             <span data-copy-ready class="inline-flex items-center gap-2"><Icon name="copy" class="h-3.5 w-3.5" /> Copy link</span>
             <span data-copy-done class="inline-flex items-center gap-2" hidden><Icon name="check" class="h-3.5 w-3.5" /> Copied</span>
           </button>
@@ -144,7 +145,7 @@ const jsonLd = {
         {
           author && (
             <div class="mt-10 flex items-start gap-4 rounded-md border border-border p-5">
-              <img src={author.avatar} alt="" class="h-14 w-14 rounded-full" />
+              <img src={author.avatar} alt="" width="56" height="56" class="h-14 w-14 rounded-full" />
               <div>
                 <div class="text-xs uppercase tracking-wider text-muted-foreground">Written by</div>
                 <a href={`/authors/${author.slug}`} class="font-serif text-lg font-semibold hover:text-primary">

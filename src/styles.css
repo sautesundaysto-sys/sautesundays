@@ -88,6 +88,7 @@
   }
 
   body {
+    margin: 0;
     background-color: var(--color-background);
     color: var(--color-foreground);
     font-family: var(--font-sans);
@@ -99,6 +100,68 @@
   ::selection {
     background-color: color-mix(in oklab, var(--color-primary) 25%, transparent);
   }
+}
+
+@layer components {
+  [data-home-header] {
+    box-shadow: none;
+    backdrop-filter: none;
+  }
+
+  [data-home-header][data-scrolled="true"] {
+    background-color: var(--color-background) !important;
+    border-color: var(--color-border) !important;
+    color: var(--color-foreground);
+  }
+
+  [data-home-header] .home-header-link {
+    color: rgb(255 255 255 / 0.78);
+    transition: color 150ms ease;
+  }
+
+  [data-home-header] .home-header-brand {
+    color: rgb(255 255 255);
+  }
+
+  [data-home-header] .home-header-link:hover,
+  [data-home-header] .home-header-link.is-active {
+    color: rgb(255 255 255);
+  }
+
+  [data-home-header][data-scrolled="true"] .home-header-link {
+    color: var(--color-muted-foreground);
+  }
+
+  [data-home-header][data-scrolled="true"] .home-header-brand {
+    color: var(--color-foreground);
+  }
+
+  [data-home-header][data-scrolled="true"] .home-header-link:hover,
+  [data-home-header][data-scrolled="true"] .home-header-link.is-active {
+    color: var(--color-foreground);
+  }
+
+  [data-home-header] .home-header-action {
+    color: rgb(255 255 255 / 0.78);
+  }
+
+  [data-home-header] .home-header-action:hover,
+  [data-home-header] .home-header-action:focus-visible {
+    background-color: rgb(255 255 255 / 0.12);
+    color: rgb(255 255 255);
+    outline: none;
+  }
+
+  [data-home-header][data-scrolled="true"] .home-header-action {
+    color: var(--color-muted-foreground);
+  }
+
+  [data-home-header][data-scrolled="true"] .home-header-action:hover,
+  [data-home-header][data-scrolled="true"] .home-header-action:focus-visible {
+    background-color: var(--color-muted);
+    color: var(--color-foreground);
+  }
+
 }
 
 @utility font-serif {
