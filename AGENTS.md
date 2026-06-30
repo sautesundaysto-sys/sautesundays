@@ -13,8 +13,6 @@ These instructions apply to all Astro theme work. Prioritize clean, reusable, ac
 * Favor progressive enhancement. The site should remain usable even if JavaScript fails.
 * Keep markup clean, semantic, and easy to crawl.
 * Never solve layout or behavior problems in a way that harms accessibility, SEO, or performance.
-* Follow README layout as here https://github.com/andreialba/maria must include the title, preview image with a link to the preview URL, those cards with versions, preview link, short description of the theme, list of features, and how to set things up.
-* Add MIT license under Andrei Alba
 
 ## Astro-Specific Guidelines
 
