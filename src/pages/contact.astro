@@ -34,9 +34,6 @@ import { CONTACT } from "../config/theme.config.ts";
           marginwidth="0"
           title="Join the Sauté Sundays Community"
         ></iframe>
-        <script>
-          var d=document,w="https://tally.so/widgets/embed.js",v=function(){"undefined"!=typeof Tally?Tally.loadEmbeds():d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach((function(e){e.src=e.dataset.tallySrc}))};if("undefined"!=typeof Tally)v();else if(d.querySelector('script[src="'+w+'"]')==null){var s=d.createElement("script");s.src=w,s.onload=v,s.onerror=v,d.body.appendChild(s);}
-        </script>
       </div>
 
       <aside class="space-y-6 border-l border-border pl-8">
@@ -60,3 +57,20 @@ import { CONTACT } from "../config/theme.config.ts";
             </li>
             <li>
               <a href="https://chat.whatsapp.com/GmxcTL5eYwsKqwb23VBjJL" class="flex items-center gap-2 hover:text-primary">
+                <Icon name="whatsapp" class="h-3.5 w-3.5" /> WhatsApp Community
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <div class="text-xs font-medium uppercase tracking-wider text-muted-foreground">Questions?</div>
+          <p class="mt-2 text-sm text-muted-foreground">
+            Email us at <a href={`mailto:${CONTACT.email}`} class="text-primary hover:underline">{CONTACT.email}</a> and we'll get back to you.
+          </p>
+        </div>
+      </aside>
+    </div>
+  </div>
+</BaseLayout>
+
+<script async src="https://tally.so/widgets/embed.js"></script>
