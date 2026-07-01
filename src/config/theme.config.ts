@@ -41,10 +41,10 @@ export const FORMS = {
 };
 
 export const SOCIAL_LINKS = [
-  { href: "https://www.instagram.com/sautesundays.to/", label: "Sauté Sundays on Instagram", icon: "instagram" },
-  { href: "https://lu.ma/sautesundaysto", label: "RSVP on Luma", icon: "calendar" },
-  { href: "https://chat.whatsapp.com/GmxcTL5eYwsKqwb23VBjJL", label: "Join our WhatsApp Community", icon: "whatsapp" },
-  { href: `mailto:${CONTACT.email}`, label: "Email", icon: "mail" },
+  { a href: "https://www.instagram.com/sautesundays.to/", label: "Sauté Sundays on Instagram", icon: "instagram" },
+  { a href: "https://lu.ma/sautesundaysto", label: "RSVP on Luma", icon: "calendar" },
+  { a href: "https://chat.whatsapp.com/GmxcTL5eYwsKqwb23VBjJL", label: "Join our WhatsApp Community", icon: "whatsapp" },
+  { a href: `mailto:${CONTACT.email}`, label: "Email", icon: "mail" },
 ];
 
 export const authors = [
