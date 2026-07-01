@@ -41,16 +41,20 @@ const latest = (await sortedPosts()).filter((post) => post.slug !== featured.slu
       format="webp"
       quality={50}
     />
+    <div
+      aria-hidden="true"
+      class="absolute inset-y-0 left-0 w-2/3 bg-gradient-to-r from-[#f2eeeb]/90 via-[#f2eeeb]/50 to-transparent"
+    />
     
-    <div class="relative mx-auto flex min-h-[calc(100svh-6rem)] max-w-6xl items-center px-5 py-20 sm:min-h-[680px] sm:py-24">
-      <div class="max-w-4xl text-foreground">
+   <div class="relative mx-auto flex min-h-[calc(100svh-6rem)] max-w-6xl items-center px-5 py-20 sm:min-h-[680px] sm:py-24">
+      <div class="max-w-4xl text-foreground drop-shadow-[0_1px_3px_rgba(255,255,255,0.8)]">
         <h1 class="font-serif text-[2.5rem] font-medium leading-[1.02] sm:text-6xl lg:text-7xl">
           Toronto's
           <span class="italic text-primary"> cookbook club</span>,
           where everyone cooks and
           <span class="italic text-primary"> everyone shares</span>.
         </h1>
-        <p class="mt-8 max-w-xl text-lg leading-relaxed text-white/86">
+        <p class="mt-8 max-w-xl text-lg leading-relaxed text-foreground/80">
           Every month, members cook a dish at home from the same featured cookbook, then come together at one table to share it. Free to attend. Running since 2025. Sells out within hours.
         </p>
         <div class="mt-10 flex flex-wrap items-center gap-4">
