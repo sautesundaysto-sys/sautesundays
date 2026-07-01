@@ -16,9 +16,11 @@ export const SITE = {
 
 export const NAVIGATION = [
   { to: "/", label: "Home" },
-  { to: "/blog", label: "Past Events" },
+  { to: "/blog", label: "Recaps" },
+  { to: "/faq", label: "FAQ" },
   { to: "/about", label: "About" },
-  { to: "https://lu.ma/sautesundaysto", label: "Join Us" },
+  { to: "/contact", label: "Contact Us" },
+  { to: "https://lu.ma/sautesundaysto", label: "Events" },
 ];
 
 export const CONTACT = {
