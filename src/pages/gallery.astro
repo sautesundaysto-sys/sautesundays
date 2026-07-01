@@ -1,0 +1,71 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
+import { SITE, sortedPosts } from "../lib/blog-data.js";
+
+const posts = await sortedPosts();
+---
+
+<BaseLayout
+  title={`Gallery - ${SITE.name}`}
+  description="Photos from Sauté Sundays — Toronto's cookbook club. A year of monthly potluck gatherings, one cookbook at a time."
+  canonical="/gallery"
+>
+  <div class="mx-auto max-w-6xl px-5 py-12">
+    <Breadcrumbs items={[{ label: "Home", to: "/" }, { label: "Gallery" }]} />
+
+    <header class="mt-6 mb-12">
+      <div class="text-xs font-medium uppercase tracking-[0.2em] text-primary">Gallery</div>
+      <h1 class="mt-2 font-serif text-5xl font-semibold leading-[1.05]">
+        A year of good tables.
+      </h1>
+      <p class="mt-4 max-w-xl text-muted-foreground">
+        Every month, one cookbook, thirty-five people, and a table full of dishes nobody planned together. Here's what it looks like.
+      </p>
+    </header>
+
+    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        posts.map((post) => (
+          post.thumbnail && (
+            
+              href={`/blog/${post.slug}`}
+              class="group relative block aspect-square overflow-hidden rounded-lg bg-muted"
+            >
+              <img
+                src={post.thumbnail.src}
+                alt={post.thumbnailAlt ?? post.title}
+                class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                loading="lazy"
+              />
+              <div class="absolute inset-0 bg-black/0 transition-colors duration-300 group-hover:bg-black/30" />
+              <div class="absolute inset-0 flex items-end p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                <div class="text-white">
+                  <div class="text-xs font-medium uppercase tracking-wider opacity-80">{post.date}</div>
+                  <div class="mt-1 font-serif text-lg font-semibold leading-tight">{post.title}</div>
+                </div>
+              </div>
+            </a>
+          )
+        ))
+      }
+    </div>
+
+    {posts.length === 0 && (
+      <div class="rounded-md border border-dashed border-border py-24 text-center text-muted-foreground">
+        Photos coming soon — check back after our next event.
+      </div>
+    )}
+
+    <div class="mt-12 text-center">
+      
+        href="https://www.instagram.com/sautesundays.to/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-2 rounded-full border border-border px-6 py-3 text-sm font-semibold hover:bg-muted transition-colors"
+      >
+        See more on Instagram ↗
+      </a>
+    </div>
+  </div>
+</BaseLayout>

@@ -18,7 +18,8 @@ export const NAVIGATION = [
   { to: "/", label: "Home" },
   { to: "/blog", label: "Past Events" },
   { to: "/about", label: "About" },
-  { to: "/contact", label: "Join Us" },
+  { to: "https://lu.ma/sautesundaysto", label: "Join Us" },
+
 ];
 
 export const CONTACT = {

@@ -1,6 +1,6 @@
 ---
 import Icon from "./Icon.astro";
-import { SITE, categories } from "../lib/blog-data.js";
+import { SITE } from "../lib/blog-data.js";
 import { SOCIAL_LINKS } from "../config/theme.config.ts";
 
 const { flush = false } = Astro.props;
@@ -9,14 +9,14 @@ const { flush = false } = Astro.props;
 <footer class:list={[flush ? "mt-0" : "mt-24", "border-t border-border/60"]}>
   <div class="mx-auto grid max-w-6xl gap-10 px-5 py-12 md:grid-cols-4">
     <div class="md:col-span-2">
-      <div class="font-serif text-lg font-semibold">{SITE.name}</div>
+      <img src="/Saute sundays logo.png" alt="Sauté Sundays" class="h-10 w-auto" />
       <p class="mt-3 max-w-sm text-sm leading-relaxed text-muted-foreground">
-        {SITE.description}
+        Toronto's cookbook club. Every month, members cook a dish at home from the same featured cookbook, then come together at one table to share it.
       </p>
       <div class="mt-4 flex items-center gap-3 text-muted-foreground">
         {
           SOCIAL_LINKS.map((link) => (
-            <a href={link.href} aria-label={link.label} class="hover:text-foreground">
+            <a href={link.href} aria-label={link.label} class="hover:text-primary">
               <Icon name={link.icon} class="h-4 w-4" />
             </a>
           ))
@@ -24,33 +24,31 @@ const { flush = false } = Astro.props;
       </div>
     </div>
     <div>
-      <div class="text-xs font-medium uppercase tracking-wider text-muted-foreground">Sections</div>
+      <div class="text-xs font-medium uppercase tracking-wider text-muted-foreground">Navigate</div>
       <ul class="mt-3 space-y-2 text-sm">
-        {
-          categories.slice(0, 5).map((category) => (
-            <li>
-              <a href={`/categories/${category.slug}`} class="text-foreground/80 hover:text-foreground">
-                {category.name}
-              </a>
-            </li>
-          ))
-        }
+        <li><a href="/" class="text-foreground/80 hover:text-foreground">Home</a></li>
+        <li><a href="/blog" class="text-foreground/80 hover:text-foreground">Past Events</a></li>
+        <li><a href="/about" class="text-foreground/80 hover:text-foreground">About</a></li>
+        <li><a href="/contact" class="text-foreground/80 hover:text-foreground">Join Us</a></li>
+        <li><a href="/gallery" class="text-foreground/80 hover:text-foreground">Gallery</a></li>
       </ul>
     </div>
     <div>
-      <div class="text-xs font-medium uppercase tracking-wider text-muted-foreground">The site</div>
+      <div class="text-xs font-medium uppercase tracking-wider text-muted-foreground">From Tammy</div>
       <ul class="mt-3 space-y-2 text-sm">
-        <li><a href="/about" class="hover:text-foreground">About</a></li>
-        <li><a href="/contact" class="hover:text-foreground">Contact</a></li>
-        <li><a href="/blog" class="hover:text-foreground">Archive</a></li>
-        <li><a href="/rss.xml" class="hover:text-foreground">RSS feed</a></li>
+        <li>
+          <a href="https://clearingthetable.substack.com" target="_blank" rel="noopener noreferrer" class="text-foreground/80 hover:text-primary">
+            Clearing the Table ↗
+          </a>
+        </li>
+        <li class="text-xs text-muted-foreground">Food writing, travel & recipes on Substack</li>
       </ul>
     </div>
   </div>
   <div class="border-t border-border/60">
     <div class="mx-auto flex max-w-6xl flex-col items-start justify-between gap-2 px-5 py-5 text-xs text-muted-foreground sm:flex-row sm:items-center">
-      <div>&copy; {new Date().getFullYear()} {SITE.name}. Quietly made on the open web.</div>
-      <div>Set in Fraunces &amp; Inter.</div>
+      <div>&copy; {new Date().getFullYear()} Sauté Sundays. Toronto's cookbook club. 💛</div>
+      <div>Made with love in Toronto.</div>
     </div>
   </div>
 </footer>
