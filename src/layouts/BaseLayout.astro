@@ -5,7 +5,7 @@ import Footer from "../components/Footer.astro";
 import { SITE, imageSrc } from "../lib/blog-data.js";
 
 const {
-  title = `${SITE.name} - A quiet magazine on writing, design, and the slow web`,
+  title = `${SITE.name} - Toronto's Cookbook Club`,
   description = SITE.description,
   canonical,
   ogType = "website",
@@ -49,20 +49,8 @@ const ogImageUrl = absoluteUrl(ogImage);
     {ogImageUrl && <meta name="twitter:image" content={ogImageUrl} />}
     {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
     <link rel="icon" type="image/png" href="/Saute sundays logo.png" />
-    <link
-      rel="preload"
-      href="/fonts/inter-latin.woff2"
-      as="font"
-      type="font/woff2"
-      crossorigin
-    />
-    <link
-      rel="preload"
-      href="/fonts/fraunces-latin.woff2"
-      as="font"
-      type="font/woff2"
-      crossorigin
-    />
+   
+    
     <link rel="alternate" type="application/rss+xml" title={SITE.name} href="/rss.xml" />
     {
       jsonLd && (
