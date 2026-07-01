@@ -1,27 +1,7 @@
 @import "tailwindcss" source(none);
 @source "../src";
 
-@font-face {
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 400 700;
-  font-display: swap;
-  src: url("/fonts/inter-latin.woff2") format("woff2");
-  unicode-range:
-    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
-    U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-
-@font-face {
-  font-family: "Fraunces";
-  font-style: normal;
-  font-weight: 400 700;
-  font-display: swap;
-  src: url("/fonts/fraunces-latin.woff2") format("woff2");
-  unicode-range:
-    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
-    U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&display=swap');
 
 @font-face {
   font-family: "JetBrains Mono";
@@ -60,54 +40,54 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  --font-serif: "Fraunces", ui-serif, Georgia, serif;
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Cormorant Garamond", ui-serif, Georgia, serif;
+  --font-sans: "Montserrat", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
 }
 
 :root {
   --radius: 0.5rem;
-  --background: oklch(0.985 0.004 90);
-  --foreground: oklch(0.18 0.01 60);
-  --card: oklch(0.985 0.004 90);
-  --card-foreground: oklch(0.18 0.01 60);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.18 0.01 60);
-  --primary: oklch(0.55 0.16 30);
-  --primary-foreground: oklch(0.99 0 0);
-  --secondary: oklch(0.95 0.005 90);
-  --secondary-foreground: oklch(0.2 0.01 60);
-  --muted: oklch(0.95 0.005 90);
-  --muted-foreground: oklch(0.5 0.01 60);
-  --accent: oklch(0.93 0.01 60);
-  --accent-foreground: oklch(0.2 0.01 60);
+  --background: #f2eeeb;
+  --foreground: #383a37;
+  --card: #f2eeeb;
+  --card-foreground: #383a37;
+  --popover: #f2eeeb;
+  --popover-foreground: #383a37;
+  --primary: #527334;
+  --primary-foreground: #f2eeeb;
+  --secondary: #e9e8e6;
+  --secondary-foreground: #383a37;
+  --muted: #e9e8e6;
+  --muted-foreground: #9a9c99;
+  --accent: #e9e8e6;
+  --accent-foreground: #383a37;
   --destructive: oklch(0.55 0.22 27);
-  --destructive-foreground: oklch(0.99 0 0);
-  --border: oklch(0.9 0.005 80);
-  --input: oklch(0.9 0.005 80);
-  --ring: oklch(0.55 0.16 30);
+  --destructive-foreground: #f2eeeb;
+  --border: #e9e8e6;
+  --input: #e9e8e6;
+  --ring: #527334;
 }
 
 .dark {
-  --background: oklch(0.16 0.005 80);
-  --foreground: oklch(0.95 0.005 80);
-  --card: oklch(0.16 0.005 80);
-  --card-foreground: oklch(0.95 0.005 80);
-  --popover: oklch(0.2 0.005 80);
-  --popover-foreground: oklch(0.95 0.005 80);
-  --primary: oklch(0.72 0.14 35);
-  --primary-foreground: oklch(0.16 0.005 80);
-  --secondary: oklch(0.22 0.005 80);
-  --secondary-foreground: oklch(0.95 0.005 80);
-  --muted: oklch(0.22 0.005 80);
-  --muted-foreground: oklch(0.65 0.01 80);
-  --accent: oklch(0.24 0.005 80);
-  --accent-foreground: oklch(0.95 0.005 80);
+  --background: #383a37;
+  --foreground: #f2eeeb;
+  --card: #383a37;
+  --card-foreground: #f2eeeb;
+  --popover: #392a24;
+  --popover-foreground: #f2eeeb;
+  --primary: #527334;
+  --primary-foreground: #f2eeeb;
+  --secondary: #392a24;
+  --secondary-foreground: #f2eeeb;
+  --muted: #392a24;
+  --muted-foreground: #9a9c99;
+  --accent: #392a24;
+  --accent-foreground: #f2eeeb;
   --destructive: oklch(0.7 0.19 22);
-  --destructive-foreground: oklch(0.16 0.005 80);
-  --border: oklch(0.28 0.005 80);
-  --input: oklch(0.28 0.005 80);
-  --ring: oklch(0.72 0.14 35);
+  --destructive-foreground: #f2eeeb;
+  --border: #392a24;
+  --input: #392a24;
+  --ring: #527334;
 }
 
 @layer base {
@@ -124,7 +104,6 @@
     background-color: var(--color-background);
     color: var(--color-foreground);
     font-family: var(--font-sans);
-    font-feature-settings: "ss01", "cv11";
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
@@ -177,27 +156,22 @@
   [data-home-header] {
     box-shadow: none;
     backdrop-filter: none;
-  }
-
-  [data-home-header][data-scrolled="true"],
-  [data-home-header][data-panel-open="true"] {
     background-color: var(--color-background) !important;
     border-color: var(--color-border) !important;
-    color: var(--color-foreground);
   }
 
   [data-home-header] .home-header-link {
-    color: rgb(255 255 255 / 0.78);
+    color: var(--color-foreground);
     transition: color 150ms ease;
   }
 
   [data-home-header] .home-header-brand {
-    color: rgb(255 255 255);
+    color: var(--color-foreground);
   }
 
   [data-home-header] .home-header-link:hover,
   [data-home-header] .home-header-link.is-active {
-    color: rgb(255 255 255);
+    color: var(--color-primary);
   }
 
   [data-home-header][data-scrolled="true"] .home-header-link,
@@ -214,17 +188,17 @@
   [data-home-header][data-scrolled="true"] .home-header-link.is-active,
   [data-home-header][data-panel-open="true"] .home-header-link:hover,
   [data-home-header][data-panel-open="true"] .home-header-link.is-active {
-    color: var(--color-foreground);
+    color: var(--color-primary);
   }
 
   [data-home-header] .home-header-action {
-    color: rgb(255 255 255 / 0.78);
+    color: var(--color-foreground);
   }
 
   [data-home-header] .home-header-action:hover,
   [data-home-header] .home-header-action:focus-visible {
-    background-color: rgb(255 255 255 / 0.12);
-    color: rgb(255 255 255);
+    background-color: var(--color-muted);
+    color: var(--color-foreground);
     outline: none;
   }
 
@@ -310,123 +284,10 @@
   & code {
     font-family: var(--font-mono);
     font-size: 0.9em;
-    color: oklch(0.3 0.08 35);
-    background: oklch(0.95 0.012 85);
+    color: #527334;
+    background: #e9e8e6;
     padding: 0.15rem 0.4rem;
     border-radius: 4px;
-  }
-  .dark & code {
-    color: oklch(0.88 0.08 55);
-    background: oklch(0.23 0.006 80);
-  }
-  & .code-block {
-    position: relative;
-    width: 100%;
-    max-width: 100%;
-    min-width: 0;
-    margin: 1.5rem 0;
-  }
-  & pre {
-    box-sizing: border-box;
-    width: 100%;
-    max-width: 100%;
-    min-width: 0;
-    color: oklch(0.22 0.025 70) !important;
-    background: oklch(0.975 0.006 95) !important;
-    border: 1px solid oklch(0.88 0.008 80);
-    border-radius: 8px;
-    padding: 1rem 3.5rem 1rem 1.25rem;
-    overflow-x: auto !important;
-    margin: 0;
-    font-size: 0.9rem;
-    line-height: 1.6;
-    box-shadow: inset 0 1px 0 oklch(1 0 0 / 0.75);
-  }
-  .dark & pre {
-    color: oklch(0.91 0.012 85) !important;
-    background: oklch(0.18 0.006 80) !important;
-    border-color: oklch(0.33 0.006 80);
-    box-shadow: inset 0 1px 0 oklch(1 0 0 / 0.06);
-  }
-  & pre code {
-    display: block;
-    min-width: max-content;
-    color: inherit;
-    background: transparent;
-    padding: 0;
-  }
-  .dark & pre code {
-    color: inherit;
-    background: transparent;
-  }
-  & pre span {
-    color: oklch(0.28 0.035 70) !important;
-  }
-  .dark & pre span {
-    color: oklch(0.89 0.014 85) !important;
-  }
-  & .code-copy-button {
-    position: absolute;
-    top: 0.55rem;
-    right: 0.55rem;
-    z-index: 1;
-    display: inline-flex;
-    width: 2rem;
-    height: 2rem;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid oklch(0.83 0.008 80);
-    border-radius: 6px;
-    color: oklch(0.46 0.015 70);
-    background: oklch(0.995 0.002 95 / 0.94);
-    transition:
-      color 150ms ease,
-      border-color 150ms ease,
-      background-color 150ms ease,
-      opacity 150ms ease;
-  }
-  & .code-copy-button:hover,
-  & .code-copy-button:focus-visible {
-    color: var(--color-foreground);
-    border-color: var(--color-primary);
-    outline: none;
-  }
-  & .code-copy-button::after {
-    position: absolute;
-    right: 0;
-    bottom: calc(100% + 0.4rem);
-    content: attr(data-tooltip);
-    pointer-events: none;
-    white-space: nowrap;
-    border-radius: 5px;
-    background: oklch(0.2 0.01 70);
-    color: oklch(0.98 0.002 90);
-    padding: 0.25rem 0.45rem;
-    font-family: var(--font-sans);
-    font-size: 0.72rem;
-    font-weight: 500;
-    line-height: 1.2;
-    opacity: 0;
-    transform: translateY(3px);
-    transition:
-      opacity 150ms ease,
-      transform 150ms ease;
-  }
-  & .code-copy-button:hover::after,
-  & .code-copy-button:focus-visible::after,
-  & .code-copy-button.is-copied::after {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  .dark & .code-copy-button {
-    color: oklch(0.73 0.012 85);
-    background: oklch(0.24 0.006 80 / 0.94);
-    border-color: oklch(0.38 0.006 80);
-  }
-  .dark & .code-copy-button:hover,
-  .dark & .code-copy-button:focus-visible {
-    color: var(--color-foreground);
-    border-color: var(--color-primary);
   }
   & hr {
     border: 0;
