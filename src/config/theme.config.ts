@@ -1,30 +1,30 @@
 const siteUrl = (
   import.meta.env.SITE_URL ||
   import.meta.env.PUBLIC_SITE_URL ||
-  "https://quietpages-eta.vercel.app"
+  "https://sautesundays.vercel.app"
 ).replace(/\/$/, "");
 
 export const SITE = {
-  name: "Quiet Pages",
+  name: "Sauté Sundays",
   description:
-    "An independent magazine on writing, design, and the slow web. Published occasionally, read closely.",
+    "Toronto's cookbook club. Every month, members cook a dish at home from the same featured cookbook, then come together at one table to share it. Running since 2025, selling out within hours.",
   url: siteUrl,
   locale: "en-US",
   language: "en",
-  repositoryUrl: "https://github.com/andreialba/quietpages",
+  repositoryUrl: "https://github.com/sautesundaysto-sys/sautesundays",
 };
 
 export const NAVIGATION = [
   { to: "/", label: "Home" },
-  { to: "/blog", label: "Writing" },
+  { to: "/blog", label: "Past Events" },
   { to: "/about", label: "About" },
-  { to: "/contact", label: "Contact" },
+  { to: "/contact", label: "Join Us" },
 ];
 
 export const CONTACT = {
-  email: "hello@example.com",
-  socialHandle: "@quietpages",
-  socialUrl: "https://x.com/quietpages",
+  email: "sautesundays.to@gmail.com",
+  socialHandle: "@sautesundays.to",
+  socialUrl: "https://www.instagram.com/sautesundays.to/",
 };
 
 export const FORMS = {
@@ -41,54 +41,41 @@ export const FORMS = {
 };
 
 export const SOCIAL_LINKS = [
-  { href: "/rss.xml", label: "RSS feed", icon: "rss" },
-  { href: CONTACT.socialUrl, label: `${SITE.name} on X`, icon: "twitter" },
-  { href: SITE.repositoryUrl, label: `${SITE.name} on GitHub`, icon: "github" },
+  { href: "https://www.instagram.com/sautesundays.to/", label: "Sauté Sundays on Instagram", icon: "instagram" },
+  { href: "https://lu.ma/sautesundaysto", label: "RSVP on Luma", icon: "calendar" },
+  { href: "https://chat.whatsapp.com/GmxcTL5eYwsKqwb23VBjJL", label: "Join our WhatsApp Community", icon: "whatsapp" },
   { href: `mailto:${CONTACT.email}`, label: "Email", icon: "mail" },
 ];
 
 export const authors = [
   {
-    slug: "elena-march",
-    name: "Elena March",
-    bio: "Writer & editor covering design, craft, and slow technology.",
+    slug: "tammy",
+    name: "Tammy",
+    bio: "Co-host of Sauté Sundays, Toronto's cookbook club.",
     longBio:
-      "Elena March writes about the quiet edges of design and technology. Previously an editor at two small magazines, she now publishes essays and field notes from a desk overlooking the harbour.",
-    avatar: "/avatars/elena-march.svg",
+      "Tammy co-hosts Sauté Sundays, a monthly potluck cookbook club based in Toronto. She also writes about food, travel, and cooking on her Substack, Clearing the Table.",
+    avatar: "/avatars/tammy.jpg",
   },
   {
-    slug: "samuel-okafor",
-    name: "Samuel Okafor",
-    bio: "Software engineer with a soft spot for typography and the open web.",
+    slug: "mady",
+    name: "Mady",
+    bio: "Co-host of Sauté Sundays, Toronto's cookbook club.",
     longBio:
-      "Samuel builds tools for writers and reads more than he ships. He believes the best interfaces are the ones you don't notice.",
-    avatar: "/avatars/samuel-okafor.svg",
-  },
-  {
-    slug: "mira-iwasaki",
-    name: "Mira Iwasaki",
-    bio: "Photographer and essayist based between Kyoto and Lisbon.",
-    longBio:
-      "Mira's work sits at the intersection of place, memory, and the everyday object. Her essays have appeared in a number of small but loved publications.",
-    avatar: "/avatars/mira-iwasaki.svg",
+      "Mady co-hosts Sauté Sundays, a monthly potluck cookbook club based in Toronto.",
+    avatar: "/avatars/mady.jpg",
   },
 ];
 
 export const categories = [
-  { slug: "essays", name: "Essays" },
-  { slug: "design", name: "Design" },
-  { slug: "engineering", name: "Engineering" },
-  { slug: "field-notes", name: "Field Notes" },
-  { slug: "interviews", name: "Interviews" },
+  { slug: "event-recap", name: "Event Recap" },
+  { slug: "cookbook", name: "Cookbook" },
+  { slug: "community", name: "Community" },
 ];
 
 export const tags = [
-  { slug: "writing", name: "Writing" },
-  { slug: "typography", name: "Typography" },
-  { slug: "minimalism", name: "Minimalism" },
-  { slug: "tools", name: "Tools" },
-  { slug: "travel", name: "Travel" },
-  { slug: "process", name: "Process" },
-  { slug: "web", name: "Web" },
-  { slug: "books", name: "Books" },
+  { slug: "toronto", name: "Toronto" },
+  { slug: "cookbook-club", name: "Cookbook Club" },
+  { slug: "potluck", name: "Potluck" },
+  { slug: "community", name: "Community" },
+  { slug: "food", name: "Food" },
 ];

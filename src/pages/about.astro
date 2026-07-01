@@ -3,51 +3,67 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Breadcrumbs from "../components/Breadcrumbs.astro";
 import { SITE, authors } from "../lib/blog-data.js";
 ---
-
 <BaseLayout
   title={`About - ${SITE.name}`}
-  description={`About ${SITE.name}: an independent magazine on writing, design, and the slow web.`}
+  description="Sauté Sundays is Toronto's cookbook club. Every month, members cook a dish at home from the same featured cookbook, then come together at one table to share it."
   canonical="/about"
 >
   <div class="mx-auto max-w-3xl px-5 py-12">
     <Breadcrumbs items={[{ label: "Home", to: "/" }, { label: "About" }]} />
-
     <header class="mt-6">
       <div class="text-xs font-medium uppercase tracking-[0.2em] text-primary">About</div>
       <h1 class="mt-2 font-serif text-5xl font-semibold leading-[1.05]">
-        A quiet magazine for the open web.
+        Toronto's cookbook club, where everyone cooks and everyone shares.
       </h1>
     </header>
-
     <div class="prose-article mt-10">
       <p>
-        {SITE.name} began as a folder of notes, drafts, and half-finished essays &mdash; the kind of writing that doesn't survive the timeline. We started publishing it here because we wanted somewhere slower to read, and somewhere slower to write.
+        Sauté Sundays is a free, monthly potluck cookbook club based in Toronto. Every month, everyone in the group cooks a dish at home from the same featured cookbook, then brings it to share at one table. Nobody teaches. Nobody performs. Everyone just shows up with what they made and a story about how it went.
       </p>
       <p>
-        The magazine is independent, occasional, and unsponsored. We publish when the work is ready and not before. There are no trackers, no pop-ups, and no infinite scroll. Just sentences, photographs, and the occasional conversation.
+        We started in 2025 with a small group and a simple idea: actually cook from the cookbooks sitting on your shelf, and find a table to bring it to. A year later, events sell out within hours and we've cooked our way through cuisines from around the world — Greek, Moroccan, Caribbean, Vietnamese, and more.
       </p>
-      <h2 id="what-we-publish">What we publish</h2>
+      <h2 id="how-it-works">How it works</h2>
       <p>
-        Essays on writing, design, and the craft of the web. Field notes from places we love. Interviews with people who make things with their hands. The occasional photograph, when one is worth printing.
+        Each month we pick a cookbook. Everyone chooses a recipe, cooks it at home, and brings it to share at our gathering in Toronto. The result is a table full of dishes from the same book, interpreted differently by everyone who cooked from it. It's part potluck, part book club, and entirely about the food.
       </p>
-      <h2 id="who-we-are">Who we are</h2>
-      <p>A small editorial team, scattered across three time zones, who would rather be reading.</p>
+      <h2 id="the-details">The details</h2>
+      <p>
+        Events are free to attend — the only cost is the groceries for your dish. We meet monthly at Jrew's (165 Niagara St, Toronto), with capacity for 35 people. Early access to RSVPs goes to our newsletter subscribers and WhatsApp community first.
+      </p>
+      <h2 id="join-us">Join us</h2>
+      <p>
+        Subscribe to our newsletter for early access to upcoming events, or follow us on Instagram to see what past nights looked like. If you have a cookbook you'd love to cook from as a group, reply to any newsletter and let us know.
+      </p>
     </div>
-
     <section class="mt-12 border-t border-border pt-10">
-      <h2 class="font-serif text-2xl font-semibold">Contributors</h2>
-      <div class="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <h2 class="font-serif text-2xl font-semibold">Your hosts</h2>
+      <div class="mt-6 grid gap-6 sm:grid-cols-2">
         {
           authors.map((author) => (
-            <a href={`/authors/${author.slug}`} class="group flex items-start gap-3">
+            <div class="flex items-start gap-3">
               <img src={author.avatar} alt="" width="48" height="48" class="h-12 w-12 rounded-full" />
               <div>
-                <div class="font-serif text-base font-semibold group-hover:text-primary">{author.name}</div>
+                <div class="font-serif text-base font-semibold">{author.name}</div>
                 <div class="mt-1 text-sm text-muted-foreground">{author.bio}</div>
               </div>
-            </a>
+            </div>
           ))
         }
+      </div>
+    </section>
+    <section class="mt-12 border-t border-border pt-10">
+      <h2 class="font-serif text-2xl font-semibold">Find us</h2>
+      <div class="mt-4 flex flex-wrap gap-4">
+        <a href="https://lu.ma/sautesundaysto" class="inline-flex items-center gap-2 rounded-full bg-foreground px-5 py-2.5 text-sm font-semibold text-background hover:opacity-90 transition-opacity">
+          RSVP on Luma
+        </a>
+        <a href="https://www.instagram.com/sautesundays.to/" class="inline-flex items-center gap-2 rounded-full border border-border px-5 py-2.5 text-sm font-semibold hover:bg-muted transition-colors">
+          Instagram
+        </a>
+        <a href="https://chat.whatsapp.com/GmxcTL5eYwsKqwb23VBjJL" class="inline-flex items-center gap-2 rounded-full border border-border px-5 py-2.5 text-sm font-semibold hover:bg-muted transition-colors">
+          WhatsApp Community
+        </a>
       </div>
     </section>
   </div>
