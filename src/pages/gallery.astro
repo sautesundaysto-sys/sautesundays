@@ -3,7 +3,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Breadcrumbs from "../components/Breadcrumbs.astro";
 import { SITE, sortedPosts } from "../lib/blog-data.js";
 
-const posts = await sortedPosts();
+const allPosts = await sortedPosts();
+const postsWithImages = allPosts.filter((post) => post.thumbnail);
 ---
 
 <BaseLayout
@@ -24,37 +25,33 @@ const posts = await sortedPosts();
       </p>
     </header>
 
-    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-      {
-        posts.map((post) => (
-          post.thumbnail && (
-            
-              href={`/blog/${post.slug}`}
-              class="group relative block aspect-square overflow-hidden rounded-lg bg-muted"
-            >
-              <img
-                src={typeof post.thumbnail === 'string' ? post.thumbnail : post.thumbnail.src}
-                alt={post.thumbnailAlt ?? post.title}
-                class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-                loading="lazy"
-              />
-              <div class="absolute inset-0 bg-black/0 transition-colors duration-300 group-hover:bg-black/30" />
-              <div class="absolute inset-0 flex items-end p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                <div class="text-white">
-                  <div class="mt-1 font-serif text-lg font-semibold leading-tight">{post.title}</div>
-                </div>
-              </div>
-            </a>
-          )
-        ))
-      }
-    </div>
-
-    {posts.filter(p => p.thumbnail).length === 0 && (
+    {postsWithImages.length === 0 && (
       <div class="rounded-md border border-dashed border-border py-24 text-center text-muted-foreground">
         Photos coming soon — check back after our next event.
       </div>
     )}
+
+    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {postsWithImages.map((post) => (
+        
+          href={`/blog/${post.slug}`}
+          class="group relative block aspect-square overflow-hidden rounded-lg bg-muted"
+        >
+          <img
+            src={post.thumbnail}
+            alt={post.thumbnailAlt ?? post.title}
+            class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+            loading="lazy"
+          />
+          <div class="absolute inset-0 bg-black/0 transition-colors duration-300 group-hover:bg-black/30" />
+          <div class="absolute inset-0 flex items-end p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+            <div class="text-white">
+              <div class="mt-1 font-serif text-lg font-semibold leading-tight">{post.title}</div>
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
 
     <div class="mt-12 text-center">
       
