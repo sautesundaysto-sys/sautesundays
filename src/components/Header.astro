@@ -34,7 +34,7 @@ const iconClass = isHome
           const active = exact ? current === "/" : current.startsWith(item.to);
           return (
             
-              href={item.to}
+             <a href={item.to}
               class={`text-sm ${active ? activeClass : inactiveClass}`}
               aria-current={active ? "page" : undefined}
             >
@@ -77,7 +77,7 @@ const iconClass = isHome
           const active = exact ? current === "/" : current.startsWith(item.to);
           return (
             
-              href={item.to}
+              <a href={item.to}
               class={`rounded-md px-2 py-2 text-sm hover:bg-muted hover:text-foreground ${active ? "text-foreground" : "text-muted-foreground"}`}
               aria-current={active ? "page" : undefined}
             >
