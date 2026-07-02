@@ -23,7 +23,7 @@ const latest = (await sortedPosts()).filter((post) => post.slug !== featured.slu
 
 <BaseLayout
   title={`${SITE.name} - Toronto's Cookbook Club`}
-  description="Sauté Sundays is Toronto's cookbook club. Every month, home cooks gather to cook from the same cookbook and share what they made. Free to attend. Spots go fast."
+  description="Sauté Sundays is Toronto's cookbook club. Bring one dish, enjoy 25+ dishes, and spend an evening with people who love food. Free to attend. Spots go fast."
   canonical="/"
   flushFooter
 >
@@ -46,27 +46,27 @@ const latest = (await sortedPosts()).filter((post) => post.slug !== featured.slu
       class="absolute inset-y-0 left-0 w-2/3 bg-gradient-to-r from-[#f2eeeb]/90 via-[#f2eeeb]/50 to-transparent"
     />
     <div class="relative mx-auto flex min-h-[calc(100svh-6rem)] max-w-6xl items-center px-5 py-20 sm:min-h-[680px] sm:py-24">
-      <div class="max-w-4xl text-foreground drop-shadow-[0_1px_3px_rgba(255,255,255,0.8)]">
+      <div class="max-w-4xl text-[#1a1c1a] drop-shadow-[0_1px_3px_rgba(255,255,255,0.8)]">
         <h1 class="font-serif text-[2.5rem] font-medium leading-[1.02] sm:text-6xl lg:text-7xl">
           Toronto's
           <span class="italic text-primary"> cookbook club</span>
           — bring one dish,
-          <span class="italic text-primary"> enjoy 25+</span>.
+          <span class="italic text-primary"> enjoy 25+ dishes</span>.
         </h1>
-        <p class="mt-8 max-w-xl text-lg leading-relaxed text-foreground/80">
+        <p class="mt-8 max-w-xl text-lg leading-relaxed text-[#1a1c1a]/80">
           Every month, Toronto home cooks gather to cook from the same cookbook and share what they made. One book, thirty-five interpretations, one table. Free to attend. Running since 2025. Spots go fast.
         </p>
         <div class="mt-10 flex flex-wrap items-center gap-4">
           
            <a href="https://lu.ma/sautesundaysto"
-            class="inline-flex items-center gap-2 rounded-full bg-foreground px-6 py-3 text-sm font-semibold text-background hover:opacity-90 transition-colors"
+            class="inline-flex items-center gap-2 rounded-full bg-[#1a1c1a] px-6 py-3 text-sm font-semibold text-[#f2eeeb] hover:opacity-90 transition-colors"
           >
             RSVP to the next event
             <Icon name="arrow-right" class="h-3.5 w-3.5" />
           </a>
           
             <a href="/blog"
-            class="inline-flex items-center gap-2 rounded-full border border-border px-6 py-3 text-sm font-semibold text-foreground hover:bg-muted transition-colors"
+            class="inline-flex items-center gap-2 rounded-full border border-[#1a1c1a] px-6 py-3 text-sm font-semibold text-[#1a1c1a] hover:bg-[#f2eeeb]/20 transition-colors"
           >
             See past events
           </a>
