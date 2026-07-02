@@ -5,44 +5,61 @@ import { SITE, authors } from "../lib/blog-data.js";
 ---
 <BaseLayout
   title={`About - ${SITE.name}`}
-  description="Sauté Sundays is Toronto's cookbook club. Every month, members cook a dish at home from the same featured cookbook, then come together at one table to share it."
+  description="Sauté Sundays is a monthly potluck cookbook club in downtown Toronto. Bring one dish, enjoy 25+, and spend an evening with people who genuinely love food."
   canonical="/about"
 >
   <div class="mx-auto max-w-3xl px-5 py-12">
     <Breadcrumbs items={[{ label: "Home", to: "/" }, { label: "About" }]} />
+
     <header class="mt-6">
       <div class="text-xs font-medium uppercase tracking-[0.2em] text-primary">About</div>
       <h1 class="mt-2 font-serif text-5xl font-semibold leading-[1.05]">
-        Toronto's cookbook club, where everyone cooks and everyone shares.
+        A monthly potluck cookbook club in downtown Toronto.
       </h1>
     </header>
+
     <div class="prose-article mt-10">
+      <p class="text-xl font-medium">
+        Bring one dish. Enjoy 25+. Spend an evening with people who genuinely love food. Pure joy.
+      </p>
+
       <p>
-        Sauté Sundays is a free, monthly potluck cookbook club based in Toronto. Every month, everyone in the group cooks a dish at home from the same featured cookbook, then brings it to share at one table. Nobody teaches. Nobody performs. Everyone just shows up with what they made and a story about how it went.
+        Every month, everyone cooks a different recipe from the same featured cookbook at home, then brings it to share at one table. One book, thirty-five interpretations, more food than anyone can finish.
+      </p>
+
+      <p>
+        It's free to attend. The only cost is the groceries for what you make and bring.
+      </p>
+
+      <h2 id="how-it-started">How it started</h2>
+      <p>
+        We're Tammy and Mady — we met on Bumble BFF, bonded over food, and went looking for a cookbook club to join in downtown Toronto. We couldn't find one that was open to the public, so we started our own.
       </p>
       <p>
-        We started in 2025 with a small group and a simple idea: actually cook from the cookbooks sitting on your shelf, and find a table to bring it to. A year later, events sell out within hours and we've cooked our way through cuisines from around the world — Greek, Moroccan, Caribbean, Vietnamese, and more.
+        The first public event was 9 people in Tammy's party room, cooking from <em>Earls the Cookbook</em>. A few faces were strangers at the start of the night and friends by the end. People came back the month after. Then the month after that.
       </p>
-      <h2 id="how-it-works">How it works</h2>
       <p>
-        Each month we pick a cookbook. Everyone chooses a recipe, cooks it at home, and brings it to share at our gathering in Toronto. The result is a table full of dishes from the same book, interpreted differently by everyone who cooked from it. It's part potluck, part book club, and entirely about the food.
+        A year later, Sauté Sundays gathers 35+ people in downtown Toronto, and events regularly sell out within days.
       </p>
+
       <h2 id="the-details">The details</h2>
       <p>
-        Events are free to attend — the only cost is the groceries for your dish. We meet monthly at Jrew's (165 Niagara St, Toronto), with capacity for 35 people. Early access to RSVPs goes to our newsletter subscribers and WhatsApp community first.
+        We meet monthly in downtown Toronto. Capacity is 35+ people. Early access to RSVPs goes to our newsletter subscribers and WhatsApp community first — spots go fast.
       </p>
+
       <h2 id="join-us">Join us</h2>
       <p>
-        Subscribe to our newsletter for early access to upcoming events, or follow us on Instagram to see what past nights looked like. If you have a cookbook you'd love to cook from as a group, reply to any newsletter and let us know.
+        Subscribe to our newsletter for early access, or follow us on Instagram to see what past nights looked like. If you have a cookbook you'd love to cook from as a group, reply to any newsletter and let us know.
       </p>
     </div>
+
     <section class="mt-12 border-t border-border pt-10">
       <h2 class="font-serif text-2xl font-semibold">Your hosts</h2>
       <div class="mt-6 grid gap-6 sm:grid-cols-2">
         {
           authors.map((author) => (
             <div class="flex items-start gap-3">
-              <img src={author.avatar} alt="" width="48" height="48" class="h-12 w-12 rounded-full" />
+              <img src={author.avatar} alt={author.name} width="48" height="48" class="h-12 w-12 rounded-full object-cover" />
               <div>
                 <div class="font-serif text-base font-semibold">{author.name}</div>
                 <div class="mt-1 text-sm text-muted-foreground">{author.bio}</div>
@@ -52,6 +69,7 @@ import { SITE, authors } from "../lib/blog-data.js";
         }
       </div>
     </section>
+
     <section class="mt-12 border-t border-border pt-10">
       <h2 class="font-serif text-2xl font-semibold">Find us</h2>
       <div class="mt-4 flex flex-wrap gap-4">
@@ -66,5 +84,13 @@ import { SITE, authors } from "../lib/blog-data.js";
         </a>
       </div>
     </section>
+
+    <section class="mt-12 border-t border-border pt-10">
+      <h2 class="font-serif text-2xl font-semibold">From Tammy</h2>
+      <p class="mt-3 text-muted-foreground">
+        Tammy also writes about food, travel, and cooking on her Substack publication, <a href="https://clearingthetable.substack.com" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline">Clearing the Table</a> — essays and recipes from someone who thinks about food way too much.
+      </p>
+    </section>
+
   </div>
 </BaseLayout>

@@ -16,11 +16,12 @@ export const SITE = {
 
 export const NAVIGATION = [
   { to: "/", label: "Home" },
-  { to: "/blog", label: "Recaps" },
-  { to: "/faq", label: "FAQ" },
-  { to: "/about", label: "About" },
-  { to: "/contact", label: "Contact Us" },
   { to: "https://lu.ma/sautesundaysto", label: "Events" },
+  { to: "/blog", label: "Recaps" },
+  { to: "/gallery", label: "Gallery" },
+  { to: "/about", label: "About" },
+  { to: "/faq", label: "FAQ" },
+  { to: "/contact", label: "Contact" },
 ];
 
 export const CONTACT = {

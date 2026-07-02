@@ -7,69 +7,71 @@ import { CONTACT } from "../config/theme.config.ts";
 ---
 
 <BaseLayout
-  title={`Join Us - ${SITE.name}`}
-  description="Join the Sauté Sundays community — Toronto's cookbook club. Sign up for early access to events and updates."
+  title={`Contact - ${SITE.name}`}
+  description="Get in touch with Sauté Sundays — Toronto's cookbook club. Sign up for early access to events and updates."
   canonical="/contact"
 >
   <div class="mx-auto max-w-3xl px-5 py-12">
-    <Breadcrumbs items={[{ label: "Home", to: "/" }, { label: "Join Us" }]} />
+    <Breadcrumbs items={[{ label: "Home", to: "/" }, { label: "Contact" }]} />
 
     <header class="mt-6">
-      <div class="text-xs font-medium uppercase tracking-[0.2em] text-primary">Join Us</div>
+      <div class="text-xs font-medium uppercase tracking-[0.2em] text-primary">Contact</div>
       <h1 class="mt-2 font-serif text-5xl font-semibold">Stay in the loop.</h1>
       <p class="mt-4 max-w-xl text-muted-foreground">
         Sign up for early access to events, cookbook announcements, and community updates. Spots fill fast — newsletter subscribers get first dibs.
       </p>
     </header>
 
-    <div class="mt-12 grid gap-12 lg:grid-cols-[1fr_240px]">
-      <div>
-        <iframe
-          data-tally-src="https://tally.so/embed/LZgLKl?alignLeft=1&dynamicHeight=1&transparentBackground=1"
-          loading="lazy"
-          width="100%"
-          height="429"
-          frameborder="0"
-          marginheight="0"
-          marginwidth="0"
-          title="Join the Sauté Sundays Community"
-        ></iframe>
-      </div>
-
-      <aside class="space-y-6 border-l border-border pl-8">
-        <div>
-          <div class="text-xs font-medium uppercase tracking-wider text-muted-foreground">Find us</div>
-          <ul class="mt-3 space-y-3 text-sm">
-            <li>
-              <a href={`mailto:${CONTACT.email}`} class="flex items-center gap-2 hover:text-primary">
-                <Icon name="mail" class="h-3.5 w-3.5" /> {CONTACT.email}
-              </a>
-            </li>
-            <li>
-              <a href={CONTACT.socialUrl} class="flex items-center gap-2 hover:text-primary">
-                <Icon name="instagram" class="h-3.5 w-3.5" /> {CONTACT.socialHandle}
-              </a>
-            </li>
-            <li>
-              <a href="https://lu.ma/sautesundaysto" class="flex items-center gap-2 hover:text-primary">
-                <Icon name="calendar" class="h-3.5 w-3.5" /> RSVP on Luma
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.whatsapp.com/GmxcTL5eYwsKqwb23VBjJL" class="flex items-center gap-2 hover:text-primary">
-                <Icon name="whatsapp" class="h-3.5 w-3.5" /> WhatsApp Community
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div>
-          <div class="text-xs font-medium uppercase tracking-wider text-muted-foreground">Questions?</div>
-          <p class="mt-2 text-sm text-muted-foreground">
-            Email us at <a href={`mailto:${CONTACT.email}`} class="text-primary hover:underline">{CONTACT.email}</a> and we'll get back to you.
-          </p>
-        </div>
-      </aside>
+    <div class="mt-12">
+      <iframe
+        data-tally-src="https://tally.so/embed/LZgLKl?alignLeft=1&dynamicHeight=1&transparentBackground=1"
+        loading="lazy"
+        width="100%"
+        height="429"
+        frameborder="0"
+        marginheight="0"
+        marginwidth="0"
+        title="Join the Sauté Sundays Community"
+      ></iframe>
     </div>
+
+    <div class="mt-16 border-t border-border pt-10">
+      <div class="text-xs font-medium uppercase tracking-wider text-muted-foreground mb-4">Find us</div>
+      <ul class="space-y-4 text-sm">
+        <li>
+          <a href={`mailto:${CONTACT.email}`} class="inline-flex items-center gap-3 hover:text-primary">
+            <Icon name="mail" class="h-4 w-4 shrink-0" />
+            <span>{CONTACT.email}</span>
+          </a>
+        </li>
+        <li>
+          <a href={CONTACT.socialUrl} class="inline-flex items-center gap-3 hover:text-primary">
+            <Icon name="instagram" class="h-4 w-4 shrink-0" />
+            <span>{CONTACT.socialHandle}</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://lu.ma/sautesundaysto" class="inline-flex items-center gap-3 hover:text-primary">
+            <Icon name="calendar" class="h-4 w-4 shrink-0" />
+            <span>RSVP on Luma</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://chat.whatsapp.com/GmxcTL5eYwsKqwb23VBjJL" class="inline-flex items-center gap-3 hover:text-primary">
+            <Icon name="whatsapp" class="h-4 w-4 shrink-0" />
+            <span>WhatsApp Community</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="mt-10 border-t border-border pt-10">
+      <div class="text-xs font-medium uppercase tracking-wider text-muted-foreground mb-2">Questions?</div>
+      <p class="text-sm text-muted-foreground">
+        Email us at <a href={`mailto:${CONTACT.email}`} class="text-primary hover:underline">{CONTACT.email}</a> and we'll get back to you.
+      </p>
+    </div>
+
   </div>
 </BaseLayout>
 
