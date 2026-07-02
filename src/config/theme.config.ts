@@ -56,7 +56,7 @@ export const authors = [
     name: "Tammy",
     bio: "Co-host of Sauté Sundays. Also writes about food, travel & recipes on Clearing the Table.",
     longBio:
-      "Tammy co-hosts Sauté Sundays, a monthly potluck cookbook club based in Toronto. She also writes about food, travel, and cooking on her Substack publication, <a href="https://clearingthetable.substack.com" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline">Clearing the Table</a> .",
+      "Tammy co-hosts Sauté Sundays, a monthly potluck cookbook club based in Toronto. She also writes about food, travel, and cooking on her Substack publication, Clearing the Table.",
     avatar: "/avatars/tammy.jpg",
   },
   {
@@ -71,8 +71,8 @@ export const authors = [
 
 export const categories = [
   { slug: "event-recap", name: "Event Recap" },
-  { slug: "cookbook", name: "Cookbook" },
-  { slug: "community", name: "Community" },
+  { slug: "cookbook-highlight", name: "Cookbook Highlight" },
+  { slug: "from-the-table", name: "From the Table" },
 ];
 
 export const tags = [

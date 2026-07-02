@@ -11,7 +11,6 @@ import {
   SITE,
   getAuthor,
   getCategory,
-  getTag,
   formatDate,
   relatedPosts,
   adjacentPosts,
@@ -80,7 +79,7 @@ const jsonLd = {
     <Breadcrumbs
       items={[
         { label: "Home", to: "/" },
-        { label: "Archive", to: "/blog" },
+        { label: "Recaps", to: "/blog" },
         ...(category ? [{ label: category.name, to: `/categories/${category.slug}` }] : []),
         { label: post.title },
       ]}
@@ -102,7 +101,7 @@ const jsonLd = {
         {
           author && (
             <a href={`/authors/${author.slug}`} class="flex items-center gap-2 hover:text-foreground">
-              <img src={author.avatar} alt="" width="28" height="28" class="h-7 w-7 rounded-full" />
+              <img src={author.avatar} alt="" width="28" height="28" class="h-7 w-7 rounded-full object-cover" />
               {author.name}
             </a>
           )
@@ -135,24 +134,13 @@ const jsonLd = {
                 {post.imageCredit.caption && <span>{post.imageCredit.caption} </span>}
                 <span>
                   Photo by{" "}
-                  <a
-                    href={post.imageCredit.authorUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    class="text-foreground/75 underline underline-offset-2 hover:text-primary"
-                  >
+                  <a href={post.imageCredit.authorUrl} target="_blank" rel="noreferrer" class="text-foreground/75 underline underline-offset-2 hover:text-primary">
                     {post.imageCredit.author}
                   </a>{" "}
                   on{" "}
-                  <a
-                    href={post.imageCredit.sourceUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    class="text-foreground/75 underline underline-offset-2 hover:text-primary"
-                  >
+                  <a href={post.imageCredit.sourceUrl} target="_blank" rel="noreferrer" class="text-foreground/75 underline underline-offset-2 hover:text-primary">
                     {post.imageCredit.source}
-                  </a>
-                  .
+                  </a>.
                 </span>
               </figcaption>
             )
@@ -167,24 +155,8 @@ const jsonLd = {
           <Content />
         </div>
 
-        <div class="mt-10 flex flex-wrap items-center gap-2">
-          <span class="text-xs uppercase tracking-wider text-muted-foreground">Tags</span>
-          {
-            post.tags.map((tag) => {
-              const item = getTag(tag);
-              return (
-                <a href={`/tags/${tag}`} class="rounded-full border border-border px-2.5 py-1 text-xs text-muted-foreground hover:border-primary hover:text-primary">
-                  #{item?.name ?? tag}
-                </a>
-              );
-            })
-          }
-        </div>
-
         <div class="mt-8 flex items-center gap-2 border-y border-border py-4">
           <span class="text-xs uppercase tracking-wider text-muted-foreground">Share</span>
-          <a target="_blank" rel="noreferrer" aria-label="Share on Twitter" data-share-twitter data-share-title={post.title} href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title)}&url=${encodeURIComponent(shareUrl)}`} class="inline-flex h-8 w-8 items-center justify-center rounded-full border border-border text-muted-foreground hover:text-primary"><Icon name="twitter" class="h-3.5 w-3.5" /></a>
-          <a target="_blank" rel="noreferrer" aria-label="Share on LinkedIn" data-share-linkedin href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`} class="inline-flex h-8 w-8 items-center justify-center rounded-full border border-border text-muted-foreground hover:text-primary"><Icon name="linkedin" class="h-3.5 w-3.5" /></a>
           <button type="button" data-copy-link class="ml-auto inline-flex items-center gap-2 rounded-full border border-border px-3 py-1.5 text-xs text-muted-foreground hover:text-foreground">
             <span data-copy-ready class="inline-flex items-center gap-2"><Icon name="copy" class="h-3.5 w-3.5" /> Copy link</span>
             <span data-copy-done class="inline-flex items-center gap-2" hidden><Icon name="check" class="h-3.5 w-3.5" /> Copied</span>
@@ -194,13 +166,21 @@ const jsonLd = {
         {
           author && (
             <div class="mt-10 flex items-start gap-4 rounded-md border border-border p-5">
-              <img src={author.avatar} alt="" width="56" height="56" class="h-14 w-14 rounded-full" />
+              <img src={author.avatar} alt="" width="56" height="56" class="h-14 w-14 rounded-full object-cover" />
               <div>
                 <div class="text-xs uppercase tracking-wider text-muted-foreground">Written by</div>
-                <a href={`/authors/${author.slug}`} class="font-serif text-lg font-semibold hover:text-primary">
-                  {author.name}
-                </a>
+                <div class="font-serif text-lg font-semibold">{author.name}</div>
                 <p class="mt-1 text-sm text-muted-foreground">{author.bio}</p>
+                {author.slug === "tammy" && (
+                  
+                    href="https://clearingthetable.substack.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="mt-2 inline-flex items-center gap-1 text-sm text-primary hover:underline"
+                  >
+                    Read Clearing the Table ↗
+                  </a>
+                )}
               </div>
             </div>
           )
@@ -228,12 +208,6 @@ const jsonLd = {
             )
           }
         </nav>
-
-        <div class="mt-12 rounded-md border border-dashed border-border p-8 text-center">
-          <Icon name="message" class="mx-auto h-5 w-5 text-muted-foreground" />
-          <div class="mt-2 font-serif text-lg">Comments</div>
-          <p class="mt-1 text-sm text-muted-foreground">Hook this up to your favourite commenting platform &mdash; Giscus, Disqus, or your own.</p>
-        </div>
       </div>
 
       <aside class="hidden lg:block">
@@ -246,7 +220,7 @@ const jsonLd = {
     {
       related.length > 0 && (
         <section class="mt-20 border-t border-border pt-12">
-          <h2 class="font-serif text-2xl font-semibold">Continue reading</h2>
+          <h2 class="font-serif text-2xl font-semibold">More recaps</h2>
           <div class="mt-8 grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
             {related.map((relatedPost) => <PostCard post={relatedPost} />)}
           </div>
@@ -269,31 +243,11 @@ const jsonLd = {
   updateProgress();
   window.addEventListener("scroll", updateProgress, { passive: true });
 
-  const copyIcon = '<svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg>';
-  const checkIcon = '<svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>';
-  const twitterShare = document.querySelector("[data-share-twitter]");
-  const linkedinShare = document.querySelector("[data-share-linkedin]");
-  const currentUrl = window.location.href;
-
-  if (twitterShare) {
-    const title = twitterShare.dataset.shareTitle || document.title;
-    twitterShare.setAttribute(
-      "href",
-      `https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(currentUrl)}`,
-    );
-  }
-
-  linkedinShare?.setAttribute(
-    "href",
-    `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(currentUrl)}`,
-  );
-
   const writeClipboard = async (text) => {
     if (navigator.clipboard?.writeText) {
       await navigator.clipboard.writeText(text);
       return;
     }
-
     const textarea = document.createElement("textarea");
     textarea.value = text;
     textarea.setAttribute("readonly", "");
@@ -325,20 +279,17 @@ const jsonLd = {
 
   document.querySelectorAll(".prose-article pre").forEach((pre) => {
     if (pre.parentElement?.classList.contains("code-block")) return;
-
     const wrapper = document.createElement("div");
     wrapper.className = "code-block";
     pre.parentNode?.insertBefore(wrapper, pre);
     wrapper.appendChild(pre);
-
     const button = document.createElement("button");
     button.type = "button";
     button.className = "code-copy-button";
     button.dataset.tooltip = "Copy code";
     button.setAttribute("aria-label", "Copy code");
-    button.innerHTML = copyIcon;
+    button.innerHTML = '<svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg>';
     wrapper.appendChild(button);
-
     let resetTimer;
     button.addEventListener("click", async () => {
       try {
@@ -347,12 +298,12 @@ const jsonLd = {
         button.classList.add("is-copied");
         button.dataset.tooltip = "Copied";
         button.setAttribute("aria-label", "Copied");
-        button.innerHTML = checkIcon;
+        button.innerHTML = '<svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>';
         resetTimer = window.setTimeout(() => {
           button.classList.remove("is-copied");
           button.dataset.tooltip = "Copy code";
           button.setAttribute("aria-label", "Copy code");
-          button.innerHTML = copyIcon;
+          button.innerHTML = '<svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg>';
         }, 1800);
       } catch (error) {}
     });
