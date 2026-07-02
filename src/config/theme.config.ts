@@ -54,10 +54,10 @@ export const authors = [
   {
     slug: "tammy",
     name: "Tammy",
-    bio: "Co-host of Sauté Sundays, Toronto's cookbook club.",
+    bio: "Co-host of Sauté Sundays. Also writes about food, travel & recipes on Clearing the Table.",
     longBio:
-      "Tammy co-hosts Sauté Sundays, a monthly potluck cookbook club based in Toronto. She also writes about food, travel, and cooking on her Substack, Clearing the Table.",
-    avatar: "/avatars/tammy.jpeg",
+      "Tammy co-hosts Sauté Sundays, a monthly potluck cookbook club based in Toronto. She also writes about food, travel, and cooking on her Substack publication, <a href="https://clearingthetable.substack.com" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline">Clearing the Table</a> .",
+    avatar: "/avatars/tammy.jpg",
   },
   {
     slug: "mady",
