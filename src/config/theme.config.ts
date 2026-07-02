@@ -57,7 +57,7 @@ export const authors = [
     bio: "Co-host of Sauté Sundays. Also writes about food, travel & recipes on Clearing the Table.",
     longBio:
       "Tammy co-hosts Sauté Sundays, a monthly potluck cookbook club based in Toronto. She also writes about food, travel, and cooking on her Substack publication, Clearing the Table.",
-    avatar: "/avatars/tammy.jpg",
+    avatar: "/avatars/tammy.jpeg",
   },
   {
     slug: "mady",
