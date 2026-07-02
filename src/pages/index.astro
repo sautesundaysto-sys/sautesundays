@@ -23,14 +23,14 @@ const latest = (await sortedPosts()).filter((post) => post.slug !== featured.slu
 
 <BaseLayout
   title={`${SITE.name} - Toronto's Cookbook Club`}
-  description={SITE.description}
+  description="Sauté Sundays is Toronto's cookbook club. Every month, home cooks gather to cook from the same cookbook and share what they made. Free to attend. Spots go fast."
   canonical="/"
   flushFooter
 >
   <section class="relative -mt-[calc(4rem+2px)] min-h-[calc(100svh-2rem)] overflow-hidden border-b border-border/60 pt-[calc(4rem+2px)] sm:min-h-[760px]">
     <Image
       src={autumnScene}
-      alt="Sauté Sundays cookbook club gathering in Toronto"
+      alt="Sauté Sundays Toronto cookbook club — a full table of homemade dishes"
       class="absolute inset-0 h-full w-full object-cover object-center"
       loading="eager"
       fetchpriority="high"
@@ -45,28 +45,27 @@ const latest = (await sortedPosts()).filter((post) => post.slug !== featured.slu
       aria-hidden="true"
       class="absolute inset-y-0 left-0 w-2/3 bg-gradient-to-r from-[#f2eeeb]/90 via-[#f2eeeb]/50 to-transparent"
     />
-    
-   <div class="relative mx-auto flex min-h-[calc(100svh-6rem)] max-w-6xl items-center px-5 py-20 sm:min-h-[680px] sm:py-24">
+    <div class="relative mx-auto flex min-h-[calc(100svh-6rem)] max-w-6xl items-center px-5 py-20 sm:min-h-[680px] sm:py-24">
       <div class="max-w-4xl text-foreground drop-shadow-[0_1px_3px_rgba(255,255,255,0.8)]">
         <h1 class="font-serif text-[2.5rem] font-medium leading-[1.02] sm:text-6xl lg:text-7xl">
           Toronto's
-          <span class="italic text-primary"> cookbook club</span>,
-          where everyone cooks and
-          <span class="italic text-primary"> everyone shares</span>.
+          <span class="italic text-primary"> cookbook club</span>
+          — bring one dish,
+          <span class="italic text-primary"> enjoy 25+</span>.
         </h1>
         <p class="mt-8 max-w-xl text-lg leading-relaxed text-foreground/80">
-          Every month, members cook a dish at home from the same featured cookbook, then come together at one table to share it. Free to attend. Running since 2025. Sells out within hours.
+          Every month, Toronto home cooks gather to cook from the same cookbook and share what they made. One book, thirty-five interpretations, one table. Free to attend. Running since 2025. Spots go fast.
         </p>
         <div class="mt-10 flex flex-wrap items-center gap-4">
           
-            <a href="https://lu.ma/sautesundaysto"
+            href="https://lu.ma/sautesundaysto"
             class="inline-flex items-center gap-2 rounded-full bg-foreground px-6 py-3 text-sm font-semibold text-background hover:opacity-90 transition-colors"
           >
             RSVP to the next event
             <Icon name="arrow-right" class="h-3.5 w-3.5" />
           </a>
           
-            <a href="/blog"
+            href="/blog"
             class="inline-flex items-center gap-2 rounded-full border border-border px-6 py-3 text-sm font-semibold text-foreground hover:bg-muted transition-colors"
           >
             See past events
@@ -89,7 +88,7 @@ const latest = (await sortedPosts()).filter((post) => post.slug !== featured.slu
               featured.thumbnail && (
                 <Image
                   src={featured.thumbnail}
-                  alt="Sauté Sundays cookbook club gathering in Toronto"
+                  alt={featured.title}
                   class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
                   width={720}
                   widths={[372, 560, 720]}
@@ -125,10 +124,10 @@ const latest = (await sortedPosts()).filter((post) => post.slug !== featured.slu
                 <>
                   <img
                     src={featuredAuthor.avatar}
-                    alt=""
+                    alt={featuredAuthor.name}
                     width="28"
                     height="28"
-                    class="h-7 w-7 rounded-full"
+                    class="h-7 w-7 rounded-full object-cover"
                   />
                   <a href={`/authors/${featuredAuthor.slug}`} class="hover:text-foreground">{featuredAuthor.name}</a>
                   <span>&middot;</span>
