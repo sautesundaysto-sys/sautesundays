@@ -3,7 +3,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Breadcrumbs from "../components/Breadcrumbs.astro";
 import { SITE } from "../lib/blog-data.js";
 
-const imageFiles = import.meta.glob('/public/gallery/*.{jpg,jpeg,png,webp}', { eager: true });
+const imageFiles = import.meta.glob('/public/gallery/*.{JPG,jpg,jpeg,png,webp}', { eager: true });
 const images = Object.keys(imageFiles).map((path) => ({
   src: path.replace('/public', ''),
   alt: path.split('/').pop().replace(/[-_]/g, ' ').replace(/\.[^/.]+$/, ''),
