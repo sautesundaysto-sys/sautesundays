@@ -64,7 +64,7 @@ export const authors = [
     bio: "Co-host of Sauté Sundays, Toronto's cookbook club.",
     longBio:
       "Mady co-hosts Sauté Sundays, a monthly potluck cookbook club based in Toronto.",
-    avatar: "/avatars/mady.jpg",
+    avatar: "/avatars/mady.jpeg",
   },
 ];
 

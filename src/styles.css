@@ -48,7 +48,7 @@
 :root {
   --radius: 0.5rem;
   --background: #f2eeeb;
-  --foreground: #383a37;
+  --foreground: #1a1c1a;
   --card: #f2eeeb;
   --card-foreground: #383a37;
   --popover: #f2eeeb;
@@ -58,7 +58,7 @@
   --secondary: #e9e8e6;
   --secondary-foreground: #383a37;
   --muted: #e9e8e6;
-  --muted-foreground: #9a9c99;
+  --muted-foreground: ##5a5c59;
   --accent: #e9e8e6;
   --accent-foreground: #383a37;
   --destructive: oklch(0.55 0.22 27);
