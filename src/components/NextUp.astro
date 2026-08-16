@@ -1,0 +1,53 @@
+---
+import Icon from "./Icon.astro";
+import { NEXT_EVENT } from "../config/theme.config.ts";
+
+const event = NEXT_EVENT;
+---
+
+{
+  event.title && (
+    <section class="border-b border-border/60 bg-muted/40">
+      <div class="mx-auto max-w-6xl px-5 py-12 sm:py-14">
+        <div class="text-xs font-medium uppercase tracking-wider text-muted-foreground">Next up</div>
+        <div class="mt-5 flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
+          <div class="max-w-2xl">
+            <h2 class="font-serif text-3xl font-semibold leading-tight sm:text-4xl">{event.title}</h2>
+            <p class="mt-3 text-muted-foreground">
+              {event.date}
+              {event.location && <> &middot; {event.location}</>}
+            </p>
+            {event.cookbook && (
+              <p class="mt-1 text-muted-foreground">
+                Cooking from <span class="italic">{event.cookbook}</span>
+                {event.cookbookAuthor && <> by {event.cookbookAuthor}</>}
+              </p>
+            )}
+            {event.status &&
+              (event.statusUrl ? (
+                <a
+                  href={event.statusUrl}
+                  class="mt-4 inline-flex items-center gap-1 text-sm font-medium text-primary hover:underline"
+                >
+                  {event.status} <Icon name="arrow-right" class="h-3.5 w-3.5" />
+                </a>
+              ) : (
+                <p class="mt-4 text-sm font-medium text-foreground">{event.status}</p>
+              ))}
+          </div>
+          {event.rsvpUrl && (
+            <div class="shrink-0">
+              <a
+                href={event.rsvpUrl}
+                class="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90"
+              >
+                {event.rsvpLabel}
+                <Icon name="arrow-right" class="h-3.5 w-3.5" />
+              </a>
+            </div>
+          )}
+        </div>
+      </div>
+    </section>
+  )
+}

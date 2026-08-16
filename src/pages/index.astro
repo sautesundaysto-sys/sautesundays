@@ -3,8 +3,10 @@ import { Image } from "astro:assets";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import PostCard from "../components/PostCard.astro";
 import Newsletter from "../components/Newsletter.astro";
+import NextUp from "../components/NextUp.astro";
 import Icon from "../components/Icon.astro";
 import autumnScene from "../assets/Website Banner.png";
+import { PROOF } from "../config/theme.config.ts";
 import {
   SITE,
   categories,
@@ -71,9 +73,15 @@ const latest = (await sortedPosts()).filter((post) => post.slug !== featured.slu
             See past events
           </a>
         </div>
+        <p class="mt-6 text-sm text-[#1a1c1a]/70">
+          {PROOF.seats} seats. {PROOF.tables} tables since {PROOF.since}.
+          {PROOF.sellOutTime && ` Every one sold out in ${PROOF.sellOutTime}.`}
+        </p>
       </div>
     </div>
   </section>
+
+  <NextUp />
 
   <section class="border-b border-border/60">
     <div class="mx-auto max-w-6xl px-5 py-16">
@@ -144,6 +152,26 @@ const latest = (await sortedPosts()).filter((post) => post.slug !== featured.slu
     </div>
   </section>
 
+  <section class="border-b border-border/60">
+    <div class="mx-auto max-w-3xl px-5 py-16">
+      <h2 class="font-serif text-3xl font-semibold sm:text-4xl">Never been?</h2>
+      <p class="mt-5 text-lg leading-relaxed text-muted-foreground">
+        Here's the whole thing. You RSVP. We tell you the cookbook. You pick a recipe from the sign-up sheet so nobody
+        doubles up. You cook it at home, bring it to Jrew's, and we eat everything together at one long table.
+      </p>
+      <p class="mt-4 text-lg leading-relaxed text-muted-foreground">
+        You don't need to be a good cook. You don't need to know anyone. Half the room is new every month and the food
+        is a very easy thing to talk about.
+      </p>
+      <a
+        href="/faq"
+        class="mt-8 inline-flex items-center gap-2 rounded-md border border-border px-5 py-2.5 text-sm font-medium hover:bg-muted"
+      >
+        Read the FAQ <Icon name="arrow-right" class="h-3.5 w-3.5" />
+      </a>
+    </div>
+  </section>
+
   <section class="mx-auto max-w-6xl px-5 py-16" data-home-latest>
     <div class="flex flex-wrap items-center justify-between gap-4">
       <h2 class="font-serif text-2xl font-semibold">Past Events</h2>
@@ -184,7 +212,7 @@ const latest = (await sortedPosts()).filter((post) => post.slug !== featured.slu
     </div>
   </section>
 
-  <Newsletter />
+  <Newsletter embed />
 </BaseLayout>
 
 <script>

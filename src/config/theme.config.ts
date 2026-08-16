@@ -82,3 +82,35 @@ export const tags = [
   { slug: "community", name: "Community" },
   { slug: "food", name: "Food" },
 ];
+
+// The "Next up" block on the homepage, directly under the hero.
+// Keep this filled in even when the event is sold out — "Sold out" is proof,
+// not a dead end. Set `title` to "" to hide the block entirely.
+export const NEXT_EVENT = {
+  title: "Summer Isn't Over Yet",
+  date: "Sunday, August 23",
+  location: "Outdoors, with SocialSip",
+  cookbook: "Endless Summer",
+  cookbookAuthor: "Katie Lee",
+  rsvpLabel: "RSVP on Luma",
+  rsvpUrl: "https://lu.ma/sautesundaysto",
+  // Swap `status` as you move through the cycle. Set it to "" to hide the line.
+  //   "Early access opens [DATE] for subscribers. Public RSVP [DATE]."
+  //   "RSVPs open now. Spots go fast."
+  //   "Sold out. Join the waitlist"      (pair with statusUrl)
+  //   "Next event announced [MONTH]. Subscribe to get it first."
+  status: "RSVPs open now. Spots go fast.",
+  // Optional. When set, `status` renders as a link with a trailing arrow.
+  statusUrl: "",
+};
+
+// The proof line under the hero buttons. Reassures a first-timer, and is the
+// first thing a sponsor reads.
+// `sellOutTime` comes from your Luma registration timestamps. While it is "",
+// that sentence is left out rather than shipped with a placeholder in it.
+export const PROOF = {
+  seats: 35,
+  tables: 13,
+  since: 2025,
+  sellOutTime: "",
+};
