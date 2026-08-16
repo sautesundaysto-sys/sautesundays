@@ -90,7 +90,7 @@ export const tags = [
 ];
 
 // The "Next up" block on the homepage, directly under the hero.
-// Keep this filled in even when the event is sold out — "Sold out" is proof,
+// Keep this filled in even when the event is sold out. "Sold out" is proof,
 // not a dead end. Set `title` to "" to hide the block entirely.
 export const NEXT_EVENT = {
   title: "Summer Isn't Over Yet",

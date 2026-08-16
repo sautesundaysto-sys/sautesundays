@@ -12,7 +12,7 @@ const images = Object.keys(imageFiles).map((path) => ({
 
 <BaseLayout
   title={`Gallery - ${SITE.name}`}
-  description="Photos from Sauté Sundays — Toronto's cookbook club. A year of monthly potluck gatherings, one cookbook at a time."
+  description="Photos from Sauté Sundays, Toronto's cookbook club. A year of monthly potluck gatherings, one cookbook at a time."
   canonical="/gallery"
 >
   <div class="mx-auto max-w-6xl px-5 py-12">
@@ -30,7 +30,7 @@ const images = Object.keys(imageFiles).map((path) => ({
 
     {images.length === 0 && (
       <div class="rounded-md border border-dashed border-border py-24 text-center text-muted-foreground">
-        Photos coming soon — check back after our next event.
+        Photos coming soon. Check back after our next event.
       </div>
     )}
 

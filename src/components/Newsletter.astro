@@ -3,7 +3,7 @@ const { compact = false, embed = false } = Astro.props;
 
 // Fixed height on purpose: Tally's dynamicHeight resize lands after first paint
 // and shifts the page under the reader on mobile. The two heights below are
-// both fixed — the taller one only covers the narrow layout where fields stack.
+// both fixed. The taller one only covers the narrow layout where fields stack.
 const tallySrc = "https://tally.so/embed/LZgLKl?alignLeft=1&transparentBackground=1";
 ---
 
@@ -24,7 +24,7 @@ const tallySrc = "https://tally.so/embed/LZgLKl?alignLeft=1&transparentBackgroun
       <div class="mx-auto max-w-2xl px-5 text-center">
         <h2 class="font-serif text-3xl font-semibold sm:text-4xl">Join the Sauté Sundays community.</h2>
         <p class="mt-3 text-muted-foreground">
-          Sign up for early access to events, cookbook announcements, and monthly updates. Spots fill fast — subscribers get first dibs.
+          Sign up for early access to events, cookbook announcements, and monthly updates. Spots fill fast. Subscribers get first dibs.
         </p>
         {embed ? (
           <div class="mt-8 rounded-lg bg-[#f2eeeb] p-6 dark:bg-[#f2eeeb]">
