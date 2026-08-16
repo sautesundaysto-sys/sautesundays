@@ -95,7 +95,7 @@ export const tags = [
 export const NEXT_EVENT = {
   title: "Summer Isn't Over Yet",
   date: "Sunday, August 23",
-  location: "Outdoors, with SocialSip",
+  location: "Outdoors at Trinity Bellwoods, with SocialSip",
   cookbook: "Endless Summer",
   cookbookAuthor: "Katie Lee",
   rsvpLabel: "RSVP on Luma",
@@ -115,7 +115,9 @@ export const NEXT_EVENT = {
   startDateTime: "2026-08-23T18:15:00-04:00",
   // The venue for this specific night. Leave "" and the schema falls back to
   // Toronto alone rather than naming a place we are not sure of.
-  locationName: "",
+  locationName: "Trinity Bellwoods Park",
+  // Optional street address for that venue. Omitted from the schema when "".
+  locationStreet: "790 Queen St W",
   schemaDescription:
     "Toronto's cookbook club, outdoors. Cooking from Endless Summer by Katie Lee.",
 };

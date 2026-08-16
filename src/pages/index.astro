@@ -38,6 +38,7 @@ const eventJsonLd = NEXT_EVENT.title && NEXT_EVENT.startDateTime
         ...(NEXT_EVENT.locationName ? { name: NEXT_EVENT.locationName } : {}),
         address: {
           "@type": "PostalAddress",
+          ...(NEXT_EVENT.locationStreet ? { streetAddress: NEXT_EVENT.locationStreet } : {}),
           addressLocality: "Toronto",
           addressRegion: "ON",
           addressCountry: "CA",
