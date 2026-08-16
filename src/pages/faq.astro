@@ -13,6 +13,14 @@ const faqs = [
     answer: "A homemade dish from the featured cookbook, your own plate and cutlery (we try to keep things sustainable), anything needed for safe food transport, a container for leftovers, and an appetite. You're also welcome to bring a drink to share, though it's optional."
   },
   {
+    question: "Can I come without cooking?",
+    answer: "No, and this is the one rule we don't bend. Everyone cooks. That's the whole club — 35 people who each made something is a very different room from 35 people who each ordered something."
+  },
+  {
+    question: "I don't know anyone. Is that weird?",
+    answer: "It's the normal case. Most people come alone the first time. You'll be holding a dish you made, which is the easiest conversation starter that exists, and everyone at the table cooked from the same book so you already have something to compare notes on."
+  },
+  {
     question: "Where can I get the recipes?",
     answer: "While there's no pressure to buy the cookbook, we encourage supporting the authors if you're able. You can also check it out on Libby, borrow from a friend, or browse it at your local bookstore. If you're having trouble accessing the recipes, feel free to reach out and we'll help."
   },
@@ -31,6 +39,10 @@ const faqs = [
   {
     question: "Where are events held?",
     answer: "We host monthly in downtown Toronto. The exact location is shared with confirmed RSVPs. We're currently at a venue with capacity for 35+ people."
+  },
+  {
+    question: "What if I can't make it anymore?",
+    answer: "Cancel on Luma as early as you can so we can offer your seat to the waitlist. Late cancels move you to the back of the line for early access next month. Life happens and we're not keeping a grudge list, but a seat that goes empty is a seat someone wanted."
   },
   {
     question: "How do I suggest a cookbook?",
@@ -58,8 +70,8 @@ const faqs = [
     </header>
 
     <div class="divide-y divide-border">
-      {faqs.map((faq) => (
-        <details class="group py-6">
+      {faqs.map((faq, index) => (
+        <details class="group py-6" open={index < 2}>
           <summary class="flex cursor-pointer items-center justify-between gap-4 font-serif text-xl font-semibold leading-snug marker:content-none hover:text-primary">
             {faq.question}
             <span class="shrink-0 text-muted-foreground transition-transform group-open:rotate-45">+</span>
