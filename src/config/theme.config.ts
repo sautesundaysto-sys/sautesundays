@@ -112,5 +112,5 @@ export const PROOF = {
   seats: 35,
   tables: 13,
   since: 2025,
-  sellOutTime: "",
+  sellOutTime: "3 days",
 };
