@@ -6,7 +6,7 @@ import Newsletter from "../components/Newsletter.astro";
 import NextUp from "../components/NextUp.astro";
 import Icon from "../components/Icon.astro";
 import autumnScene from "../assets/Website Banner.png";
-import { PROOF } from "../config/theme.config.ts";
+import { PROOF, NEXT_EVENT } from "../config/theme.config.ts";
 import {
   SITE,
   categories,
@@ -21,12 +21,50 @@ const featured = await featuredPost();
 const featuredAuthor = getAuthor(featured.author);
 const featuredCategory = getCategory(featured.category);
 const latest = (await sortedPosts()).filter((post) => post.slug !== featured.slug);
+
+// Event structured data, built from the same NEXT_EVENT entry the "Next up"
+// block renders, so there is only one place to update each month.
+const eventJsonLd = NEXT_EVENT.title && NEXT_EVENT.startDateTime
+  ? {
+      "@context": "https://schema.org",
+      "@type": "Event",
+      name: NEXT_EVENT.title,
+      description: NEXT_EVENT.schemaDescription,
+      startDate: NEXT_EVENT.startDateTime,
+      eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+      eventStatus: "https://schema.org/EventScheduled",
+      location: {
+        "@type": "Place",
+        ...(NEXT_EVENT.locationName ? { name: NEXT_EVENT.locationName } : {}),
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: "Toronto",
+          addressRegion: "ON",
+          addressCountry: "CA",
+        },
+      },
+      organizer: {
+        "@type": "Organization",
+        name: SITE.name,
+        url: SITE.url,
+      },
+      offers: {
+        "@type": "Offer",
+        price: "0",
+        priceCurrency: "CAD",
+        availability: "https://schema.org/InStock",
+        url: NEXT_EVENT.rsvpUrl,
+      },
+      image: [new URL("/og-default.jpg", SITE.url).toString()],
+    }
+  : undefined;
 ---
 
 <BaseLayout
   title={`${SITE.name} - Toronto's Cookbook Club`}
   description="Sauté Sundays is Toronto's cookbook club. Bring one dish, enjoy 25+ dishes, and spend an evening with people who love food. Free to attend. Spots go fast."
   canonical="/"
+  jsonLd={eventJsonLd}
   flushFooter
 >
   <section class="relative -mt-[calc(4rem+2px)] min-h-[calc(100svh-2rem)] overflow-hidden border-b border-border/60 pt-[calc(4rem+2px)] sm:min-h-[760px]">

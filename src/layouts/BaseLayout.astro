@@ -2,7 +2,8 @@
 import "../styles.css";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
-import { SITE, imageSrc } from "../lib/blog-data.js";
+import { SITE, imageSrc, authors } from "../lib/blog-data.js";
+import { CONTACT } from "../config/theme.config.ts";
 
 const {
   title = `${SITE.name} - Toronto's Cookbook Club`,
@@ -10,9 +11,15 @@ const {
   canonical,
   ogType = "website",
   ogImage,
+  ogImageAlt,
   jsonLd,
   flushFooter = false,
 } = Astro.props;
+
+// Without a fallback, any page that is not a blog post shares as a blank card.
+const DEFAULT_OG_IMAGE = "/og-default.jpg";
+const DEFAULT_OG_ALT =
+  "A full table of homemade dishes at Sauté Sundays, Toronto's cookbook club";
 
 const siteUrl = Astro.site?.toString() || SITE.url;
 const absoluteUrl = (value) => {
@@ -26,7 +33,8 @@ const absoluteUrl = (value) => {
   }
 };
 const canonicalUrl = absoluteUrl(canonical || Astro.url.pathname);
-const ogImageUrl = absoluteUrl(ogImage);
+const usingDefaultOgImage = !imageSrc(ogImage) && !ogImage;
+const ogImageUrl = absoluteUrl(usingDefaultOgImage ? DEFAULT_OG_IMAGE : ogImage);
 ---
 
 <!doctype html>
@@ -43,12 +51,24 @@ const ogImageUrl = absoluteUrl(ogImage);
     <meta property="og:site_name" content={SITE.name} />
     {canonicalUrl && <meta property="og:url" content={canonicalUrl} />}
     {ogImageUrl && <meta property="og:image" content={ogImageUrl} />}
+    {
+      usingDefaultOgImage && (
+        <>
+          <meta property="og:image:width" content="1200" />
+          <meta property="og:image:height" content="630" />
+        </>
+      )
+    }
+    <meta
+      property="og:image:alt"
+      content={ogImageAlt || (usingDefaultOgImage ? DEFAULT_OG_ALT : title)}
+    />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     {ogImageUrl && <meta name="twitter:image" content={ogImageUrl} />}
     {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
-    <link rel="icon" type="image/png" href="/Saute sundays logo.png" />
+    <link rel="icon" type="image/png" href="/saute-sundays-logo.png" />
    
     
     <link rel="alternate" type="application/rss+xml" title={SITE.name} href="/rss.xml" />
@@ -71,33 +91,20 @@ const ogImageUrl = absoluteUrl(ogImage);
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
       "@type": "Organization",
-      "name": "Sauté Sundays",
-      "description": "Toronto's cookbook club. Every month, members cook a dish at home from the same featured cookbook, then come together at one table to share it.",
-      "url": "https://sautesundays.vercel.app",
-      "logo": "https://sautesundays.vercel.app/Saute sundays logo.png",
+      "name": SITE.name,
+      "alternateName": "Toronto Cookbook Club",
+      "description": SITE.description,
+      "url": siteUrl.replace(/\/$/, ""),
+      "logo": absoluteUrl("/saute-sundays-logo.png"),
+      "image": absoluteUrl(DEFAULT_OG_IMAGE),
+      "email": CONTACT.email,
+      "foundingDate": "2025",
+      "areaServed": { "@type": "City", "name": "Toronto" },
       "sameAs": [
-        "https://www.instagram.com/sautesundays.to/",
+        CONTACT.socialUrl,
         "https://lu.ma/sautesundaysto"
       ],
-     "location": {
-        "@type": "Place",
-        "name": "Downtown Toronto",
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "Toronto",
-          "addressRegion": "ON",
-          "addressCountry": "CA"
-        }
-      },
-      "event": {
-        "@type": "Event",
-        "name": "Sauté Sundays Cookbook Club",
-        "description": "Monthly potluck cookbook club in Toronto. Free to attend.",
-        "organizer": {
-          "@type": "Organization",
-          "name": "Sauté Sundays"
-        }
-      }
+      "founder": authors.map((author) => ({ "@type": "Person", "name": author.name }))
     })} />
   </head>
   <body>

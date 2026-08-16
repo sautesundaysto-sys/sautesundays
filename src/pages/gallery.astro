@@ -1,13 +1,9 @@
 ---
+import { Image } from "astro:assets";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Breadcrumbs from "../components/Breadcrumbs.astro";
 import { SITE } from "../lib/blog-data.js";
-
-const imageFiles = import.meta.glob('/public/gallery/*.{JPG,jpg,jpeg,png,webp}', { eager: true });
-const images = Object.keys(imageFiles).map((path) => ({
-  src: path.replace('/public', ''),
-  alt: path.split('/').pop().replace(/[-_]/g, ' ').replace(/\.[^/.]+$/, ''),
-}));
+import { gallery as images } from "../data/gallery.js";
 ---
 
 <BaseLayout
@@ -36,15 +32,21 @@ const images = Object.keys(imageFiles).map((path) => ({
 
     <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {images.map((image) => (
-        <div class="group relative aspect-square overflow-hidden rounded-lg bg-muted">
-          <img
+        <figure class="group relative aspect-square overflow-hidden rounded-lg bg-muted">
+          <Image
             src={image.src}
             alt={image.alt}
             class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+            widths={[400, 800, 1200]}
+            sizes="(min-width: 1024px) 360px, (min-width: 640px) 45vw, calc(100vw - 40px)"
+            format="webp"
+            quality={62}
             loading="lazy"
           />
-          
-        </div>
+          <figcaption class="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent p-3 text-xs font-medium text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+            {image.event}
+          </figcaption>
+        </figure>
       ))}
     </div>
 

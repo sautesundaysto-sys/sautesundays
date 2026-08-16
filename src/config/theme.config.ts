@@ -108,6 +108,16 @@ export const NEXT_EVENT = {
   status: "RSVPs open now. Spots go fast.",
   // Optional. When set, `status` renders as a link with a trailing arrow.
   statusUrl: "",
+
+  // The fields below feed the Event structured data on the homepage, so search
+  // engines can show the date. They are not rendered as visible copy.
+  // ISO 8601 with the offset. Toronto is -04:00 on daylight time, -05:00 in winter.
+  startDateTime: "2026-08-23T18:15:00-04:00",
+  // The venue for this specific night. Leave "" and the schema falls back to
+  // Toronto alone rather than naming a place we are not sure of.
+  locationName: "",
+  schemaDescription:
+    "Toronto's cookbook club, outdoors. Cooking from Endless Summer by Katie Lee.",
 };
 
 // The proof line under the hero buttons. Reassures a first-timer, and is the
