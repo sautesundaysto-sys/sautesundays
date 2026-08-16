@@ -1,0 +1,242 @@
+---
+import { Image } from "astro:assets";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Icon from "../components/Icon.astro";
+import { REACH } from "../config/theme.config.ts";
+import heroPhoto from "../assets/gallery/023636E4-7D7E-477F-9FF7-7B1AA2B47916.JPG";
+import kitchenPhoto from "../assets/gallery/IMG_8506.jpg";
+
+const stats = [
+  { label: "Sells out in", value: REACH.sellsOutIn },
+  { label: "Repeat members", value: REACH.repeatMembers },
+  { label: "Subscribers", value: REACH.subscribers },
+  { label: "Newsletter opens", value: REACH.openRate },
+];
+
+const youBring = [
+  "A night you're open and quiet",
+  "A cook to lead the dish",
+  "Ingredients for the agreed headcount",
+  "Space for three small groups, plus sink and oven access",
+  "Your usual service for the meal afterwards",
+];
+
+const weBring = [
+  "The guests, from our own community",
+  "All promotion: newsletter, Instagram, WhatsApp",
+  "Ticketing, sign-ups and payment handling",
+  "Headcount, dietary flags and allergy notes in advance",
+  "Both of us on site for the evening",
+];
+
+const money = [
+  "Paid on confirmed headcount, 10 days out. If someone pays and doesn't show, you're still paid for them.",
+  "Tickets are non-refundable but transferable, so your count holds.",
+  "The bar is 100% yours. We take no share of drinks.",
+  "We keep a small fixed amount that doesn't scale with the ticket price.",
+  "The two of us cook alongside everyone else, so the headcount is 17 rather than 15.",
+];
+
+const openQuestions = [
+  {
+    term: "Insurance",
+    detail:
+      "Whether your policy covers non-staff in the kitchen, or whether we take out event coverage. We're happy to arrange that.",
+  },
+  {
+    term: "Public Health",
+    detail: "You hold the licence, so we'd follow your read on what your inspector is comfortable with.",
+  },
+  { term: "The space", detail: "We'd like to visit before agreeing anything." },
+  {
+    term: "The dish",
+    detail:
+      "Which one, whether your chef is paid separately for teaching, and whether you're happy for guests to take the recipe home.",
+  },
+  { term: "Drinks", detail: "During the cooking or after." },
+  { term: "Cleanup and leftovers", detail: "Who handles which." },
+];
+
+const afterwards = [
+  "A written recap on our site with photographs, naming you",
+  "Coverage in our newsletter and on Instagram, before and after",
+  "Fifteen people who spent three hours in your kitchen and will tell people where they went",
+];
+---
+
+<BaseLayout
+  title="Restaurant nights — Sauté Sundays"
+  description="We bring 15 home cooks into your restaurant on a quiet night. Your chef teaches one dish, they cook it, then they stay and eat."
+  canonical="/restaurant-nights"
+  ogImage="/og-restaurant-nights.jpg"
+  ogImageWidth={1200}
+  ogImageHeight={630}
+  ogImageAlt="Guests filling their plates from shared trays at a Sauté Sundays table"
+>
+  <div class="mx-auto max-w-[680px] px-5 py-12 sm:py-16">
+    <section>
+      <div class="text-xs font-medium uppercase tracking-[0.2em] text-primary">Sauté Sundays</div>
+      <h1 class="mt-3 font-serif text-4xl font-semibold leading-[1.08] sm:text-5xl">
+        Fill a quiet night with people who came for the food
+      </h1>
+      <p class="mt-6 text-lg leading-relaxed text-muted-foreground">
+        We bring 15 of our members into your room. Your chef teaches them one dish from your menu. They cook it, then
+        stay and eat and drink.
+      </p>
+      <p class="mt-4 text-lg leading-relaxed text-muted-foreground">
+        You never write us a cheque. You're paid per head from ticket sales, and the bar is yours.
+      </p>
+      <a
+        href="#form"
+        class="mt-8 inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90"
+      >
+        Start a conversation
+        <Icon name="arrow-right" class="h-3.5 w-3.5" />
+      </a>
+    </section>
+
+    <figure class="mt-10 overflow-hidden rounded-lg bg-muted">
+      <Image
+        src={heroPhoto}
+        alt="A busy Sauté Sundays table, guests serving themselves from trays and glass dishes while others reach across"
+        class="h-full w-full object-cover"
+        widths={[400, 680, 1000]}
+        sizes="(min-width: 720px) 640px, calc(100vw - 40px)"
+        format="webp"
+        quality={66}
+        loading="eager"
+      />
+    </figure>
+
+    <section class="mt-14">
+      <h2 class="font-serif text-2xl font-semibold sm:text-3xl">Who we'd bring</h2>
+      <dl class="mt-6 grid grid-cols-2 gap-3">
+        {
+          stats.map((stat) => (
+            <div class="rounded-lg border border-border bg-muted/40 px-4 py-5">
+              <dt class="text-xs uppercase tracking-wider text-muted-foreground">{stat.label}</dt>
+              <dd class="mt-1 font-serif text-2xl font-semibold sm:text-3xl">{stat.value}</dd>
+            </div>
+          ))
+        }
+      </dl>
+      <p class="mt-6 leading-relaxed text-muted-foreground">
+        A free monthly cookbook club, running since 2025 at Jrew's on Niagara. Everyone who comes cooks. 35 seats, sold
+        out every month, and the waitlist gets longer rather than shorter.
+      </p>
+    </section>
+
+    <section class="mt-14">
+      <h2 class="font-serif text-2xl font-semibold sm:text-3xl">How the night runs</h2>
+      <p class="mt-5 leading-relaxed text-muted-foreground">
+        Guests arrive and get a drink. Your chef introduces the dish and demonstrates. Everyone cooks in three small
+        groups. Then they sit down and eat what they made, alongside the rest of your menu.
+      </p>
+      <p class="mt-4 text-sm leading-relaxed text-muted-foreground/80">
+        About three hours. You'd know better than us how long the cooking part takes, and that is one of the first
+        things we'd ask you.
+      </p>
+    </section>
+
+    <figure class="mt-10 overflow-hidden rounded-lg bg-muted">
+      <Image
+        src={kitchenPhoto}
+        alt="Guests helping themselves along a counter at Sauté Sundays, dishes and serving spoons spread the length of it"
+        class="h-full w-full object-cover"
+        widths={[400, 680, 1000]}
+        sizes="(min-width: 720px) 640px, calc(100vw - 40px)"
+        format="webp"
+        quality={66}
+        loading="lazy"
+      />
+    </figure>
+
+    <section class="mt-14">
+      <h2 class="font-serif text-2xl font-semibold sm:text-3xl">What each side brings</h2>
+      <div class="mt-6 grid gap-8 sm:grid-cols-2">
+        <div>
+          <h3 class="text-xs font-medium uppercase tracking-wider text-muted-foreground">You</h3>
+          <ul class="mt-3 space-y-2 text-sm leading-relaxed text-muted-foreground">
+            {youBring.map((item) => <li class="border-l-2 border-border pl-3">{item}</li>)}
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-xs font-medium uppercase tracking-wider text-muted-foreground">Us</h3>
+          <ul class="mt-3 space-y-2 text-sm leading-relaxed text-muted-foreground">
+            {weBring.map((item) => <li class="border-l-2 border-primary/40 pl-3">{item}</li>)}
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="mt-14">
+      <h2 class="font-serif text-2xl font-semibold sm:text-3xl">The money</h2>
+      <p class="mt-5 leading-relaxed text-muted-foreground">
+        Tell us what a set menu for 15 costs you per person, and we build the ticket around it. Hands-on classes in
+        Toronto run $85–150 a head. We'd sit below that.
+      </p>
+      <ul class="mt-6 space-y-3 text-sm leading-relaxed text-muted-foreground/90">
+        {money.map((item) => <li class="border-l-2 border-border pl-3">{item}</li>)}
+      </ul>
+    </section>
+
+    <section class="mt-14">
+      <h2 class="font-serif text-2xl font-semibold sm:text-3xl">Confirming the date</h2>
+      <p class="mt-5 leading-relaxed text-muted-foreground">
+        We'd confirm about four weeks ahead and hold ticket sales until then, so an early change costs nobody anything.
+      </p>
+      <p class="mt-4 leading-relaxed text-muted-foreground">
+        Once tickets are live we'd ask that the date is firm. If something unavoidable comes up on either side, we'd
+        reschedule rather than cancel, so nobody who bought a ticket loses out.
+      </p>
+    </section>
+
+    <section class="mt-14">
+      <h2 class="font-serif text-2xl font-semibold sm:text-3xl">Things we'd work out with you</h2>
+      <p class="mt-5 leading-relaxed text-muted-foreground">
+        We'd rather raise these now than discover them on the night.
+      </p>
+      <dl class="mt-6 space-y-4 text-sm leading-relaxed">
+        {
+          openQuestions.map((item) => (
+            <div class="border-l-2 border-border pl-3">
+              <dt class="font-medium text-foreground">{item.term}</dt>
+              <dd class="mt-1 text-muted-foreground">{item.detail}</dd>
+            </div>
+          ))
+        }
+      </dl>
+    </section>
+
+    <section class="mt-14">
+      <h2 class="font-serif text-2xl font-semibold sm:text-3xl">What you get afterwards</h2>
+      <ul class="mt-6 space-y-3 leading-relaxed text-muted-foreground">
+        {afterwards.map((item) => <li class="border-l-2 border-primary/40 pl-3">{item}</li>)}
+      </ul>
+    </section>
+
+    <section id="form" class="mt-16 scroll-mt-24">
+      <h2 class="font-serif text-2xl font-semibold sm:text-3xl">Talk to us</h2>
+      <p class="mt-4 leading-relaxed text-muted-foreground">
+        We reply within two days. Next step is half an hour in your room, no commitment.
+      </p>
+      <div class="mt-6 rounded-lg bg-[#f2eeeb] p-4 dark:bg-[#f2eeeb] sm:p-6">
+        <iframe
+          src="https://tally.so/embed/LZxlJJ?alignLeft=1&hideTitle=1&transparentBackground=1"
+          width="100%"
+          height="600"
+          class="block h-[820px] w-full sm:h-[640px]"
+          frameborder="0"
+          marginheight="0"
+          marginwidth="0"
+          loading="lazy"
+          title="Restaurant nights enquiry form"></iframe>
+      </div>
+    </section>
+
+    <p class="mt-14 text-center text-sm text-muted-foreground">
+      Not a restaurant?
+      <a href="/partners" class="text-primary hover:underline">We work with brands too &rarr;</a>
+    </p>
+  </div>
+</BaseLayout>

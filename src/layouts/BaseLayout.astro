@@ -12,6 +12,8 @@ const {
   ogType = "website",
   ogImage,
   ogImageAlt,
+  ogImageWidth,
+  ogImageHeight,
   jsonLd,
   flushFooter = false,
 } = Astro.props;
@@ -35,6 +37,10 @@ const absoluteUrl = (value) => {
 const canonicalUrl = absoluteUrl(canonical || Astro.url.pathname);
 const usingDefaultOgImage = !imageSrc(ogImage) && !ogImage;
 const ogImageUrl = absoluteUrl(usingDefaultOgImage ? DEFAULT_OG_IMAGE : ogImage);
+// Only declared when we know the real size. Claiming the wrong dimensions is
+// worse than omitting them, so a post's own cover stays undeclared.
+const ogWidth = ogImageWidth ?? (usingDefaultOgImage ? 1200 : undefined);
+const ogHeight = ogImageHeight ?? (usingDefaultOgImage ? 630 : undefined);
 ---
 
 <!doctype html>
@@ -52,10 +58,10 @@ const ogImageUrl = absoluteUrl(usingDefaultOgImage ? DEFAULT_OG_IMAGE : ogImage)
     {canonicalUrl && <meta property="og:url" content={canonicalUrl} />}
     {ogImageUrl && <meta property="og:image" content={ogImageUrl} />}
     {
-      usingDefaultOgImage && (
+      ogWidth && ogHeight && (
         <>
-          <meta property="og:image:width" content="1200" />
-          <meta property="og:image:height" content="630" />
+          <meta property="og:image:width" content={String(ogWidth)} />
+          <meta property="og:image:height" content={String(ogHeight)} />
         </>
       )
     }

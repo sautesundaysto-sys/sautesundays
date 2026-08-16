@@ -126,6 +126,19 @@ export const NEXT_EVENT = {
 // first thing a sponsor reads.
 // `sellOutTime` comes from your Luma registration timestamps. While it is "",
 // that sentence is left out rather than shipped with a placeholder in it.
+// Numbers shown on /restaurant-nights and /partners. Both pages are sent as
+// direct links to people deciding whether to work with us, so check these
+// against Luma before sending either one out.
+export const REACH = {
+  seats: "35",
+  goneIn24Hours: "28",
+  sellsOutIn: "2 days",
+  repeatMembers: "50+",
+  subscribers: "400",
+  whatsappMembers: "130",
+  openRate: "50–70%",
+};
+
 export const PROOF = {
   seats: 35,
   tables: 13,
