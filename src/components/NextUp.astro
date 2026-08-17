@@ -6,15 +6,28 @@ const event = NEXT_EVENT;
 
 // NEXT_EVENT is updated by hand once the next Luma page is public, which leaves
 // a window after an event where this block would still be advertising a date
-// that has passed. Once startDateTime is behind us the block stops naming the
-// event and asks for a subscribe instead.
+// that has passed. Once the event day is over the block stops naming the event
+// and asks for a subscribe instead.
+//
+// The cutover is midnight at the end of the event day, in the event's own
+// offset rather than the visitor's, so the block holds all the way through the
+// evening for someone reading it in another timezone.
 //
 // Both states are rendered. The server picks one from the build date, and the
 // script below re-checks in the browser, because a static build could otherwise
 // sit here for days after the event with nothing triggering a rebuild.
-const startsAt = event.startDateTime ? new Date(event.startDateTime) : null;
-const startsAtValid = startsAt !== null && !Number.isNaN(startsAt.valueOf());
-const hasPassed = startsAtValid && startsAt.valueOf() < Date.now();
+const parts = event.startDateTime?.match(
+  /^(\d{4})-(\d{2})-(\d{2})T[\d:.]+(Z|[+-]\d{2}:\d{2})?$/,
+);
+let hideAfter = null;
+if (parts) {
+  const [, year, month, day, offset = "Z"] = parts;
+  // Step a day forward on the calendar, then take midnight in the event's offset.
+  const dayAfter = new Date(Date.UTC(Number(year), Number(month) - 1, Number(day) + 1));
+  const candidate = new Date(`${dayAfter.toISOString().slice(0, 10)}T00:00:00${offset}`);
+  if (!Number.isNaN(candidate.valueOf())) hideAfter = candidate;
+}
+const hasPassed = hideAfter !== null && hideAfter.valueOf() <= Date.now();
 ---
 
 {
@@ -23,7 +36,7 @@ const hasPassed = startsAtValid && startsAt.valueOf() < Date.now();
       <div
         class="mx-auto max-w-6xl px-5 py-12 sm:py-14"
         data-next-up
-        data-starts-at={startsAtValid ? startsAt.toISOString() : undefined}
+        data-hide-after={hideAfter ? hideAfter.toISOString() : undefined}
       >
         <div class="text-xs font-medium uppercase tracking-wider text-muted-foreground">Next up</div>
 
@@ -95,10 +108,10 @@ const hasPassed = startsAtValid && startsAt.valueOf() < Date.now();
 
 <script>
   const block = document.querySelector("[data-next-up]");
-  const startsAt = block?.dataset.startsAt;
+  const hideAfter = block?.dataset.hideAfter;
 
-  if (block && startsAt) {
-    const passed = new Date(startsAt).valueOf() < Date.now();
+  if (block && hideAfter) {
+    const passed = new Date(hideAfter).valueOf() <= Date.now();
     const live = block.querySelector("[data-next-up-live]");
     const past = block.querySelector("[data-next-up-past]");
     if (live) live.hidden = passed;
