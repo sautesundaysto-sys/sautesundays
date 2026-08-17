@@ -14,15 +14,19 @@ export const SITE = {
   repositoryUrl: "https://github.com/sautesundaysto-sys/sautesundays",
 };
 
+// No Home entry: the logo goes home, which every visitor already knows.
+// Events leaves the site for Luma, so it is marked external and gets an arrow.
 export const NAVIGATION = [
-  { to: "/", label: "Home" },
-  { to: "https://lu.ma/sautesundaysto", label: "Events" },
+  { to: "https://lu.ma/sautesundaysto", label: "Events", external: true },
   { to: "/blog", label: "Recaps" },
   { to: "/gallery", label: "Gallery" },
   { to: "/about", label: "About" },
   { to: "/faq", label: "FAQ" },
-  { to: "/contact", label: "Contact" },
 ];
+
+// The nav's single button. /contact is an email signup and the main conversion
+// on the site, so it sits apart rather than competing with Recaps and Gallery.
+export const NAV_CTA = { to: "/contact", label: "Subscribe" };
 
 export const CONTACT = {
   email: "sautesundays.to@gmail.com",

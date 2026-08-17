@@ -1,9 +1,12 @@
 ---
 import Icon from "./Icon.astro";
 import { SITE } from "../lib/blog-data.js";
-import { NAVIGATION } from "../config/theme.config.ts";
+import { NAVIGATION, NAV_CTA } from "../config/theme.config.ts";
 
 const current = Astro.url.pathname.replace(/\/$/, "") || "/";
+const isCurrent = (item) => !item.external && current.startsWith(item.to);
+const ctaClass =
+  "inline-flex items-center rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90";
 const isHome = current === "/";
 const activeClass = isHome ? "home-header-link is-active" : "text-foreground";
 const inactiveClass = isHome
@@ -31,15 +34,17 @@ const iconClass = isHome
     <nav class="hidden items-center gap-8 md:flex" aria-label="Primary navigation">
       {
         NAVIGATION.map((item) => {
-          const exact = item.to === "/";
-          const active = exact ? current === "/" : current.startsWith(item.to);
+          const active = isCurrent(item);
           return (
-            
-             <a href={item.to}
+            <a
+              href={item.to}
               class={`text-sm ${active ? activeClass : inactiveClass}`}
               aria-current={active ? "page" : undefined}
+              target={item.external ? "_blank" : undefined}
+              rel={item.external ? "noopener noreferrer" : undefined}
             >
               {item.label}
+              {item.external && <span aria-hidden="true"> &#8599;</span>}
             </a>
           );
         })
@@ -47,6 +52,7 @@ const iconClass = isHome
     </nav>
 
     <div class="flex items-center gap-1">
+      <a href={NAV_CTA.to} class={`mr-2 hidden md:inline-flex ${ctaClass}`}>{NAV_CTA.label}</a>
       <button
         type="button"
         data-theme-toggle
@@ -74,19 +80,22 @@ const iconClass = isHome
     <nav class="mx-auto flex max-w-6xl flex-col gap-1 px-5 py-3" aria-label="Mobile navigation">
       {
         NAVIGATION.map((item) => {
-          const exact = item.to === "/";
-          const active = exact ? current === "/" : current.startsWith(item.to);
+          const active = isCurrent(item);
           return (
-            
-              <a href={item.to}
+            <a
+              href={item.to}
               class={`rounded-md px-2 py-2 text-sm hover:bg-muted hover:text-foreground ${active ? "text-foreground" : "text-muted-foreground"}`}
               aria-current={active ? "page" : undefined}
+              target={item.external ? "_blank" : undefined}
+              rel={item.external ? "noopener noreferrer" : undefined}
             >
               {item.label}
+              {item.external && <span aria-hidden="true"> &#8599;</span>}
             </a>
           );
         })
       }
+      <a href={NAV_CTA.to} class={`mt-2 justify-center ${ctaClass}`}>{NAV_CTA.label}</a>
     </nav>
   </div>
 </header>
