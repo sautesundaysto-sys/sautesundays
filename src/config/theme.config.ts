@@ -73,13 +73,8 @@ export const authors = [
     slug: "mady",
     name: "Mady",
     role: "Co-host",
-    bio: "Co-founded Sauté Sundays and makes video content for social. Attended culinary school at George Brown.",
-    longBio: [
-      "Started Sauté Sundays with Tammy in 2025. The two of them had gone looking for a cookbook club in Toronto, found nothing open to the public, and started their own. It has run monthly ever since.",
-      "Hosts, and makes the video content for the Instagram. Recipe tests, cooking clips, the parts that make a cookbook look worth buying before anyone has committed to a Sunday. It is where the club exists between events.",
-      "Usually brings a meat dish, though the real rule is whatever looks tastiest to her in the moment. Whichever page she keeps going back to. Meat just tends to win.",
-      "Attended culinary school at George Brown.",
-    ],
+    bio: "Co-host of Sauté Sundays, Toronto's cookbook club.",
+    longBio: ["Mady co-hosts Sauté Sundays, a monthly potluck cookbook club based in Toronto."],
     avatar: "/avatars/mady.jpeg",
   },
 ];
