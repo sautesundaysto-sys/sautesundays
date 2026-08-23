@@ -29,7 +29,7 @@ export const NAVIGATION = [
 export const NAV_CTA = { to: "/contact", label: "Subscribe" };
 
 export const CONTACT = {
-  email: "sautesundays.to@gmail.com",
+  email: "hello@sautesundays.com",
   socialHandle: "@sautesundays.to",
   socialUrl: "https://www.instagram.com/sautesundays.to/",
 };
@@ -125,10 +125,6 @@ export const NEXT_EVENT = {
     "Toronto's cookbook club, outdoors. Cooking from Endless Summer by Katie Lee.",
 };
 
-// The proof line under the hero buttons. Reassures a first-timer, and is the
-// first thing a sponsor reads.
-// `sellOutTime` comes from your Luma registration timestamps. While it is "",
-// that sentence is left out rather than shipped with a placeholder in it.
 // Numbers shown on /restaurant-nights and /partners. Both pages are sent as
 // direct links to people deciding whether to work with us, so check these
 // against Luma before sending either one out.
@@ -142,6 +138,10 @@ export const REACH = {
   openRate: "50–70%",
 };
 
+// The proof line under the hero buttons. Reassures a first-timer, and is the
+// first thing a sponsor reads.
+// `sellOutTime` comes from your Luma registration timestamps. While it is "",
+// that sentence is left out rather than shipped with a placeholder in it.
 export const PROOF = {
   seats: 35,
   tables: 13,
