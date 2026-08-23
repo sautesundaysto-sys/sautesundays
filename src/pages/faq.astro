@@ -96,7 +96,11 @@ const faqs = [
       ))}
     </div>
 
-    <div class="mt-16 rounded-lg border border-border bg-muted/40 px-8 py-10 text-center">
+    <p class="mt-8 text-center text-sm text-muted-foreground">
+      Didn't find your answer? Email <a href={`mailto:${CONTACT.email}`} class="text-primary hover:underline">{CONTACT.email}</a>.
+    </p>
+
+    <div class="mt-10 rounded-lg border border-border bg-muted/40 px-8 py-10 text-center">
       <p class="font-serif text-2xl font-semibold">Ready to join?</p>
       <p class="mt-2 text-muted-foreground">Sign up for early access and be the first to know when spots open.</p>
       <div class="mt-6 flex flex-wrap justify-center gap-4">
