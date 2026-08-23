@@ -2,7 +2,7 @@
 import { Image } from "astro:assets";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Icon from "../components/Icon.astro";
-import { REACH } from "../config/theme.config.ts";
+import { REACH, CONTACT } from "../config/theme.config.ts";
 import heroPhoto from "../assets/gallery/IMG_9483.JPG";
 import roomPhoto from "../assets/gallery/C3D8722C-A122-4A1B-87AC-D46C5B11B5DD.JPG";
 
@@ -181,6 +181,11 @@ const pastPartners = ["Jrew's, our home on Niagara St", "Danu Social House", "Su
           loading="lazy"
           title="Brand partnership enquiry form"></iframe>
       </div>
+      <p class="mt-3 text-center text-sm text-muted-foreground">
+        Form not loading?
+        <a href="https://tally.so/r/4405o5" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline">Open it in a new tab &#8599;</a>
+        or email <a href={`mailto:${CONTACT.email}`} class="text-primary hover:underline">{CONTACT.email}</a>.
+      </p>
     </section>
 
     <p class="mt-14 text-center text-sm text-muted-foreground">

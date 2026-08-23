@@ -26,7 +26,7 @@ const posts = await sortedPosts();
       <button
         type="button"
         data-home-filter=""
-        class="rounded-full border px-3 py-1 text-xs transition-colors border-foreground bg-foreground text-background"
+        class="inline-flex min-h-11 items-center rounded-full border px-4 text-xs transition-colors border-foreground bg-foreground text-background"
       >
         All
       </button>
@@ -35,7 +35,7 @@ const posts = await sortedPosts();
           <button
             type="button"
             data-home-filter={category.slug}
-            class="rounded-full border px-3 py-1 text-xs transition-colors border-border text-muted-foreground hover:text-foreground"
+            class="inline-flex min-h-11 items-center rounded-full border px-4 text-xs transition-colors border-border text-muted-foreground hover:text-foreground"
           >
             {category.name}
           </button>
@@ -51,6 +51,17 @@ const posts = await sortedPosts();
       {posts.map((post) => (
         <PostCard post={post} variant="list" />
       ))}
+    </div>
+
+    <div class="mt-10 text-center">
+      <button
+        type="button"
+        data-show-more
+        class="inline-flex min-h-11 items-center gap-2 rounded-full border border-border px-6 text-sm font-medium hover:bg-muted"
+        hidden
+      >
+        Show more
+      </button>
     </div>
   </div>
 </BaseLayout>
@@ -83,4 +94,40 @@ const posts = await sortedPosts();
   buttons.forEach((btn) => {
     btn.addEventListener("click", () => filter(btn.dataset.homeFilter || ""));
   });
+
+  // Reveal in batches. Without this the phone gets every post at once, which
+  // ran to about eighteen screens of scrolling.
+  const BATCH = 8;
+  const showMore = document.querySelector("[data-show-more]");
+  let shown = BATCH;
+  let category = "";
+
+  const render = () => {
+    let matched = 0;
+    cards.forEach((card) => {
+      const match = !category || card.dataset.category === category;
+      card.hidden = !match || matched >= shown;
+      if (match) matched += 1;
+    });
+    if (empty) empty.hidden = matched > 0;
+    if (showMore) {
+      showMore.hidden = matched <= shown;
+      showMore.textContent = `Show more (${Math.max(matched - shown, 0)} left)`;
+    }
+  };
+
+  showMore?.addEventListener("click", () => {
+    shown += BATCH;
+    render();
+  });
+
+  buttons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      category = btn.dataset.homeFilter || "";
+      shown = BATCH;
+      render();
+    });
+  });
+
+  render();
 </script>

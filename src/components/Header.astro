@@ -6,7 +6,7 @@ import { NAVIGATION, NAV_CTA } from "../config/theme.config.ts";
 const current = Astro.url.pathname.replace(/\/$/, "") || "/";
 const isCurrent = (item) => !item.external && current.startsWith(item.to);
 const ctaClass =
-  "inline-flex items-center rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90";
+  "inline-flex min-h-11 items-center rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90";
 const isHome = current === "/";
 const activeClass = isHome ? "home-header-link is-active" : "text-foreground";
 const inactiveClass = isHome
@@ -16,8 +16,8 @@ const headerClass = isHome
   ? "sticky top-0 z-40 border-b border-transparent bg-transparent"
   : "sticky top-0 z-40 border-b border-border/60 bg-background/80 backdrop-blur-md";
 const iconClass = isHome
-  ? "home-header-action inline-flex h-9 w-9 items-center justify-center rounded-full transition-colors"
-  : "inline-flex h-9 w-9 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-muted hover:text-foreground";
+  ? "home-header-action inline-flex h-11 w-11 items-center justify-center rounded-full transition-colors"
+  : "inline-flex h-11 w-11 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-muted hover:text-foreground";
 ---
 
 <header class={headerClass} data-home-header={isHome ? "true" : undefined} data-scrolled="false">
@@ -28,7 +28,7 @@ const iconClass = isHome
         alt="Sauté Sundays"
         class="h-8 w-auto"
       />
-      <span class="font-serif font-semibold text-lg hidden sm:block">Sauté Sundays</span>
+      <span class="whitespace-nowrap font-serif text-sm font-semibold sm:text-lg">Sauté Sundays</span>
     </a>
 
     <nav class="hidden items-center gap-8 md:flex" aria-label="Primary navigation">

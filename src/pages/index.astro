@@ -68,11 +68,11 @@ const eventJsonLd = NEXT_EVENT.title && NEXT_EVENT.startDateTime
   jsonLd={eventJsonLd}
   flushFooter
 >
-  <section class="relative -mt-[calc(4rem+2px)] min-h-[calc(100svh-2rem)] overflow-hidden border-b border-border/60 pt-[calc(4rem+2px)] sm:min-h-[760px]">
+  <section class="relative -mt-[calc(4rem+2px)] min-h-[78svh] overflow-hidden border-b border-border/60 pt-[calc(4rem+2px)] sm:min-h-[760px]">
     <Image
       src={autumnScene}
       alt="Sauté Sundays Toronto cookbook club, a full table of homemade dishes"
-      class="absolute inset-0 h-full w-full object-cover object-center"
+      class="absolute inset-0 h-full w-full object-cover object-right sm:object-center"
       loading="eager"
       fetchpriority="high"
       decoding="async"
@@ -84,35 +84,39 @@ const eventJsonLd = NEXT_EVENT.title && NEXT_EVENT.startDateTime
     />
     <div
       aria-hidden="true"
-      class="absolute inset-y-0 left-0 w-2/3 bg-gradient-to-r from-[#f2eeeb]/90 via-[#f2eeeb]/50 to-transparent"
+      class="absolute inset-0 bg-gradient-to-b from-[#f2eeeb]/95 via-[#f2eeeb]/88 to-[#f2eeeb]/70 dark:from-[#383a37]/95 dark:via-[#383a37]/88 dark:to-[#383a37]/70 sm:hidden"
     />
-    <div class="relative mx-auto flex min-h-[calc(100svh-6rem)] max-w-6xl items-center px-5 py-20 sm:min-h-[680px] sm:py-24">
-      <div class="max-w-4xl text-[#1a1c1a] drop-shadow-[0_1px_3px_rgba(255,255,255,0.8)]">
+    <div
+      aria-hidden="true"
+      class="absolute inset-y-0 left-0 hidden w-2/3 bg-gradient-to-r from-[#f2eeeb]/90 via-[#f2eeeb]/50 to-transparent dark:from-[#383a37]/90 dark:via-[#383a37]/50 dark:to-transparent sm:block"
+    />
+    <div class="relative mx-auto flex min-h-[66svh] max-w-6xl items-center px-5 py-16 sm:min-h-[680px] sm:py-24">
+      <div class="max-w-4xl text-[#1a1c1a] drop-shadow-[0_1px_3px_rgba(255,255,255,0.8)] dark:text-[#f2eeeb] dark:drop-shadow-[0_1px_3px_rgba(0,0,0,0.7)]">
         <h1 class="font-serif text-[2.5rem] font-bold leading-[1.02] sm:text-6xl lg:text-7xl">
           Toronto's
           <span class="italic text-primary"> cookbook club</span>
           : bring one dish,
           <span class="italic text-primary"> enjoy 35 dishes</span>.
         </h1>
-        <p class="mt-8 max-w-xl text-lg leading-relaxed text-[#1a1c1a]/80">
+        <p class="mt-8 max-w-xl text-lg leading-relaxed text-[#1a1c1a]/80 dark:text-[#f2eeeb]/80">
           Every month, Toronto home cooks gather to cook from the same cookbook and share what they made. One book, thirty-five interpretations, one table. Free to attend. Running since 2025. Spots go fast.
         </p>
         <div class="mt-10 flex flex-wrap items-center gap-4">
           
            <a href="https://lu.ma/sautesundaysto"
-            class="inline-flex items-center gap-2 rounded-full bg-[#1a1c1a] px-6 py-3 text-sm font-semibold text-[#f2eeeb] hover:opacity-90 transition-colors"
+            class="inline-flex min-h-11 items-center gap-2 rounded-full bg-[#1a1c1a] px-6 py-3 text-sm font-semibold text-[#f2eeeb] transition-colors hover:opacity-90 dark:bg-[#f2eeeb] dark:text-[#1a1c1a]"
           >
             RSVP to the next event
             <Icon name="arrow-right" class="h-3.5 w-3.5" />
           </a>
           
             <a href="/blog"
-            class="inline-flex items-center gap-2 rounded-full border border-[#1a1c1a] px-6 py-3 text-sm font-semibold text-[#1a1c1a] hover:bg-[#f2eeeb]/20 transition-colors"
+            class="inline-flex min-h-11 items-center gap-2 rounded-full border border-[#1a1c1a] px-6 py-3 text-sm font-semibold text-[#1a1c1a] transition-colors hover:bg-[#f2eeeb]/20 dark:border-[#f2eeeb] dark:text-[#f2eeeb] dark:hover:bg-[#1a1c1a]/20"
           >
             See past events
           </a>
         </div>
-        <p class="mt-6 text-sm text-[#1a1c1a]/70">
+        <p class="mt-6 text-sm font-medium text-[#1a1c1a] dark:text-[#f2eeeb]">
           {PROOF.seats} seats. {PROOF.tables} tables since {PROOF.since}.
           {PROOF.sellOutTime && ` Every one sold out in ${PROOF.sellOutTime}.`}
         </p>
@@ -126,7 +130,7 @@ const eventJsonLd = NEXT_EVENT.title && NEXT_EVENT.startDateTime
     <div class="mx-auto max-w-6xl px-5 py-16">
       <div class="mb-6 flex items-center justify-between">
         <div class="text-xs font-medium uppercase tracking-wider text-muted-foreground">Latest Event</div>
-        <a href="/blog" class="text-xs text-muted-foreground hover:text-foreground">All past events &rarr;</a>
+        <a href="/blog" class="inline-flex min-h-11 items-center text-xs text-muted-foreground hover:text-foreground">All past events &rarr;</a>
       </div>
       <article class="grid gap-10 lg:grid-cols-2">
         <a href={`/blog/${featured.slug}`} class="group block" aria-label={`Read ${featured.title}`}>
@@ -151,7 +155,7 @@ const eventJsonLd = NEXT_EVENT.title && NEXT_EVENT.startDateTime
           <div class="flex items-center gap-3 text-xs uppercase tracking-wider text-muted-foreground">
             {
               featuredCategory && (
-                <a href={`/categories/${featuredCategory.slug}`} class="inline-flex min-h-9 items-center text-primary hover:underline">
+                <a href={`/categories/${featuredCategory.slug}`} class="inline-flex min-h-11 items-center text-primary hover:underline">
                   {featuredCategory.name}
                 </a>
               )
@@ -176,14 +180,14 @@ const eventJsonLd = NEXT_EVENT.title && NEXT_EVENT.startDateTime
                     height="28"
                     class="h-7 w-7 rounded-full object-cover"
                   />
-                  <a href={`/authors/${featuredAuthor.slug}`} class="hover:text-foreground">{featuredAuthor.name}</a>
+                  <a href={`/authors/${featuredAuthor.slug}`} class="inline-flex min-h-11 items-center hover:text-foreground">{featuredAuthor.name}</a>
                   <span>&middot;</span>
                 </>
               )
             }
             <span>{featured.readingTime} min read</span>
           </div>
-          <a href={`/blog/${featured.slug}`} class="mt-6 inline-flex items-center gap-1 text-sm font-medium text-primary hover:underline">
+          <a href={`/blog/${featured.slug}`} class="mt-6 inline-flex min-h-11 items-center gap-1 text-sm font-medium text-primary hover:underline">
             Read the recap <Icon name="arrow-right" class="h-3.5 w-3.5" />
           </a>
         </div>
@@ -204,7 +208,7 @@ const eventJsonLd = NEXT_EVENT.title && NEXT_EVENT.startDateTime
       </p>
       <a
         href="/faq"
-        class="mt-8 inline-flex items-center gap-2 rounded-md border border-border px-5 py-2.5 text-sm font-medium hover:bg-muted"
+        class="mt-8 inline-flex min-h-11 items-center gap-2 rounded-md border border-border px-5 text-sm font-medium hover:bg-muted"
       >
         Read the FAQ <Icon name="arrow-right" class="h-3.5 w-3.5" />
       </a>
@@ -218,7 +222,7 @@ const eventJsonLd = NEXT_EVENT.title && NEXT_EVENT.startDateTime
         <button
           type="button"
           data-home-filter=""
-          class="rounded-full border px-3 py-1 text-xs transition-colors border-foreground bg-foreground text-background"
+          class="inline-flex min-h-11 items-center rounded-full border px-4 text-xs transition-colors border-foreground bg-foreground text-background"
         >
           All
         </button>
@@ -227,7 +231,7 @@ const eventJsonLd = NEXT_EVENT.title && NEXT_EVENT.startDateTime
             <button
               type="button"
               data-home-filter={category.slug}
-              class="rounded-full border px-3 py-1 text-xs transition-colors border-border text-muted-foreground hover:text-foreground"
+              class="inline-flex min-h-11 items-center rounded-full border px-4 text-xs transition-colors border-border text-muted-foreground hover:text-foreground"
             >
               {category.name}
             </button>
@@ -245,7 +249,7 @@ const eventJsonLd = NEXT_EVENT.title && NEXT_EVENT.startDateTime
     </div>
 
     <div class="mt-12 text-center">
-      <a href="/blog" class="inline-flex items-center gap-2 rounded-md border border-border px-5 py-2.5 text-sm font-medium hover:bg-muted">
+      <a href="/blog" class="inline-flex min-h-11 items-center gap-2 rounded-md border border-border px-5 text-sm font-medium hover:bg-muted">
         All past events <Icon name="arrow-right" class="h-3.5 w-3.5" />
       </a>
     </div>

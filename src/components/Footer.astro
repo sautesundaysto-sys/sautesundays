@@ -16,7 +16,7 @@ const { flush = false } = Astro.props;
       <div class="mt-4 flex items-center gap-3 text-muted-foreground">
         {
           SOCIAL_LINKS.map((link) => (
-            <a href={link.href} aria-label={link.label} class="hover:text-primary">
+            <a href={link.href} aria-label={link.label} class="inline-flex h-11 w-11 items-center justify-center rounded-full hover:bg-muted hover:text-primary">
               <Icon name={link.icon} class="h-4 w-4" />
             </a>
           ))
@@ -26,20 +26,20 @@ const { flush = false } = Astro.props;
     <div>
       <div class="text-xs font-medium uppercase tracking-wider text-muted-foreground">Navigate</div>
       <ul class="mt-3 space-y-2 text-sm">
-        <li><a href="/" class="text-foreground/80 hover:text-foreground">Home</a></li>
+        <li><a href="/" class="inline-flex min-h-11 items-center text-foreground/80 hover:text-foreground">Home</a></li>
         <li>
           <a
             href="https://lu.ma/sautesundaysto"
             target="_blank"
             rel="noopener noreferrer"
-            class="text-foreground/80 hover:text-foreground">Events ↗</a
+            class="inline-flex min-h-11 items-center text-foreground/80 hover:text-foreground">Events ↗</a
           >
         </li>
-        <li><a href="/blog" class="text-foreground/80 hover:text-foreground">Recaps</a></li>
-        <li><a href="/gallery" class="text-foreground/80 hover:text-foreground">Gallery</a></li>
-        <li><a href="/about" class="text-foreground/80 hover:text-foreground">About</a></li>
-        <li><a href="/faq" class="text-foreground/80 hover:text-foreground">FAQ</a></li>
-        <li><a href="/contact" class="text-foreground/80 hover:text-foreground">Subscribe</a></li>
+        <li><a href="/blog" class="inline-flex min-h-11 items-center text-foreground/80 hover:text-foreground">Recaps</a></li>
+        <li><a href="/gallery" class="inline-flex min-h-11 items-center text-foreground/80 hover:text-foreground">Gallery</a></li>
+        <li><a href="/about" class="inline-flex min-h-11 items-center text-foreground/80 hover:text-foreground">About</a></li>
+        <li><a href="/faq" class="inline-flex min-h-11 items-center text-foreground/80 hover:text-foreground">FAQ</a></li>
+        <li><a href="/contact" class="inline-flex min-h-11 items-center text-foreground/80 hover:text-foreground">Subscribe</a></li>
       </ul>
         
     
@@ -47,14 +47,14 @@ const { flush = false } = Astro.props;
     <div>
       <div class="text-xs font-medium uppercase tracking-wider text-muted-foreground">Work with us</div>
       <ul class="mt-3 space-y-2 text-sm">
-        <li><a href="/restaurant-nights" class="text-foreground/80 hover:text-foreground">Restaurant nights</a></li>
-        <li><a href="/partners" class="text-foreground/80 hover:text-foreground">Partner with us</a></li>
+        <li><a href="/restaurant-nights" class="inline-flex min-h-11 items-center text-foreground/80 hover:text-foreground">Restaurant nights</a></li>
+        <li><a href="/partners" class="inline-flex min-h-11 items-center text-foreground/80 hover:text-foreground">Partner with us</a></li>
       </ul>
 
       <div class="mt-8 text-xs font-medium uppercase tracking-wider text-muted-foreground">From Tammy</div>
       <ul class="mt-3 space-y-2 text-sm">
         <li>
-          <a href="https://clearingthetable.substack.com" target="_blank" rel="noopener noreferrer" class="text-foreground/80 hover:text-primary">
+          <a href="https://clearingthetable.substack.com" target="_blank" rel="noopener noreferrer" class="inline-flex min-h-11 items-center text-foreground/80 hover:text-primary">
             Clearing the Table ↗
           </a>
         </li>

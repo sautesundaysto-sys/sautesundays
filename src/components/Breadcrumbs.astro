@@ -10,7 +10,7 @@ const { items = [] } = Astro.props;
       <span class="flex items-center gap-1">
         {index > 0 && <Icon name="chevron-right" class="h-3 w-3" />}
         {item.to ? (
-          <a href={item.to} class="hover:text-foreground">{item.label}</a>
+          <a href={item.to} class="inline-flex min-h-11 items-center hover:text-foreground">{item.label}</a>
         ) : (
           <span class="text-foreground">{item.label}</span>
         )}
