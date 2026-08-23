@@ -1,7 +1,7 @@
 const siteUrl = (
   import.meta.env.SITE_URL ||
   import.meta.env.PUBLIC_SITE_URL ||
-  "https://sautesundays.vercel.app"
+  "https://sautesundays.com"
 ).replace(/\/$/, "");
 
 export const SITE = {
