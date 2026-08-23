@@ -12,15 +12,21 @@ import {
   categories,
   featuredPost,
   sortedPosts,
-  getAuthor,
   getCategory,
   formatDate,
 } from "../lib/blog-data.js";
 
 const featured = await featuredPost();
-const featuredAuthor = getAuthor(featured.author);
 const featuredCategory = getCategory(featured.category);
-const latest = (await sortedPosts()).filter((post) => post.slug !== featured.slug);
+
+// Each night has two posts: the recap, and a cookbook highlight slugged
+// cookbook-<recap>. Surfacing both near the top read as a duplicate, so the
+// companion is linked from the featured card instead of repeating in the grid.
+const allPosts = await sortedPosts();
+const companion = allPosts.find((post) => post.slug === `cookbook-${featured.slug}`);
+const latest = allPosts.filter(
+  (post) => post.slug !== featured.slug && post.slug !== companion?.slug,
+);
 
 // Event structured data, built from the same NEXT_EVENT entry the "Next up"
 // block renders, so there is only one place to update each month.
@@ -126,24 +132,21 @@ const eventJsonLd = NEXT_EVENT.title && NEXT_EVENT.startDateTime
 
   <NextUp />
 
-  <section class="border-b border-border/60">
+  <section class="border-b border-border/60 bg-muted/40">
     <div class="mx-auto max-w-6xl px-5 py-16">
-      <div class="mb-6 flex items-center justify-between">
-        <div class="text-xs font-medium uppercase tracking-wider text-muted-foreground">Latest Event</div>
-        <a href="/blog" class="inline-flex min-h-11 items-center text-xs text-muted-foreground hover:text-foreground">All past events &rarr;</a>
-      </div>
-      <article class="grid gap-10 lg:grid-cols-2">
+      <div class="text-xs font-medium uppercase tracking-wider text-muted-foreground">The latest night</div>
+      <article class="mt-5 overflow-hidden rounded-xl border border-border bg-background">
         <a href={`/blog/${featured.slug}`} class="group block" aria-label={`Read ${featured.title}`}>
-          <div class="aspect-[4/3] overflow-hidden rounded-md bg-muted">
+          <div class="aspect-[16/9] overflow-hidden bg-muted sm:aspect-[21/9]">
             {
               featured.thumbnail && (
                 <Image
                   src={featured.thumbnail}
                   alt={featured.title}
                   class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-                  width={720}
-                  widths={[372, 560, 720]}
-                  sizes="(min-width: 1024px) 560px, calc(100vw - 40px)"
+                  width={1200}
+                  widths={[560, 880, 1200]}
+                  sizes="(min-width: 1024px) 1100px, calc(100vw - 40px)"
                   format="webp"
                   quality={64}
                 />
@@ -151,7 +154,7 @@ const eventJsonLd = NEXT_EVENT.title && NEXT_EVENT.startDateTime
             }
           </div>
         </a>
-        <div class="flex flex-col justify-center">
+        <div class="p-6 sm:p-10">
           <div class="flex items-center gap-3 text-xs uppercase tracking-wider text-muted-foreground">
             {
               featuredCategory && (
@@ -163,33 +166,24 @@ const eventJsonLd = NEXT_EVENT.title && NEXT_EVENT.startDateTime
             <span>&middot;</span>
             <time datetime={featured.date}>{formatDate(featured.date)}</time>
           </div>
-          <a href={`/blog/${featured.slug}`} class="mt-2 block py-1">
-            <h2 class="font-serif text-3xl font-semibold leading-tight hover:text-primary sm:text-4xl">
+          <a href={`/blog/${featured.slug}`} class="mt-1 block py-2.5">
+            <h2 class="font-serif text-3xl font-semibold leading-tight hover:text-primary sm:text-5xl">
               {featured.title}
             </h2>
           </a>
-          <p class="mt-4 text-lg text-muted-foreground">{featured.excerpt}</p>
-          <div class="mt-6 flex items-center gap-3 text-sm text-muted-foreground">
+          <p class="mt-3 text-lg leading-relaxed text-muted-foreground sm:text-xl">{featured.excerpt}</p>
+          <div class="mt-7 flex flex-wrap items-center gap-x-6 gap-y-2">
+            <a href={`/blog/${featured.slug}`} class="inline-flex min-h-11 items-center gap-2 rounded-full bg-primary px-5 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90">
+              Read the recap <Icon name="arrow-right" class="h-3.5 w-3.5" />
+            </a>
             {
-              featuredAuthor && (
-                <>
-                  <img
-                    src={featuredAuthor.avatar}
-                    alt={featuredAuthor.name}
-                    width="28"
-                    height="28"
-                    class="h-7 w-7 rounded-full object-cover"
-                  />
-                  <a href={`/authors/${featuredAuthor.slug}`} class="inline-flex min-h-11 items-center hover:text-foreground">{featuredAuthor.name}</a>
-                  <span>&middot;</span>
-                </>
+              companion && (
+                <a href={`/blog/${companion.slug}`} class="inline-flex min-h-11 items-center text-sm text-muted-foreground hover:text-foreground">
+                  Or the cookbook behind it &rarr;
+                </a>
               )
             }
-            <span>{featured.readingTime} min read</span>
           </div>
-          <a href={`/blog/${featured.slug}`} class="mt-6 inline-flex min-h-11 items-center gap-1 text-sm font-medium text-primary hover:underline">
-            Read the recap <Icon name="arrow-right" class="h-3.5 w-3.5" />
-          </a>
         </div>
       </article>
     </div>
@@ -217,7 +211,10 @@ const eventJsonLd = NEXT_EVENT.title && NEXT_EVENT.startDateTime
 
   <section class="mx-auto max-w-6xl px-5 py-16" data-home-latest>
     <div class="flex flex-wrap items-center justify-between gap-4">
-      <h2 class="font-serif text-2xl font-semibold">Past Events</h2>
+      <div>
+        <h2 class="font-serif text-2xl font-semibold">Past Events</h2>
+        <p class="mt-1 text-sm text-muted-foreground">Every table since 2025.</p>
+      </div>
       <div class="flex flex-wrap gap-2">
         <button
           type="button"
