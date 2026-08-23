@@ -60,7 +60,11 @@ const eventJsonLd = NEXT_EVENT.title && NEXT_EVENT.startDateTime
         price: "0",
         priceCurrency: "CAD",
         availability: "https://schema.org/InStock",
-        url: NEXT_EVENT.rsvpUrl,
+        // rsvpUrl is relative while it points at /contact, between Luma pages.
+        url: new URL(NEXT_EVENT.rsvpUrl, SITE.url).toString(),
+        // Only set once we know the date, so we are not telling search engines
+        // a seat is bookable before RSVPs actually open.
+        ...(NEXT_EVENT.rsvpOpensDateTime ? { validFrom: NEXT_EVENT.rsvpOpensDateTime } : {}),
       },
       image: [new URL("/og-default.jpg", SITE.url).toString()],
     }

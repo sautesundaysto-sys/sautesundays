@@ -53,6 +53,7 @@ const hasPassed = hideAfter !== null && hideAfter.valueOf() <= Date.now();
                 {event.cookbookAuthor && <> by {event.cookbookAuthor}</>}
               </p>
             )}
+            {event.note && <p class="mt-1 text-muted-foreground">{event.note}</p>}
             {event.status &&
               (event.statusUrl ? (
                 <a
