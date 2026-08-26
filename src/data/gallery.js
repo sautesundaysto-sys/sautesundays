@@ -6,6 +6,10 @@
 // Every alt describes what is actually happening in the frame. A generic line
 // is no use to someone using a screen reader and no use in search either.
 
+import augustWall from "../assets/gallery/DSCF3746.jpg";
+import augustCounter from "../assets/gallery/DSCF3755.jpg";
+import augustServing from "../assets/gallery/DSCF3764.jpg";
+import augustTalking from "../assets/gallery/DSCF3768.jpg";
 import vietnameseGroup from "../assets/gallery/IMG_9483.JPG";
 import vietnamesePair from "../assets/gallery/IMG_9488.JPG";
 import caribbeanServing from "../assets/gallery/023636E4-7D7E-477F-9FF7-7B1AA2B47916.JPG";
@@ -21,6 +25,26 @@ import dishoomCounter from "../assets/gallery/IMG_8506.jpg";
 import dishoomRice from "../assets/gallery/IMG_8507.jpg";
 
 export const gallery = [
+  {
+    src: augustCounter,
+    alt: "Guests filling their plates from the foil trays along the counter at Sauté Sundays",
+    event: "Summer Isn't Over Yet, August 2026",
+  },
+  {
+    src: augustServing,
+    alt: "A guest spooning food onto her plate at the counter, the room busy behind her",
+    event: "Summer Isn't Over Yet, August 2026",
+  },
+  {
+    src: augustTalking,
+    alt: "Four guests standing with full plates, talking over the counter at Sauté Sundays",
+    event: "Summer Isn't Over Yet, August 2026",
+  },
+  {
+    src: augustWall,
+    alt: "Guests standing along the wall with plates and bowls, eating and talking",
+    event: "Summer Isn't Over Yet, August 2026",
+  },
   {
     src: vietnameseGroup,
     alt: "Four guests sitting together with their plates at Sauté Sundays, one flashing a peace sign at the camera",

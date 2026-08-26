@@ -13,6 +13,12 @@ export default defineConfig({
   redirects: {
     "/blog/caribbean-June-2026": "/blog/caribbean-june-2026",
   },
+  // Markdown images otherwise ship a single file at the source's full width:
+  // an 800KB WebP for a phone photo. `constrained` gives every image, including
+  // the ones written as plain markdown in the recaps, a srcset and sizes.
+  image: {
+    layout: "constrained",
+  },
   integrations: [mdx()],
   vite: {
     plugins: [tailwindcss()],
