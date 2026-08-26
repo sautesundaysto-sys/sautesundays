@@ -136,6 +136,28 @@ const eventJsonLd = NEXT_EVENT.title && NEXT_EVENT.startDateTime
 
   <NextUp />
 
+  <section id="calendar" class="scroll-mt-20 border-b border-border/60">
+    <div class="mx-auto max-w-3xl px-5 py-16">
+      <h2 class="font-serif text-2xl font-semibold sm:text-3xl">What's on the books</h2>
+      <p class="mt-2 text-muted-foreground">
+        Every night we have scheduled. Subscribe on Luma and each new one lands in your calendar.
+      </p>
+
+      <div class="mt-6 overflow-hidden rounded-lg border border-border bg-muted">
+        <iframe
+          src="https://luma.com/embed/calendar/cal-MPOdvnBoHzwltEq/events"
+          title="Sauté Sundays events calendar"
+          class="block h-[540px] w-full border-0 sm:h-[450px]"
+          loading="lazy"
+          allowfullscreen></iframe>
+      </div>
+
+      <p class="mt-3 text-center text-sm text-muted-foreground">
+        Calendar not loading? <a href="https://lu.ma/sautesundaysto" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline">Open it on Luma &#8599;</a>
+      </p>
+    </div>
+  </section>
+
   <section class="border-b border-border/60 bg-muted/40">
     <div class="mx-auto max-w-6xl px-5 py-16">
       <div class="text-xs font-medium uppercase tracking-wider text-muted-foreground">The latest night</div>
