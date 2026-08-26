@@ -141,7 +141,7 @@ export const REACH = {
   goneIn24Hours: "28",
   sellsOutIn: "2 days",
   repeatMembers: "50+",
-  subscribers: "400",
+  subscribers: "400+",
   whatsappMembers: "130",
   openRate: "50–70%",
 };
