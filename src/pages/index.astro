@@ -19,11 +19,14 @@ import {
 const featured = await featuredPost();
 const featuredCategory = getCategory(featured.category);
 
-// Each night has two posts: the recap, and a cookbook highlight slugged
-// cookbook-<recap>. Surfacing both near the top read as a duplicate, so the
-// companion is linked from the featured card instead of repeating in the grid.
+// Each night has two posts: the recap, and its cookbook highlight. Surfacing
+// both near the top read as a duplicate, so the companion is linked from the
+// featured card instead of repeating in the grid. Older nights pair by slug
+// (cookbook-<recap>); newer ones name the pair explicitly in frontmatter,
+// which frees the slugs to be written for search rather than for this lookup.
 const allPosts = await sortedPosts();
-const companion = allPosts.find((post) => post.slug === `cookbook-${featured.slug}`);
+const companionSlug = featured.companion || `cookbook-${featured.slug}`;
+const companion = allPosts.find((post) => post.slug === companionSlug);
 const latest = allPosts.filter(
   (post) => post.slug !== featured.slug && post.slug !== companion?.slug,
 );

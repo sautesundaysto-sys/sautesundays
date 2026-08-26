@@ -105,10 +105,8 @@ export const NEXT_EVENT = {
   cookbookAuthor: "",
   // Optional. A muted line for anything that is not settled yet.
   note: "More details coming soon.",
-  rsvpLabel: "Subscribe for early access",
-  // Points at /contact until the Luma page for this event is public. Swap it
-  // back to the Luma URL, and the label back to "RSVP on Luma", on the day.
-  rsvpUrl: "/contact",
+  rsvpLabel: "RSVP on Luma",
+  rsvpUrl: "https://luma.com/oz1ooaiv",
   // Swap `status` as you move through the cycle. Set it to "" to hide the line.
   //   "Early access opens [DATE] for subscribers. Public RSVP [DATE]."
   //   "RSVPs open now. Spots go fast."

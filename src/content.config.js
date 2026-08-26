@@ -32,6 +32,9 @@ const blog = defineCollection({
           sourceUrl: z.string().url(),
         })
         .optional(),
+      // Slug of the paired post for this night, so a recap and its cookbook
+      // highlight stay linked even when their slugs are not name variants.
+      companion: z.string().optional(),
       featured: z.boolean().default(false),
       draft: z.boolean().default(false),
     }),
