@@ -5,6 +5,9 @@ import PostCard from "../../components/PostCard.astro";
 import { SITE, categories, sortedPosts } from "../../lib/blog-data.js";
 
 const posts = await sortedPosts();
+// Each night has two posts, a recap and a cookbook highlight, so posts.length
+// is roughly double the number of events. Count the recaps.
+const eventCount = posts.filter((post) => post.category === "event-recap").length;
 ---
 
 <BaseLayout
@@ -18,7 +21,7 @@ const posts = await sortedPosts();
     <header class="mt-4 mb-10">
       <h1 class="font-serif text-4xl font-semibold sm:text-5xl">Every night at the table.</h1>
       <p class="mt-3 max-w-xl text-muted-foreground">
-        A year of cookbooks, cuisines, and community, recapped. {posts.length} {posts.length === 1 ? "event" : "events"} and counting.
+        A year of cookbooks, cuisines, and community, recapped. {eventCount} {eventCount === 1 ? "event" : "events"} and counting.
       </p>
     </header>
 
