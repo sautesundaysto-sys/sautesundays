@@ -5,8 +5,12 @@ const BASE_URL = SITE.url || "";
 export async function GET() {
   const posts = await sortedPosts();
   const entries = [
+    // Standing pages. Posts, categories, tags and authors below are generated,
+    // but this list is by hand, so add new pages here when you add them.
     { path: "/", changefreq: "weekly", priority: "1.0" },
     { path: "/blog", changefreq: "daily", priority: "0.9" },
+    { path: "/faq", changefreq: "monthly", priority: "0.7" },
+    { path: "/gallery", changefreq: "monthly", priority: "0.6" },
     { path: "/about", changefreq: "monthly", priority: "0.6" },
     { path: "/contact", changefreq: "monthly", priority: "0.5" },
     { path: "/restaurant-nights", changefreq: "monthly", priority: "0.7" },
