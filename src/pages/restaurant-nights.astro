@@ -107,7 +107,7 @@ const faqs = [
   {
     question: "What do you get out of this?",
     answer:
-      "A flat $40 to $50 a night for printing and admin. The rest of the ticket is yours, minus about 8% that Luma and Stripe take for processing. Our monthly club is free and stays free. This is a separate thing we run alongside it.",
+      "A flat $45 a night for printing and admin. The rest of the ticket is yours, minus about 8% that Luma and Stripe take for processing. Our monthly club is free and stays free. This is a separate thing we run alongside it.",
   },
   {
     question: "How far ahead do we need to decide?",
@@ -314,8 +314,8 @@ const faqJsonLd = {
       <h2 class="font-serif text-2xl font-semibold sm:text-3xl">Questions restaurants ask</h2>
       <div class="mt-4 divide-y divide-border">
         {
-          faqs.map((faq, index) => (
-            <details class="group py-5" open={index < 2}>
+          faqs.map((faq) => (
+            <details class="group py-5">
               <summary class="flex cursor-pointer items-center justify-between gap-4 font-serif text-lg font-semibold leading-snug marker:content-none hover:text-primary">
                 {faq.question}
                 <span class="shrink-0 text-muted-foreground transition-transform group-open:rotate-45">+</span>
