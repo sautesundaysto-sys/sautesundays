@@ -17,7 +17,7 @@ const nightsRun = posts.filter((post) => post.category === "event-recap").length
 // to avoid, so it is not on the board at all.
 const stats = [
   { label: "Newsletter opens", value: REACH.openRate },
-  { label: "Sold out, every one in under 3 days", value: `${nightsRun} nights` },
+  { label: `Sold out, every one in ${REACH.sellsOutIn}`, value: `${nightsRun} nights` },
   { label: "Repeat members", value: REACH.repeatMembers },
   { label: "Seats every month", value: REACH.seats },
 ];

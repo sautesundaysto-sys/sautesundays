@@ -174,7 +174,10 @@ export const NEXT_EVENT = {
 export const REACH = {
   seats: "35",
   goneIn24Hours: "28",
-  sellsOutIn: "2 days",
+  // How long a night takes to sell out, measured from the moment the first
+  // person can book, which is when early access opens. The single source for
+  // this claim: the homepage proof line and both work-with-us pages read it.
+  sellsOutIn: "3 days",
   repeatMembers: "50+",
   subscribers: "400+",
   whatsappMembers: "130",
@@ -189,5 +192,5 @@ export const PROOF = {
   seats: 35,
   tables: 13,
   since: 2025,
-  sellOutTime: "3 days",
+  sellOutTime: REACH.sellsOutIn,
 };
