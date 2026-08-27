@@ -132,12 +132,12 @@ export const NEXT_EVENT = {
   title: "Mastering the Art of Japanese Home Cooking",
   date: "Sunday, September 20",
   location: "Jrew's, 165 Niagara St",
-  // Leave these "" until the cookbook is confirmed. The `note` line below
-  // stands in for them while the details are still being worked out.
+  // The event title is the book's title here, so a "Cooking from ..." line
+  // would only repeat it. Fill these in when the book and the title differ.
   cookbook: "",
   cookbookAuthor: "",
-  // Optional. A muted line for anything that is not settled yet.
-  note: "More details coming soon.",
+  // Optional. A muted line for anything not settled yet. Empty means no line.
+  note: "",
   rsvpLabel: "RSVP on Luma",
   rsvpUrl: "https://luma.com/oz1ooaiv",
   // Swap `status` as you move through the cycle. Set it to "" to hide the line.
