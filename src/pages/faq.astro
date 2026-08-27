@@ -47,7 +47,7 @@ const faqs = [
   },
   {
     question: "What time should I arrive?",
-    answer: "Doors at 6:15. We start eating at 6:30 and we mean it. The table works because everyone sits down together. If you're running late, message the WhatsApp group so we know. Repeated late arrivals move you to the back of the line for early access next month. It's not a punishment, it's just how we keep 35 people's food warm at the same time."
+    answer: "Doors at 6:15 and we start eating at 6:30. If you're running late, message the WhatsApp group so we know. Nothing happens to you for it, but the catch is a real one: by the time a late dish gets put out, most people are already full, so you may end up carrying most of what you made back home."
   },
   {
     question: "Is the venue accessible?",
@@ -59,7 +59,8 @@ const faqs = [
   },
   {
     question: "How do I suggest a cookbook?",
-    answer: "Reply to any of our newsletters with your suggestion, or send us a DM on Instagram. We love hearing what people want to cook from. It directly shapes what we pick each month."
+    answer: "Send it through our suggestion form, reply to any of our newsletters, or send us a DM on Instagram. We love hearing what people want to cook from. It directly shapes what we pick each month.",
+    link: { href: "https://tally.so/r/9qjM0G", label: "Suggest a cookbook" }
   },
 ];
 ---
@@ -92,6 +93,16 @@ const faqs = [
           <p class="mt-4 text-muted-foreground leading-relaxed">
             {faq.answer}
           </p>
+          {faq.link && (
+            <a
+              href={faq.link.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="mt-3 inline-flex min-h-11 items-center gap-1 text-sm font-medium text-primary hover:underline"
+            >
+              {faq.link.label} <span aria-hidden="true">&#8599;</span>
+            </a>
+          )}
         </details>
       ))}
     </div>
