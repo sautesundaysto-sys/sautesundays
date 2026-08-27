@@ -21,16 +21,22 @@ export async function GET() {
       changefreq: "monthly",
       priority: "0.8",
     })),
-    ...categories.map((category) => ({
-      path: `/categories/${category.slug}`,
-      changefreq: "weekly",
-      priority: "0.6",
-    })),
-    ...tags.map((tag) => ({
-      path: `/tags/${tag.slug}`,
-      changefreq: "weekly",
-      priority: "0.4",
-    })),
+    // Listing pages with nothing in them are noindexed, so submitting them here
+    // would contradict the page itself. They reappear with their first post.
+    ...categories
+      .filter((category) => posts.some((post) => post.category === category.slug))
+      .map((category) => ({
+        path: `/categories/${category.slug}`,
+        changefreq: "weekly",
+        priority: "0.6",
+      })),
+    ...tags
+      .filter((tag) => posts.some((post) => post.tags.includes(tag.slug)))
+      .map((tag) => ({
+        path: `/tags/${tag.slug}`,
+        changefreq: "weekly",
+        priority: "0.4",
+      })),
     ...authors.map((author) => ({
       path: `/authors/${author.slug}`,
       changefreq: "monthly",

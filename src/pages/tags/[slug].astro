@@ -10,12 +10,20 @@ export function getStaticPaths() {
 
 const { tag } = Astro.props;
 const list = await postsByTag(tag.slug);
+// A tag nothing uses yet still builds, so that adding the first post to it just
+// works. It should not be advertised in the meantime: an empty listing is thin
+// content. Both this and the sitemap entry come back on their own.
+const isEmpty = list.length === 0;
+const description = tag.description
+  ? tag.description.replace("{count}", String(list.length))
+  : `All writing tagged ${tag.name}.`;
 ---
 
 <BaseLayout
   title={`#${tag.name} - ${SITE.name}`}
-  description={`All writing tagged ${tag.name}.`}
+  description={description}
   canonical={`/tags/${tag.slug}`}
+  noindex={isEmpty}
 >
   <div class="mx-auto max-w-4xl px-5 py-12">
     <Breadcrumbs items={[{ label: "Home", to: "/" }, { label: "Tags" }, { label: `#${tag.name}` }]} />

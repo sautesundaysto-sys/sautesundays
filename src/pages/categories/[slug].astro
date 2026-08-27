@@ -11,12 +11,17 @@ export function getStaticPaths() {
 
 const { category } = Astro.props;
 const list = await postsByCategory(category.slug);
+const isEmpty = list.length === 0;
+const description = category.description
+  ? category.description.replace("{count}", String(list.length))
+  : `Writing in ${category.name} on ${SITE.name}.`;
 ---
 
 <BaseLayout
   title={`${category.name} - ${SITE.name}`}
-  description={`Writing in ${category.name} on ${SITE.name}.`}
+  description={description}
   canonical={`/categories/${category.slug}`}
+  noindex={isEmpty}
 >
   <div class="mx-auto max-w-6xl px-5 py-12">
     <Breadcrumbs items={[{ label: "Home", to: "/" }, { label: "Categories" }, { label: category.name }]} />

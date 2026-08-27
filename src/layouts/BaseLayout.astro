@@ -15,6 +15,7 @@ const {
   ogImageWidth,
   ogImageHeight,
   jsonLd,
+  noindex = false,
   flushFooter = false,
 } = Astro.props;
 
@@ -50,6 +51,7 @@ const ogHeight = ogImageHeight ?? (usingDefaultOgImage ? 630 : undefined);
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
     <meta name="author" content={SITE.name} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />

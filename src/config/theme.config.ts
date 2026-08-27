@@ -79,15 +79,48 @@ export const authors = [
 ];
 
 export const categories = [
-  { slug: "event-recap", name: "Event Recap" },
-  { slug: "cookbook-highlight", name: "Cookbook Highlight" },
-  { slug: "from-the-table", name: "From the Table" },
+  // `description` is the meta description for the listing page. Without one it
+  // falls back to a generic line, which reads as boilerplate to a search engine.
+  // {count} is replaced with the number of posts, so it never goes stale.
+  {
+    slug: "event-recap",
+    name: "Event Recap",
+    description:
+      "{count} nights at the Sauté Sundays table in Toronto, written up: what we cooked, what worked, and what the room was actually like.",
+  },
+  {
+    slug: "cookbook-highlight",
+    name: "Cookbook Highlight",
+    description:
+      "A closer look at every cookbook our Toronto cookbook club has cooked from: what's inside, how hard it is, and who each book is for.",
+  },
+  {
+    slug: "from-the-table",
+    name: "From the Table",
+    description:
+      "Writing from the Sauté Sundays table in Toronto: the food, the people, and what a room full of home cooks is actually like.",
+  },
 ];
 
 export const tags = [
-  { slug: "toronto", name: "Toronto" },
-  { slug: "cookbook-club", name: "Cookbook Club" },
-  { slug: "potluck", name: "Potluck" },
+  {
+    slug: "toronto",
+    name: "Toronto",
+    description:
+      "Everything from Sauté Sundays, Toronto's free monthly cookbook club: event recaps, cookbook picks, and nights at one long table.",
+  },
+  {
+    slug: "cookbook-club",
+    name: "Cookbook Club",
+    description:
+      "How a cookbook club actually works in practice, month by month, from the Toronto group where everyone who shows up has cooked something.",
+  },
+  {
+    slug: "potluck",
+    name: "Potluck",
+    description:
+      "Potluck nights at Sauté Sundays, where 35 Toronto home cooks each bring one dish from the same book and share the table.",
+  },
   { slug: "community", name: "Community" },
   { slug: "food", name: "Food" },
 ];
