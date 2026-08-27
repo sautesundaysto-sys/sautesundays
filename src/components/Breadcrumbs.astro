@@ -1,8 +1,28 @@
 ---
 import Icon from "./Icon.astro";
+import { SITE } from "../lib/blog-data.js";
 
 const { items = [] } = Astro.props;
+
+// The visible trail and the structured one come from the same array, so they
+// cannot drift. Google allows the final crumb to omit `item`, which is right
+// here: the last one is the current page and never carries a link.
+const siteUrl = (Astro.site?.toString() || SITE.url).replace(/\/$/, "");
+const breadcrumbJsonLd = items.length
+  ? {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: items.map((item, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        name: item.label,
+        ...(item.to ? { item: new URL(item.to, siteUrl + "/").toString() } : {}),
+      })),
+    }
+  : undefined;
 ---
+
+{breadcrumbJsonLd && <script type="application/ld+json" set:html={JSON.stringify(breadcrumbJsonLd)} />}
 
 <nav aria-label="Breadcrumb" class="flex flex-wrap items-center gap-1 text-xs text-muted-foreground">
   {

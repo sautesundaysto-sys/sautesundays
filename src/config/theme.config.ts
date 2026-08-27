@@ -120,6 +120,9 @@ export const NEXT_EVENT = {
   // engines can show the date. They are not rendered as visible copy.
   // ISO 8601 with the offset. Toronto is -04:00 on daylight time, -05:00 in winter.
   startDateTime: "2026-09-20T18:15:00-04:00",
+  // Roughly when the night wraps. Google wants an end time on an Event, and an
+  // estimate in the right place beats leaving it out. Adjust if yours differs.
+  endDateTime: "2026-09-20T21:30:00-04:00",
   // When the public RSVP opens, in the same format. Feeds `validFrom` on the
   // Offer so the free ticket is not advertised as bookable before it is.
   // Optional: leave "" and the field is omitted.

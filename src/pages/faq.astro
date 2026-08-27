@@ -63,9 +63,26 @@ const faqs = [
     link: { href: "https://tally.so/r/9qjM0G", label: "Suggest a cookbook" }
   },
 ];
+
+// 14 questions and answers already live in the array above. Without this they
+// are just <details> elements to a crawler, which is the difference between
+// being quoted in an AI answer and not being seen at all.
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((faq) => ({
+    "@type": "Question",
+    name: faq.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: faq.link ? `${faq.answer} ${faq.link.label}: ${faq.link.href}` : faq.answer,
+    },
+  })),
+};
 ---
 
 <BaseLayout
+  jsonLd={faqJsonLd}
   title={`FAQ - ${SITE.name}`}
   description="Frequently asked questions about Sauté Sundays, Toronto's cookbook club. How it works, what to bring, how to RSVP, and more."
   canonical="/faq"

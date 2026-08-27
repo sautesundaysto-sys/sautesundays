@@ -6,7 +6,7 @@ import Newsletter from "../components/Newsletter.astro";
 import NextUp from "../components/NextUp.astro";
 import Icon from "../components/Icon.astro";
 import autumnScene from "../assets/Website Banner.png";
-import { PROOF, NEXT_EVENT } from "../config/theme.config.ts";
+import { PROOF, NEXT_EVENT, REACH } from "../config/theme.config.ts";
 import {
   SITE,
   categories,
@@ -40,6 +40,12 @@ const eventJsonLd = NEXT_EVENT.title && NEXT_EVENT.startDateTime
       name: NEXT_EVENT.title,
       description: NEXT_EVENT.schemaDescription,
       startDate: NEXT_EVENT.startDateTime,
+      ...(NEXT_EVENT.endDateTime ? { endDate: NEXT_EVENT.endDateTime } : {}),
+      // The single strongest thing we can tell a machine about this event.
+      isAccessibleForFree: true,
+      maximumAttendeeCapacity: Number(REACH.seats),
+      url: new URL(NEXT_EVENT.rsvpUrl, SITE.url).toString(),
+      inLanguage: "en-CA",
       eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
       eventStatus: "https://schema.org/EventScheduled",
       location: {

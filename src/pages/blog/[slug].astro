@@ -59,11 +59,25 @@ const jsonLd = {
   image: thumbnailUrl,
   author: { "@type": "Person", name: author?.name },
   mainEntityOfPage: canonicalUrl,
+  publisher: {
+    "@type": "Organization",
+    name: SITE.name,
+    logo: {
+      "@type": "ImageObject",
+      url: new URL("/saute-sundays-logo.png", SITE.url).toString(),
+    },
+  },
 };
+
+// Google shows roughly 60 characters. Several cookbook titles are long enough
+// that " - Sauté Sundays" pushed the useful words off the end, so the brand
+// suffix is only added when the whole thing still fits.
+const brandedTitle = `${post.title} - ${SITE.name}`;
+const pageTitle = post.seoTitle ?? (brandedTitle.length <= 60 ? brandedTitle : post.title);
 ---
 
 <BaseLayout
-  title={post.seoTitle ?? `${post.title} - ${SITE.name}`}
+  title={pageTitle}
   description={post.seoDescription ?? post.excerpt}
   canonical={canonical}
   ogType="article"
