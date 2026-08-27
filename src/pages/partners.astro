@@ -75,6 +75,53 @@ const afterwards = [
   "A mention in the write-up on our site and in the newsletter that follows",
   "Your name in the event listing, if that's part of what we agreed",
 ];
+const faqs = [
+  {
+    question: "Can we come to the event?",
+    answer:
+      "One person, as a guest. You cook and eat like everyone else. What doesn't work is a table, a pitch, or a speech. People can tell the difference immediately and it changes the room.",
+  },
+  {
+    question: "Can we get your mailing list?",
+    answer:
+      "We keep member details to ourselves. What we can do is feature you in the newsletter. It reaches the same people and they actually open it.",
+  },
+  {
+    question: "Will our product be in the photos?",
+    answer:
+      "Almost certainly, because people will be using it. We shoot the night as it happens rather than staging product shots. Everything we take is yours to use.",
+  },
+  {
+    question: "What if our product doesn't suit that month's cookbook?",
+    answer:
+      "We'll tell you, and suggest a month that fits better. A jar of something that doesn't belong in the recipe just sits there, and nobody wins.",
+  },
+  {
+    question: "Can we partner more than once?",
+    answer: "Yes, and repeat partners get first pick of months.",
+  },
+  {
+    question: "Do you work with alcohol brands?",
+    answer: "Only at a licensed venue. Jrew's is licensed, so most months that's fine.",
+  },
+  {
+    question: "How far ahead do you need to know?",
+    answer:
+      "Six to eight weeks. Tell us roughly which month you're aiming at and we'll tell you what's still open.",
+  },
+];
+
+// The questions are on the page, so they can be marked up. Built from the same
+// array the page renders, so the two cannot drift.
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((faq) => ({
+    "@type": "Question",
+    name: faq.question,
+    acceptedAnswer: { "@type": "Answer", text: faq.answer },
+  })),
+};
 ---
 
 <BaseLayout
@@ -85,6 +132,7 @@ const afterwards = [
   ogImageWidth={1200}
   ogImageHeight={630}
   ogImageAlt="Four guests sitting together with their plates at a Sauté Sundays table"
+  jsonLd={faqJsonLd}
 >
   <div class="mx-auto max-w-[680px] px-5 py-12 sm:py-16">
     <section>
@@ -234,6 +282,23 @@ const afterwards = [
       <ul class="mt-6 space-y-3 leading-relaxed text-muted-foreground">
         {afterwards.map((item) => <li class="border-l-2 border-primary/40 pl-3">{item}</li>)}
       </ul>
+    </section>
+
+    <section class="mt-14">
+      <h2 class="font-serif text-2xl font-semibold sm:text-3xl">Questions brands ask</h2>
+      <div class="mt-4 divide-y divide-border">
+        {
+          faqs.map((faq) => (
+            <details class="group py-5">
+              <summary class="flex cursor-pointer items-center justify-between gap-4 font-serif text-lg font-semibold leading-snug marker:content-none hover:text-primary">
+                {faq.question}
+                <span class="shrink-0 text-muted-foreground transition-transform group-open:rotate-45">+</span>
+              </summary>
+              <p class="mt-3 leading-relaxed text-muted-foreground">{faq.answer}</p>
+            </details>
+          ))
+        }
+      </div>
     </section>
 
     <section id="form" class="mt-16 scroll-mt-24">
