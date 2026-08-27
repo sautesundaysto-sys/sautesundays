@@ -4,10 +4,15 @@ const siteUrl = (
   "https://sautesundays.com"
 ).replace(/\/$/, "");
 
+// `blurb` is the plain description of the club. The footer prints it as is and
+// `description` extends it for meta tags, so the sentence exists once.
+const blurb =
+  "Toronto's cookbook club. Every month, members cook a dish at home from the same featured cookbook, then bring it to share with everyone else who did the same.";
+
 export const SITE = {
   name: "Sauté Sundays",
-  description:
-    "Toronto's cookbook club. Every month, members cook a dish at home from the same featured cookbook, then come together at one table to share it. Running since 2025, selling out within hours.",
+  blurb,
+  description: `${blurb} Running since 2025, selling out within hours.`,
   url: siteUrl,
   locale: "en-US",
   language: "en",
@@ -107,7 +112,7 @@ export const tags = [
     slug: "toronto",
     name: "Toronto",
     description:
-      "Everything from Sauté Sundays, Toronto's free monthly cookbook club: event recaps, cookbook picks, and nights at one long table.",
+      "Everything from Sauté Sundays, Toronto's free monthly cookbook club: event recaps, cookbook picks, and nights when everyone cooks.",
   },
   {
     slug: "cookbook-club",
