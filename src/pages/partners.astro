@@ -3,40 +3,78 @@ import { Image } from "astro:assets";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Icon from "../components/Icon.astro";
 import { REACH, CONTACT } from "../config/theme.config.ts";
+import { sortedPosts } from "../lib/blog-data.js";
 import heroPhoto from "../assets/gallery/IMG_9483.JPG";
 import roomPhoto from "../assets/gallery/C3D8722C-A122-4A1B-87AC-D46C5B11B5DD.JPG";
 
+// One recap per night, so the count of them is the count of nights. Derived
+// rather than typed, so it does not need remembering after each event.
+const posts = await sortedPosts();
+const nightsRun = posts.filter((post) => post.category === "event-recap").length;
+
+// Open rate first: it is roughly double the category norm, and it is a quality
+// number. A raw audience size invites the reach comparison this page is trying
+// to avoid, so it is not on the board at all.
 const stats = [
-  { label: "Seats, every month", value: REACH.seats },
-  { label: "Gone in 24 hours", value: REACH.goneIn24Hours },
-  { label: "Subscribers", value: REACH.subscribers },
-  { label: "Open rate", value: REACH.openRate },
+  { label: "Newsletter opens", value: REACH.openRate },
+  { label: "Sold out, every one in under 3 days", value: `${nightsRun} nights` },
+  { label: "Repeat members", value: REACH.repeatMembers },
+  { label: "Seats every month", value: REACH.seats },
 ];
+
+const productPartners = ["Sunny Daze"];
+const roomPartners = ["Jrew's, our home on Niagara St", "Danu Social House"];
 
 const ways = [
   {
     title: "Product for the room",
-    body: "Drinks, ingredients or cookware for one month's event. Everyone there cooks, so nothing goes to waste and nothing goes unnoticed.",
-    featured: false,
+    body: "Enough of your product for one month's event. 35 people, drinks or ingredients or cookware. Everyone cooks with it, nothing goes to waste, nothing goes unnoticed.",
+    badge: "Easiest place to start",
   },
   {
     title: "Product to take home",
-    body: "35 people leaving with your thing in their hands and a recipe they just cooked.",
-    featured: false,
+    body: "35 units, one each. People leave with your thing in their hands and a recipe they just cooked.",
+    badge: "",
   },
   {
     title: "A month of your own",
     body: "Your name on one event: in the title, on the RSVP page, in the newsletter, and in the write-up afterwards.",
-    featured: true,
+    badge: "",
   },
   {
     title: "Cover the running costs",
     body: "Plates, permits, printing, the website. Unglamorous, and the reason a free event stays free. Happy to name you for it.",
-    featured: false,
+    badge: "",
   },
 ];
 
-const pastPartners = ["Jrew's, our home on Niagara St", "Danu Social House", "Sunny Daze", "SocialSip Toronto"];
+const howItWorks = [
+  {
+    term: "One brand per category, per month",
+    detail: "If you make olive oil, you're the only olive oil in the room that night.",
+  },
+  {
+    term: "We plan six to eight weeks ahead",
+    detail: "Tell us roughly which month you're aiming at and we'll tell you what's still open.",
+  },
+  {
+    term: "Photos are yours",
+    detail:
+      "Everything we shoot that night, free to use on your own channels. No permission needed, no expiry.",
+  },
+  {
+    term: "We'll tell you if it's a bad fit",
+    detail:
+      "Not everything belongs in a home kitchen. If your product isn't right for this room, we'd rather say so than take it and have the night fall flat.",
+  },
+];
+
+const afterwards = [
+  "Photographs from the night, yours to keep and use",
+  "Final headcount and how the room actually responded to your product",
+  "A mention in the write-up on our site and in the newsletter that follows",
+  "Your name in the event listing, if that's part of what we agreed",
+];
 ---
 
 <BaseLayout
@@ -85,16 +123,50 @@ const pastPartners = ["Jrew's, our home on Niagara St", "Danu Social House", "Su
       <dl class="mt-6 grid grid-cols-2 gap-3">
         {
           stats.map((stat) => (
-            <div class="rounded-lg border border-border bg-muted/40 px-4 py-5">
+            <div class="flex flex-col justify-between rounded-lg border border-border bg-muted/40 px-4 py-5">
               <dt class="text-xs uppercase tracking-wider text-muted-foreground">{stat.label}</dt>
-              <dd class="mt-1 font-serif text-2xl font-semibold sm:text-3xl">{stat.value}</dd>
+              <dd class="mt-2 font-serif text-2xl font-semibold sm:text-3xl">{stat.value}</dd>
             </div>
           ))
         }
       </dl>
       <p class="mt-6 leading-relaxed text-muted-foreground">
-        Over 50 members have come back more than once. The newsletter is mostly food writing rather than event
-        announcements, so people read it because they want to.
+        This isn't reach. It's three hours of hands-on time with people who chose to spend their Sunday cooking, then
+        went home and cooked again. The newsletter is mostly food writing rather than event announcements, which is why
+        people open it.
+      </p>
+      <p class="mt-4 leading-relaxed text-muted-foreground">
+        If you're weighing this against a social buy, it's the wrong comparison. It's closer to sampling, except nobody
+        hands the product back, and half the room photographs it.
+      </p>
+    </section>
+
+    <section class="mt-14">
+      <h2 class="font-serif text-2xl font-semibold sm:text-3xl">Who we've worked with</h2>
+      <div class="mt-6 grid gap-8 sm:grid-cols-2">
+        <div>
+          <h3 class="text-xs font-medium uppercase tracking-wider text-muted-foreground">Product partners</h3>
+          <ul class="mt-3 space-y-2 text-sm leading-relaxed text-muted-foreground">
+            {productPartners.map((partner) => <li class="border-l-2 border-primary/40 pl-3">{partner}</li>)}
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-xs font-medium uppercase tracking-wider text-muted-foreground">Rooms</h3>
+          <ul class="mt-3 space-y-2 text-sm leading-relaxed text-muted-foreground">
+            {roomPartners.map((partner) => <li class="border-l-2 border-border pl-3">{partner}</li>)}
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="mt-14">
+      <h2 class="font-serif text-2xl font-semibold sm:text-3xl">Why this stays free</h2>
+      <p class="mt-5 leading-relaxed text-muted-foreground">
+        The monthly potluck is free and stays free. Nobody has ever been charged to bring a dish.
+      </p>
+      <p class="mt-4 leading-relaxed text-muted-foreground">
+        Partnerships are the reason that's possible. You're not buying impressions. You're paying for the room so the
+        plate stays free.
       </p>
     </section>
 
@@ -106,16 +178,16 @@ const pastPartners = ["Jrew's, our home on Niagara St", "Danu Social House", "Su
             <div
               class:list={[
                 "rounded-lg p-5",
-                way.featured ? "border-2 border-primary bg-primary/5" : "border border-border bg-muted/30",
+                way.badge ? "border-2 border-primary bg-primary/5" : "border border-border bg-muted/30",
               ]}
             >
               <div class="flex flex-wrap items-center gap-x-3 gap-y-2">
                 <h3 class="font-serif text-lg font-semibold">
                   {index + 1}. {way.title}
                 </h3>
-                {way.featured && (
+                {way.badge && (
                   <span class="rounded-full bg-primary px-2.5 py-0.5 text-[11px] font-semibold uppercase tracking-wider text-primary-foreground">
-                    Most visible
+                    {way.badge}
                   </span>
                 )}
               </div>
@@ -125,9 +197,23 @@ const pastPartners = ["Jrew's, our home on Niagara St", "Danu Social House", "Su
         }
       </div>
       <p class="mt-6 leading-relaxed text-muted-foreground">
-        Most of our partnerships are product rather than cash. Tell us roughly what you have in mind and we'll tell you
+        Most of our partnerships are product rather than cash. Tell us roughly what you had in mind and we'll tell you
         honestly what it gets.
       </p>
+    </section>
+
+    <section class="mt-14">
+      <h2 class="font-serif text-2xl font-semibold sm:text-3xl">How it works</h2>
+      <dl class="mt-6 space-y-4 text-sm leading-relaxed">
+        {
+          howItWorks.map((item) => (
+            <div class="border-l-2 border-border pl-3">
+              <dt class="font-medium text-foreground">{item.term}</dt>
+              <dd class="mt-1 text-muted-foreground">{item.detail}</dd>
+            </div>
+          ))
+        }
+      </dl>
     </section>
 
     <figure class="mt-10 overflow-hidden rounded-lg bg-muted">
@@ -144,30 +230,18 @@ const pastPartners = ["Jrew's, our home on Niagara St", "Danu Social House", "Su
     </figure>
 
     <section class="mt-14">
-      <h2 class="font-serif text-2xl font-semibold sm:text-3xl">Who we've worked with</h2>
-      <ul class="mt-6 flex flex-wrap gap-x-3 gap-y-2 text-sm text-muted-foreground">
-        {
-          pastPartners.map((partner, index) => (
-            <li>
-              {partner}
-              {index < pastPartners.length - 1 && <span class="ml-3 text-border">&middot;</span>}
-            </li>
-          ))
-        }
+      <h2 class="font-serif text-2xl font-semibold sm:text-3xl">What you get afterwards</h2>
+      <ul class="mt-6 space-y-3 leading-relaxed text-muted-foreground">
+        {afterwards.map((item) => <li class="border-l-2 border-primary/40 pl-3">{item}</li>)}
       </ul>
-    </section>
-
-    <section class="mt-14">
-      <blockquote class="border-l-2 border-primary pl-5">
-        <p class="font-serif text-xl leading-relaxed sm:text-2xl">
-          The monthly potluck is free and stays free. Nobody has ever been charged to bring a dish. Partnerships pay for
-          the room, never the plate.
-        </p>
-      </blockquote>
     </section>
 
     <section id="form" class="mt-16 scroll-mt-24">
       <h2 class="font-serif text-2xl font-semibold sm:text-3xl">Get in touch</h2>
+      <p class="mt-4 leading-relaxed text-muted-foreground">
+        Happy to talk it through before you commit to anything. Fifteen minutes, tell us what you're working on, and
+        we'll tell you honestly whether we're a fit.
+      </p>
       <p class="mt-4 leading-relaxed text-muted-foreground">We reply within two days.</p>
       <div class="mt-6 rounded-lg bg-[#f2eeeb] p-4 dark:bg-[#f2eeeb] sm:p-6">
         <iframe
@@ -182,15 +256,13 @@ const pastPartners = ["Jrew's, our home on Niagara St", "Danu Social House", "Su
           title="Brand partnership enquiry form"></iframe>
       </div>
       <p class="mt-3 text-center text-sm text-muted-foreground">
-        Form not loading?
-        <a href="https://tally.so/r/4405o5" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline">Open it in a new tab &#8599;</a>
+        Form not loading? <a href="https://tally.so/r/4405o5" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline">Open it in a new tab &#8599;</a>
         or email <a href={`mailto:${CONTACT.email}`} class="text-primary hover:underline">{CONTACT.email}</a>.
       </p>
     </section>
 
     <p class="mt-14 text-center text-sm text-muted-foreground">
-      Run a restaurant?
-      <a href="/restaurant-nights" class="text-primary hover:underline">We do hands-on nights &rarr;</a>
+      Run a restaurant? <a href="/restaurant-nights" class="text-primary hover:underline">We do hands-on nights &rarr;</a>
     </p>
   </div>
 </BaseLayout>
