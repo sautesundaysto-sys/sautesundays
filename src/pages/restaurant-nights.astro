@@ -15,10 +15,10 @@ const stats = [
 
 const youBring = [
   "A night you're open and quiet",
-  "A cook to lead the dish",
+  "Someone to lead the dish",
   "Ingredients for the agreed headcount",
   "Space for three small groups, plus sink and oven access",
-  "Your usual service for the meal afterwards",
+  "Whatever food you're serving alongside",
 ];
 
 const weBring = [
@@ -29,14 +29,6 @@ const weBring = [
   "Both of us on site for the evening",
 ];
 
-const money = [
-  "Paid on confirmed headcount, 10 days out. If someone pays and doesn't show, you're still paid for them.",
-  "Tickets are non-refundable but transferable, so your count holds.",
-  "The bar is 100% yours. We take no share of drinks.",
-  "We keep a small fixed amount that doesn't scale with the ticket price.",
-  "The two of us cook alongside everyone else, so the headcount is 17 rather than 15.",
-];
-
 const openQuestions = [
   {
     term: "Insurance",
@@ -45,16 +37,20 @@ const openQuestions = [
   },
   {
     term: "Public Health",
-    detail: "You hold the licence, so we'd follow your read on what your inspector is comfortable with.",
+    detail: "You hold the licence, so we'd follow your lead on what your inspector is comfortable with.",
   },
   { term: "The space", detail: "We'd like to visit before agreeing anything." },
   {
-    term: "The dish",
+    term: "Your room",
     detail:
-      "Which one, whether your chef is paid separately for teaching, and whether you're happy for guests to take the recipe home.",
+      "Fifteen people in three groups. If you're the one teaching, you probably can't run normal service at the same time. Worth deciding early whether you're closed to walk-ins that night.",
+  },
+  {
+    term: "The dish",
+    detail: "Which one, who's leading it, and whether you're happy for guests to take the recipe home.",
   },
   { term: "Drinks", detail: "During the cooking or after." },
-  { term: "Cleanup and leftovers", detail: "Who handles which." },
+  { term: "Cleanup and leftovers", detail: "Who handles what." },
 ];
 
 const afterwards = [
@@ -62,16 +58,85 @@ const afterwards = [
   "Coverage in our newsletter and on Instagram, before and after",
   "Fifteen people who spent three hours in your kitchen and will tell people where they went",
 ];
+
+const faqs = [
+  {
+    question: "What kind of night should we offer you?",
+    answer:
+      "A night you're already open and quiet. We're not after your Friday. Tell us what's slow and we'll build around it.",
+  },
+  {
+    question: "How many people, exactly?",
+    answer:
+      "Fifteen. We won't send more without asking. If we end up under ten, we'll check with you rather than assume.",
+  },
+  {
+    question: "Does it have to be a full meal?",
+    answer:
+      "No, and we run both. Some nights are technique only: one dish, everyone makes it, everyone eats what they made, nothing else served. Others teach a dish and serve a meal alongside it. Tell us which suits your kitchen and we price it accordingly.",
+  },
+  {
+    question: "What if the owner is the one teaching?",
+    answer:
+      "Most of the places we want to work with, that's exactly who it'd be. Just factor your own hour into the number you quote us, and think about whether you can run service at the same time.",
+  },
+  {
+    question: "When do we get paid?",
+    answer:
+      "Headcount is confirmed 10 days out. We can send half then if you need it for ingredients, with the balance on the night, or all of it on the night. Your call.",
+  },
+  {
+    question: "What if people cancel?",
+    answer:
+      "Tickets are non-refundable and non-transferable, so a late cancellation doesn't change what you're paid.",
+  },
+  {
+    question: "What about the bar?",
+    answer: "Entirely yours. We don't take a cut and we don't bundle drinks into the ticket. Our members drink.",
+  },
+  {
+    question: "Do you need our liquor licence or food handling certification?",
+    answer:
+      "You hold both, and we follow your lead. If your insurer needs event coverage for non-staff in the kitchen, we'll arrange it.",
+  },
+  {
+    question: "Are these experienced cooks?",
+    answer:
+      "Home cooks who choose to spend a Sunday cooking from a cookbook. Confident, curious, and not squeamish.",
+  },
+  {
+    question: "What do you get out of this?",
+    answer:
+      "A flat $40 to $50 a night for printing and admin. The rest of the ticket is yours, minus about 8% that Luma and Stripe take for processing. Our monthly club is free and stays free. This is a separate thing we run alongside it.",
+  },
+  {
+    question: "How far ahead do we need to decide?",
+    answer: "About four weeks to confirm. We'd want to see the space before that.",
+  },
+];
+
+// The questions are on the page, so they can be marked up. Built from the same
+// array the page renders, so the two cannot drift.
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((faq) => ({
+    "@type": "Question",
+    name: faq.question,
+    acceptedAnswer: { "@type": "Answer", text: faq.answer },
+  })),
+};
 ---
 
 <BaseLayout
-  title="Restaurant nights — Sauté Sundays"
-  description="We bring 15 home cooks into your restaurant on a quiet night. Your chef teaches one dish, they cook it, then they stay and eat."
+  title="Restaurant nights - Sauté Sundays"
+  description="We bring 15 home cooks into your restaurant on a quiet night. You teach them one dish, they cook it, then they stay and eat. You're paid per head and the bar is yours."
   canonical="/restaurant-nights"
   ogImage="/og-restaurant-nights.jpg"
   ogImageWidth={1200}
   ogImageHeight={630}
   ogImageAlt="Guests filling their plates from shared trays at a Sauté Sundays table"
+  jsonLd={faqJsonLd}
 >
   <div class="mx-auto max-w-[680px] px-5 py-12 sm:py-16">
     <section>
@@ -80,11 +145,13 @@ const afterwards = [
         Fill a quiet night with people who came for the food
       </h1>
       <p class="mt-6 text-lg leading-relaxed text-muted-foreground">
-        We bring 15 of our members into your room. Your chef teaches them one dish from your menu. They cook it, then
-        stay and eat and drink.
+        We bring 15 of our members into your room. You teach them one dish. They cook it, then stay and eat and drink.
       </p>
       <p class="mt-4 text-lg leading-relaxed text-muted-foreground">
         You never write us a cheque. You're paid per head from ticket sales, and the bar is yours.
+      </p>
+      <p class="mt-4 text-lg leading-relaxed text-muted-foreground">
+        We're not asking for your busiest night. Tell us which night is quiet and we'll build around it.
       </p>
       <a
         href="#form"
@@ -129,12 +196,16 @@ const afterwards = [
     <section class="mt-14">
       <h2 class="font-serif text-2xl font-semibold sm:text-3xl">How the night runs</h2>
       <p class="mt-5 leading-relaxed text-muted-foreground">
-        Guests arrive and get a drink. Your chef introduces the dish and demonstrates. Everyone cooks in three small
-        groups. Then they sit down and eat what they made, alongside the rest of your menu.
+        Guests arrive and get a drink. Whoever's leading introduces the dish and demonstrates. Everyone cooks in three
+        small groups. Then they sit down and eat what they made.
+      </p>
+      <p class="mt-4 leading-relaxed text-muted-foreground">
+        Home cooks, most of them confident, all of them there because they want to be. Nobody's starting from knife
+        grip.
       </p>
       <p class="mt-4 text-sm leading-relaxed text-muted-foreground/80">
-        About three hours. You'd know better than us how long the cooking part takes, and that is one of the first
-        things we'd ask you.
+        About three hours. You'd know better than us how long the cooking part takes, and that's one of the first things
+        we'd ask you.
       </p>
     </section>
 
@@ -172,12 +243,31 @@ const afterwards = [
     <section class="mt-14">
       <h2 class="font-serif text-2xl font-semibold sm:text-3xl">The money</h2>
       <p class="mt-5 leading-relaxed text-muted-foreground">
-        Tell us what a set menu for 15 costs you per person, and we build the ticket around it. Hands-on classes in
-        Toronto run $85–150 a head. We'd sit below that.
+        You're paid per head from ticket sales. You never write us a cheque, and the bar is yours.
       </p>
-      <ul class="mt-6 space-y-3 text-sm leading-relaxed text-muted-foreground/90">
-        {money.map((item) => <li class="border-l-2 border-border pl-3">{item}</li>)}
-      </ul>
+      <p class="mt-4 leading-relaxed text-muted-foreground">
+        Most nights work out between $20 and $40 a head for you, depending on what you're teaching. The more technical
+        the dish, the more the ticket supports. Our members will pay more to learn something they can't pick up from a
+        video.
+      </p>
+      <p class="mt-4 leading-relaxed text-muted-foreground">
+        We keep $45 flat per night for recipe card printing and admin. Same on every night, whatever the ticket. Luma
+        and Stripe take about 8% of the ticket for processing. Everything else is yours.
+      </p>
+      <p class="mt-4 leading-relaxed text-muted-foreground">
+        Two ways this runs. Technique only: one dish, everyone makes it, everyone eats what they made, nothing else
+        served. Or with a meal: you teach one dish, then serve alongside it. Tell us which suits your kitchen.
+      </p>
+      <p class="mt-4 leading-relaxed text-muted-foreground">
+        We confirm headcount 10 days out so you can shop and prep against a real number. If you need money up front for
+        ingredients, we'll send half then and the balance on the night. Whatever suits your cash flow.
+      </p>
+      <p class="mt-4 leading-relaxed text-muted-foreground">
+        Tickets are non-refundable and non-transferable, so a late cancellation doesn't change what you're paid.
+      </p>
+      <p class="mt-4 leading-relaxed text-muted-foreground">
+        Two of those covers are us. We run the night and we cook alongside everyone else.
+      </p>
     </section>
 
     <section class="mt-14">
@@ -186,15 +276,20 @@ const afterwards = [
         We'd confirm about four weeks ahead and hold ticket sales until then, so an early change costs nobody anything.
       </p>
       <p class="mt-4 leading-relaxed text-muted-foreground">
-        Once tickets are live we'd ask that the date is firm. If something unavoidable comes up on either side, we'd
-        reschedule rather than cancel, so nobody who bought a ticket loses out.
+        Once tickets are live we'll ask that the date is firm. If something unavoidable comes up on either side, we'd
+        reschedule rather than cancel, so nobody who bought a ticket loses out. If we've sent a deposit and the night
+        can't go ahead, it comes back to us.
+      </p>
+      <p class="mt-4 leading-relaxed text-muted-foreground">
+        If we're under ten guests two weeks out, we'll come to you. You decide whether to run it or take the night back,
+        no hard feelings either way.
       </p>
     </section>
 
     <section class="mt-14">
       <h2 class="font-serif text-2xl font-semibold sm:text-3xl">Things we'd work out with you</h2>
       <p class="mt-5 leading-relaxed text-muted-foreground">
-        We'd rather raise these now than discover them on the night.
+        Nothing here we'd rather discover than tell you on the night.
       </p>
       <dl class="mt-6 space-y-4 text-sm leading-relaxed">
         {
@@ -215,10 +310,31 @@ const afterwards = [
       </ul>
     </section>
 
+    <section class="mt-14">
+      <h2 class="font-serif text-2xl font-semibold sm:text-3xl">Questions restaurants ask</h2>
+      <div class="mt-4 divide-y divide-border">
+        {
+          faqs.map((faq, index) => (
+            <details class="group py-5" open={index < 2}>
+              <summary class="flex cursor-pointer items-center justify-between gap-4 font-serif text-lg font-semibold leading-snug marker:content-none hover:text-primary">
+                {faq.question}
+                <span class="shrink-0 text-muted-foreground transition-transform group-open:rotate-45">+</span>
+              </summary>
+              <p class="mt-3 leading-relaxed text-muted-foreground">{faq.answer}</p>
+            </details>
+          ))
+        }
+      </div>
+    </section>
+
     <section id="form" class="mt-16 scroll-mt-24">
       <h2 class="font-serif text-2xl font-semibold sm:text-3xl">Talk to us</h2>
       <p class="mt-4 leading-relaxed text-muted-foreground">
-        We reply within two days. Next step is half an hour in your room, no commitment.
+        Our monthly cookbook club is free and always will be. This is a separate thing, for people who want a night in a
+        real kitchen.
+      </p>
+      <p class="mt-4 leading-relaxed text-muted-foreground">
+        We reply within two days. Next step is half an hour in your room, no commitments.
       </p>
       <div class="mt-6 rounded-lg bg-[#f2eeeb] p-4 dark:bg-[#f2eeeb] sm:p-6">
         <iframe
@@ -233,15 +349,13 @@ const afterwards = [
           title="Restaurant nights enquiry form"></iframe>
       </div>
       <p class="mt-3 text-center text-sm text-muted-foreground">
-        Form not loading?
-        <a href="https://tally.so/r/LZxlJJ" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline">Open it in a new tab &#8599;</a>
+        Form not loading? <a href="https://tally.so/r/LZxlJJ" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline">Open it in a new tab &#8599;</a>
         or email <a href={`mailto:${CONTACT.email}`} class="text-primary hover:underline">{CONTACT.email}</a>.
       </p>
     </section>
 
     <p class="mt-14 text-center text-sm text-muted-foreground">
-      Not a restaurant?
-      <a href="/partners" class="text-primary hover:underline">We work with brands too &rarr;</a>
+      Not a restaurant? <a href="/partners" class="text-primary hover:underline">We work with brands too &rarr;</a>
     </p>
   </div>
 </BaseLayout>
