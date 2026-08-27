@@ -6,6 +6,16 @@ import { REACH, CONTACT } from "../config/theme.config.ts";
 import heroPhoto from "../assets/gallery/023636E4-7D7E-477F-9FF7-7B1AA2B47916.JPG";
 import kitchenPhoto from "../assets/gallery/IMG_8506.jpg";
 
+// Bump this when the money or the terms change, not on every edit. It is a
+// claim about the numbers below being current, and a stale one reads worse
+// than none. It also feeds dateModified in the page schema.
+const termsUpdated = "2026-08-27";
+const termsUpdatedLabel = new Date(`${termsUpdated}T12:00:00Z`).toLocaleDateString("en-CA", {
+  year: "numeric",
+  month: "long",
+  timeZone: "UTC",
+});
+
 const stats = [
   { label: "Sells out in", value: REACH.sellsOutIn },
   { label: "Repeat members", value: REACH.repeatMembers },
@@ -120,6 +130,7 @@ const faqs = [
 const faqJsonLd = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
+  dateModified: termsUpdated,
   mainEntity: faqs.map((faq) => ({
     "@type": "Question",
     name: faq.question,
@@ -267,6 +278,11 @@ const faqJsonLd = {
       </p>
       <p class="mt-4 leading-relaxed text-muted-foreground">
         Two of those covers are us. We run the night and we cook alongside everyone else.
+      </p>
+      <p class="mt-6 border-l-2 border-primary/40 pl-3 text-sm leading-relaxed text-muted-foreground">
+        Everything here is how we normally run it. The specifics of your night get agreed on a call and confirmed in
+        writing before tickets go live.
+        <span class="mt-1 block text-muted-foreground/70">Terms updated {termsUpdatedLabel}.</span>
       </p>
     </section>
 
