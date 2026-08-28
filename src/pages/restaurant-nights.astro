@@ -53,7 +53,7 @@ const openQuestions = [
   {
     term: "Your room",
     detail:
-      "Fifteen people in three groups. If you're the one teaching, you probably can't run normal service at the same time. Worth deciding early whether you're closed to walk-ins that night.",
+      "Fifteen guests in three groups, plus the two of us on site. If you're the one teaching, you probably can't run normal service at the same time. Worth deciding early whether you're closed to walk-ins that night.",
   },
   {
     term: "The dish",
@@ -73,22 +73,22 @@ const faqs = [
   {
     question: "What kind of night should we offer you?",
     answer:
-      "A night you're already open and quiet. We're not after your Friday. Tell us what's slow and we'll build around it.",
+      "A night you're already open and quiet. Tell us what's slow and we'll build around it.",
   },
   {
     question: "How many people, exactly?",
     answer:
-      "Fifteen. We won't send more without asking. If we end up under ten, we'll check with you rather than assume.",
+      "Fifteen guests. The two of us are there as hosts as well, so count on 17 people from Sauté Sundays before your staff. We won't add more guests without asking.",
   },
   {
     question: "Does it have to be a full meal?",
     answer:
-      "No, and we run both. Some nights are technique only: one dish, everyone makes it, everyone eats what they made, nothing else served. Others teach a dish and serve a meal alongside it. Tell us which suits your kitchen and we price it accordingly.",
+      "No. We run both versions. Some nights are technique-only: one dish, everyone makes it and eats what they made. Others teach a dish and serve a meal alongside it. Tell us which suits your kitchen and we'll price it accordingly.",
   },
   {
     question: "What if the owner is the one teaching?",
     answer:
-      "Most of the places we want to work with, that's exactly who it'd be. Just factor your own hour into the number you quote us, and think about whether you can run service at the same time.",
+      "At a lot of the places we want to work with, the owner will be the one teaching. Just factor your own hour into the number you quote us, and decide whether you can run service at the same time.",
   },
   {
     question: "When do we get paid?",
@@ -117,7 +117,7 @@ const faqs = [
   {
     question: "What do you get out of this?",
     answer:
-      "A flat $45 a night for printing and admin. The rest of the ticket is yours, minus about 8% that Luma and Stripe take for processing. Our monthly club is free and stays free. This is a separate thing we run alongside it.",
+      "A flat $45 a night for printing and admin. The rest of the ticket is yours, minus about 8% for Luma and Stripe processing.",
   },
   {
     question: "How far ahead do we need to decide?",
@@ -156,13 +156,14 @@ const faqJsonLd = {
         Fill a quiet night with people who came for the food
       </h1>
       <p class="mt-6 text-lg leading-relaxed text-muted-foreground">
-        We bring 15 of our members into your room. You teach them one dish. They cook it, then stay and eat and drink.
+        We bring 15 members into your room. You teach them one dish. They cook it, then stay to eat and drink. The two of
+        us are there too, running the night and cooking alongside them.
       </p>
       <p class="mt-4 text-lg leading-relaxed text-muted-foreground">
-        You never write us a cheque. You're paid per head from ticket sales, and the bar is yours.
+        There's no fee to us: you're paid per head from ticket sales, and the bar is yours.
       </p>
       <p class="mt-4 text-lg leading-relaxed text-muted-foreground">
-        We're not asking for your busiest night. Tell us which night is quiet and we'll build around it.
+        Give us one of your quiet nights and we'll build around it.
       </p>
       <a
         href="#form"
@@ -199,9 +200,8 @@ const faqJsonLd = {
         }
       </dl>
       <p class="mt-6 leading-relaxed text-muted-foreground">
-        A free monthly cookbook club, running since 2025 at Jrew's on Niagara. Everyone who comes cooks a dish at home
-        and brings it. 35 seats, sold
-        out every month, and the waitlist gets longer rather than shorter.
+        We've run the free monthly cookbook club at Jrew's on Niagara since 2025. Everyone who comes cooks a dish at home
+        and brings it. The 35 seats sell out every month, and the waitlist keeps growing.
       </p>
     </section>
 
@@ -212,16 +212,15 @@ const faqJsonLd = {
         small groups. Then they sit down and eat what they made.
       </p>
       <p class="mt-4 leading-relaxed text-muted-foreground">
-        Home cooks, most of them confident, all of them there because they want to be. Nobody's starting from knife
-        grip.
+        They're home cooks, mostly confident, all there because they want to be. You won't be teaching knife grip.
       </p>
       <figure class="mt-8 border-l-2 border-primary pl-5">
         <blockquote class="font-serif text-xl leading-relaxed">Everyone is such a good cook 🥰</blockquote>
         <figcaption class="mt-3 text-sm text-muted-foreground">Leena, February 2026</figcaption>
       </figure>
       <p class="mt-8 text-sm leading-relaxed text-muted-foreground/80">
-        About three hours. You'd know better than us how long the cooking part takes, and that's one of the first things
-        we'd ask you.
+        About three hours. You know your dish better than we do, so one of the first things we'll work out is how long the
+        cooking portion needs.
       </p>
     </section>
 
@@ -259,20 +258,20 @@ const faqJsonLd = {
     <section class="mt-14">
       <h2 class="font-serif text-2xl font-semibold sm:text-3xl">The money</h2>
       <p class="mt-5 leading-relaxed text-muted-foreground">
-        You're paid per head from ticket sales. You never write us a cheque, and the bar is yours.
+        You're paid per head from ticket sales, and the bar is entirely yours.
       </p>
       <p class="mt-4 leading-relaxed text-muted-foreground">
-        Most nights work out between $20 and $40 a head for you, depending on what you're teaching. The more technical
-        the dish, the more the ticket supports. Our members will pay more to learn something they can't pick up from a
+        Most nights work out between $20 and $40 a guest for you, depending on what you're teaching. More technical dishes
+        can support a higher ticket price. Our members will pay more to learn something they can't pick up from a
         video.
       </p>
       <p class="mt-4 leading-relaxed text-muted-foreground">
-        We keep $45 flat per night for recipe card printing and admin. Same on every night, whatever the ticket. Luma
-        and Stripe take about 8% of the ticket for processing. Everything else is yours.
+        We keep a flat $45 per night for recipe-card printing and admin, regardless of ticket price. Luma and Stripe take
+        about 8% for processing. Everything else is yours.
       </p>
       <p class="mt-4 leading-relaxed text-muted-foreground">
-        Two ways this runs. Technique only: one dish, everyone makes it, everyone eats what they made, nothing else
-        served. Or with a meal: you teach one dish, then serve alongside it. Tell us which suits your kitchen.
+        There are two versions. Technique-only: one dish, everyone makes it and eats what they made. Or with a meal: you
+        teach one dish, then serve food alongside it. Tell us which suits your kitchen.
       </p>
       <p class="mt-4 leading-relaxed text-muted-foreground">
         We confirm headcount 10 days out so you can shop and prep against a real number. If you need money up front for
@@ -282,11 +281,12 @@ const faqJsonLd = {
         Tickets are non-refundable and non-transferable, so a late cancellation doesn't change what you're paid.
       </p>
       <p class="mt-4 leading-relaxed text-muted-foreground">
-        Two of those covers are us. We run the night and we cook alongside everyone else.
+        The 15 guest spots are separate from us. Both of us are there for the night, running it and cooking alongside
+        everyone else.
       </p>
       <p class="mt-6 border-l-2 border-primary/40 pl-3 text-sm leading-relaxed text-muted-foreground">
-        Everything here is how we normally run it. The specifics of your night get agreed on a call and confirmed in
-        writing before tickets go live.
+        This is our standard setup. We'll agree the specifics of your night on a call and confirm them in writing before
+        tickets go live.
         <span class="mt-1 block text-muted-foreground/70">Terms updated {termsUpdatedLabel}.</span>
       </p>
     </section>
@@ -297,9 +297,9 @@ const faqJsonLd = {
         We'd confirm about four weeks ahead and hold ticket sales until then, so an early change costs nobody anything.
       </p>
       <p class="mt-4 leading-relaxed text-muted-foreground">
-        Once tickets are live we'll ask that the date is firm. If something unavoidable comes up on either side, we'd
-        reschedule rather than cancel, so nobody who bought a ticket loses out. If we've sent a deposit and the night
-        can't go ahead, it comes back to us.
+        Once tickets are live, we'll ask that the date stays firm. If something unavoidable comes up on either side, we'd
+        reschedule so ticket holders don't lose out. If we've sent a deposit and the night can't go ahead, it comes back
+        to us.
       </p>
       <p class="mt-4 leading-relaxed text-muted-foreground">
         If we're under ten guests two weeks out, we'll come to you. You decide whether to run it or take the night back,
@@ -310,7 +310,7 @@ const faqJsonLd = {
     <section class="mt-14">
       <h2 class="font-serif text-2xl font-semibold sm:text-3xl">Things we'd work out with you</h2>
       <p class="mt-5 leading-relaxed text-muted-foreground">
-        Nothing here we'd rather discover than tell you on the night.
+        We sort these details out before the night, so nobody is improvising them in the kitchen.
       </p>
       <dl class="mt-6 space-y-4 text-sm leading-relaxed">
         {
@@ -358,8 +358,7 @@ const faqJsonLd = {
     <section id="form" class="mt-16 scroll-mt-24">
       <h2 class="font-serif text-2xl font-semibold sm:text-3xl">Talk to us</h2>
       <p class="mt-4 leading-relaxed text-muted-foreground">
-        Our monthly cookbook club is free and always will be. This is a separate thing, for people who want a night in a
-        real kitchen.
+        Our monthly cookbook club stays free. Restaurant nights give people a chance to learn in a real kitchen.
       </p>
       <p class="mt-4 leading-relaxed text-muted-foreground">
         We reply within two days. Next step is half an hour in your room, no commitments.

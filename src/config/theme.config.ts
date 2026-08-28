@@ -7,7 +7,7 @@ const siteUrl = (
 // `blurb` is the plain description of the club. The footer prints it as is and
 // `description` extends it for meta tags, so the sentence exists once.
 const blurb =
-  "Toronto's cookbook club. Every month, members cook a dish at home from the same featured cookbook, then bring it to share with everyone else who did the same.";
+  "Toronto's cookbook club. Every month, members cook different recipes from the same featured cookbook, then bring the dishes to share.";
 
 export const SITE = {
   name: "Sauté Sundays",
@@ -66,8 +66,8 @@ export const authors = [
     bio: "Co-host. Started Sauté Sundays in her party room in 2025, and writes the newsletter that keeps it running.",
     // Each entry renders as its own paragraph on the author page.
     longBio: [
-      "Started Sauté Sundays in her party room in 2025 by inviting friends. They brought their friends. Then people started showing up who'd found the Instagram back when there was almost nothing on it, and it kept going from there.",
-      "Writes the newsletter: recipes, food thoughts, and all the boring logistics. Keeps the recipe sheet so 35 people can actually get hold of the book. Does the unglamorous half because that's what makes the room feel easy when people walk in.",
+      "Started Sauté Sundays in her party room in 2025 by inviting friends, who brought their friends. Then strangers started showing up after finding the barely-there Instagram, and it kept going from there.",
+      "Writes the newsletter, recipes, food thoughts and all the boring logistics, and keeps the recipe sheet running so everyone can get hold of the book. Does the unglamorous half because that's what makes the room feel easy when people walk in.",
       "Usually brings something simple, since setting up on event day takes the energy she'd need for anything ambitious. The exception was a rice pudding somebody said beat the restaurant's, and we were cooking from that restaurant's cookbook.",
       "Marketing by day. Also writes Clearing the Table, on food and travel.",
     ],

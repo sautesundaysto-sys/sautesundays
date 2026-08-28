@@ -48,12 +48,12 @@ export const gallery = [
   {
     src: vietnameseGroup,
     alt: "Four guests sitting together with their plates at Sauté Sundays, one flashing a peace sign at the camera",
-    event: "Vietnamese's Kitchen, July 2026",
+    event: "A Vietnamese Kitchen, July 2026",
   },
   {
     src: vietnamesePair,
     alt: "Two guests sharing a container of food in front of the Jrew's window at Sauté Sundays",
-    event: "Vietnamese's Kitchen, July 2026",
+    event: "A Vietnamese Kitchen, July 2026",
   },
   {
     src: caribbeanServing,
