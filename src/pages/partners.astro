@@ -12,97 +12,116 @@ import roomPhoto from "../assets/gallery/C3D8722C-A122-4A1B-87AC-D46C5B11B5DD.JP
 const posts = await sortedPosts();
 const nightsRun = posts.filter((post) => post.category === "event-recap").length;
 
-// Open rate first: it is roughly double the category norm, and it is a quality
-// number. A raw audience size invites the reach comparison this page is trying
-// to avoid, so it is not on the board at all.
+// Open rate first: it is a quality number. A raw audience size invites the
+// reach comparison this page does not want.
 const stats = [
-  { label: "Newsletter opens", value: REACH.openRate },
-  { label: `Sold out, every one in ${REACH.sellsOutIn}`, value: `${nightsRun} nights` },
-  { label: "Repeat members", value: REACH.repeatMembers },
-  { label: "Seats every month", value: REACH.seats },
+  { label: "Median newsletter open rate", value: REACH.openRateMedian },
+  { label: "Events sold out, each within three days", value: `${nightsRun}/${nightsRun}` },
+  { label: "Unique members have attended at least twice", value: REACH.repeatMembers },
+  { label: "Current member places at Jrew's", value: REACH.seats },
 ];
-
-const productPartners = ["Sunny Daze"];
-const roomPartners = ["Jrew's, our home on Niagara St", "Danu Social House"];
 
 const ways = [
   {
     title: "Product for the room",
-    body: "Enough product for one month's event: drinks, ingredients or cookware. Everyone uses it; nothing goes to waste or unnoticed.",
-    badge: "Easiest place to start",
+    badge: "The easiest place to start",
+    body: "Enough product for approximately 35 servings, with the final quantity agreed according to the format. This works well for drinks, condiments, snacks, dips, and anything that can be opened and shared during the evening.",
   },
   {
     title: "Product to take home",
-    body: "35 units, one each. People leave with your thing in their hands and a recipe they just cooked.",
     badge: "",
+    body: "Thirty-five units, handed to attendees during or at the end of the event. Members can take the product home and try it in their own time. We invite them to tag Sauté Sundays and the brand if they choose to share their experience.",
   },
   {
     title: "A month of your own",
-    body: "Your name on one event: in the title, on the RSVP page, in the newsletter, and in the write-up afterwards.",
     badge: "",
+    body: "$350 CAD plus product. Your brand appears in the event title, on the RSVP page, in the announcement newsletter, in an Instagram feed post and story, and in the post-event recap. That creates repeated visibility across roughly six weeks.",
   },
-  {
-    title: "Cover the running costs",
-    body: "Plates, permits, printing, the website. It's unglamorous, but it's what keeps a free event free. Happy to name you for it.",
-    badge: "",
-  },
+];
+
+// Wide on purpose: the table scrolls inside its own container rather than
+// pushing the page sideways.
+const deliverables = [
+  ["Brand contribution", "Product for approximately 35 servings", "35 take-home units", "$350 CAD plus product"],
+  ["Newsletter", "One inclusion", "One inclusion", "Announcement and post-event recap"],
+  ["Instagram", "At least one story", "At least one story", "One feed post and at least one story"],
+  ["Event title and RSVP page", "—", "—", "Brand named"],
+  ["Photography and reporting", "5–10 selected photographs within seven days, plus final headcount", "Same", "Same"],
+  ["Community feedback", "When agreed in advance", "When agreed in advance", "When agreed in advance"],
+  ["Category exclusivity", "Yes, within the agreed category", "Yes", "Yes"],
 ];
 
 const howItWorks = [
   {
-    term: "One brand per category, per month",
-    detail: "If you make olive oil, you're the only olive oil in the room that night.",
+    term: "One official partner per agreed product category",
+    detail:
+      "We do not promote a competing brand from that category in the event copy or selected sponsor photographs. Members still choose their own recipes and ingredients, so they remain free to bring the products they normally use.",
   },
   {
     term: "We plan six to eight weeks ahead",
-    detail: "Tell us roughly which month you're aiming at and we'll tell you what's still open.",
+    detail:
+      "Product should arrive at least two weeks before the event. A pre-event cooking format may need more lead time.",
   },
   {
-    term: "Photos are yours",
+    term: "5 to 10 selected photographs within seven days",
     detail:
-      "Everything we shoot that night, free to use on your own channels. No permission needed, no expiry.",
+      "We can include at least one clear product image when requested. The photographs document the event as it happens. Usage details are included in the Partnership Terms shared before confirmation.",
   },
   {
-    term: "We'll tell you if it's a bad fit",
+    term: "We only confirm products that fit",
     detail:
-      "Some products simply won't work in this room. If yours is one of them, we'll say so upfront and leave it there.",
+      "The product needs a natural place in the room and the featured cookbook. When another month would work better, we will say so and suggest it.",
   },
-];
-
-const afterwards = [
-  "Photographs from the night, yours to keep and use",
-  "Final headcount and how the room actually responded to your product",
-  "A mention in the write-up on our site and in the newsletter that follows",
-  "Your name in the event listing, if that's part of what we agreed",
 ];
 const faqs = [
   {
     question: "Can we come to the night?",
     answer:
-      "One person can come as a guest and cook and eat like everyone else. A branded table, pitch or speech changes the room immediately, so we don't do them.",
+      "Yes, by arrangement. Brand guests bring a dish and participate in the evening. We cap brand attendance at two people across the event, so when two brands are involved that usually means one guest from each. A brief two or three minute introduction is welcome. We keep the room free of booths, sales tables, and direct pitches.",
   },
   {
     question: "Can we get your mailing list?",
     answer:
-      "We keep member details private. We can feature you in the newsletter instead, which reaches the same audience.",
+      "We keep member details private. Brand mentions go through Sauté Sundays. When agreed in advance, we can ask one short, voluntary question in our WhatsApp community and share an anonymous summary.",
   },
   {
-    question: "Will our product be in the photos?",
+    question: "Will our product be in the photographs?",
     answer:
-      "It'll be in the room and in people's hands, so it turns up naturally. We don't stage product shots. That is the kind of photo nobody believes.",
+      "Yes. We can include at least one clear product image in the final selection when requested. The remaining photographs document the evening as it happens.",
   },
   {
-    question: "What if our product doesn't suit that month's cookbook?",
+    question: "Can members cook with the product before the event?",
     answer:
-      "We'll tell you and suggest a month that fits better. A jar of something Mediterranean lands differently in a Basque month than a Taiwanese one.",
+      "Yes, when the product suits the featured cookbook and there is enough lead time. We distribute it early to interested members, agree the number in advance, and report actual participation afterwards.",
+  },
+  {
+    question: "Will members post about the product?",
+    answer:
+      "Some members share their dishes or product experience and tag Sauté Sundays. We encourage that and reshare relevant posts, while keeping participation voluntary.",
+  },
+  {
+    question: "How many people will attend?",
+    answer:
+      "We release 35 member places at Jrew's and use the waitlist to fill late cancellations where possible. Final attendance can vary because the event is free. Every partner receives the final headcount afterwards.",
+  },
+  {
+    question: "What does it cost?",
+    answer:
+      "Product for the room means enough for approximately 35 servings. Product to take home means 35 units. A named month costs $350 CAD plus product. Support for running costs is quoted case by case.",
+  },
+  {
+    question: "What if our product does not suit the cookbook?",
+    answer:
+      "We will suggest a month or featured cookbook that gives the product a more natural place in the room.",
   },
   {
     question: "Can we partner more than once?",
-    answer: "Yes, and repeat partners get first pick of months.",
+    answer: "Yes. Repeat partners receive first pick of suitable upcoming months.",
   },
   {
     question: "Do you work with alcohol brands?",
-    answer: "Only at a licensed venue. Jrew's is licensed, so most months that works.",
+    answer:
+      "Only at a licensed venue. Jrew's is licensed, and we confirm the product and service plan before agreeing the partnership.",
   },
 ];
 
@@ -133,11 +152,12 @@ const faqJsonLd = {
     <section>
       <div class="text-xs font-medium uppercase tracking-[0.2em] text-primary">Sauté Sundays</div>
       <h1 class="mt-3 font-serif text-4xl font-semibold leading-[1.08] sm:text-5xl">
-        35 people who will actually cook with your products
+        Put your product in a room full of people who cook
       </h1>
       <p class="mt-6 text-lg leading-relaxed text-muted-foreground">
-        Your product goes home with people and gets used. A knife, a bottle, a bag of something unfamiliar becomes part of
-        a dish, then gets photographed and talked about.
+        Each month, around 35 cookbook lovers cook from the same book, bring a dish to Jrew's, and share everything.
+        Your product can be served during dinner, handed to attendees to take home, or distributed before the event when
+        it genuinely fits the cookbook.
       </p>
       <a
         href="#form"
@@ -174,13 +194,14 @@ const faqJsonLd = {
         }
       </dl>
       <p class="mt-6 leading-relaxed text-muted-foreground">
-        The value comes from what happens after the product leaves the room: someone takes it home, cooks with it on
-        purpose, and brings the result back for the group to taste. The newsletter is mostly food writing, which is why
-        people actually open it.
+        Our newsletter is food writing: recipes, food thoughts, club updates, and recaps from previous events. Across
+        our seven most recent editorial newsletters, excluding early-access ticket emails, the median open rate was 64%.
+        The latest went to 414 people and recorded a 63% open rate and a 5% click rate.
       </p>
       <p class="mt-4 leading-relaxed text-muted-foreground">
-        If you're weighing this against a social buy, it's the wrong comparison. Think of it more like sampling: people
-        keep the product, use it, and about half the room photographs it.
+        Members regularly tell us they bought the featured cookbook after attending, or share stories about tracking
+        down ingredients they had never used before. We keep the room capped so Tammy and Mady can know the people who
+        come and hear those stories directly.
       </p>
       <figure class="mt-8 border-l-2 border-primary pl-5">
         <blockquote class="font-serif text-xl leading-relaxed">
@@ -192,35 +213,41 @@ const faqJsonLd = {
 
     <section class="mt-14">
       <h2 class="font-serif text-2xl font-semibold sm:text-3xl">Who we've worked with</h2>
-      <div class="mt-6 grid gap-8 sm:grid-cols-2">
-        <div>
-          <h3 class="text-xs font-medium uppercase tracking-wider text-muted-foreground">Product partners</h3>
-          <ul class="mt-3 space-y-2 text-sm leading-relaxed text-muted-foreground">
-            {productPartners.map((partner) => <li class="border-l-2 border-primary/40 pl-3">{partner}</li>)}
-          </ul>
+      <div class="mt-6">
+        <h3 class="text-xs font-medium uppercase tracking-wider text-muted-foreground">Product partners</h3>
+        <div class="mt-3 border-l-2 border-primary/40 pl-4">
+          <p class="font-serif text-lg font-semibold">Sunny Daze</p>
+          <p class="mt-2 text-sm leading-relaxed text-muted-foreground">
+            In June 2026, Sunny Daze supplied 30 lemonades for the room. Two team members joined as guests, brought
+            dishes, and gave a short introduction. We featured the partnership in one newsletter section, one Instagram
+            feed post, and one story. The lemonade stayed available throughout the evening and appeared naturally in the
+            event photographs.
+          </p>
         </div>
-        <div>
-          <h3 class="text-xs font-medium uppercase tracking-wider text-muted-foreground">Rooms</h3>
-          <ul class="mt-3 space-y-2 text-sm leading-relaxed text-muted-foreground">
-            {roomPartners.map((partner) => <li class="border-l-2 border-border pl-3">{partner}</li>)}
-          </ul>
-        </div>
+      </div>
+      <div class="mt-8">
+        <h3 class="text-xs font-medium uppercase tracking-wider text-muted-foreground">Community and venue partners</h3>
+        <ul class="mt-3 space-y-2 text-sm leading-relaxed text-muted-foreground">
+          <li class="border-l-2 border-border pl-3">Jrew's, our home on Niagara St</li>
+          <li class="border-l-2 border-border pl-3">Danu Social House</li>
+        </ul>
       </div>
     </section>
 
     <section class="mt-14">
       <h2 class="font-serif text-2xl font-semibold sm:text-3xl">Why this stays free</h2>
       <p class="mt-5 leading-relaxed text-muted-foreground">
-        The monthly potluck is free and stays free. Nobody has ever been charged to bring a dish.
-      </p>
-      <p class="mt-4 leading-relaxed text-muted-foreground">
-        Partnerships cover the room and help keep it that way. The value is in supporting a real event where people use
-        the product.
+        The monthly potluck is free for members. Product and cash partnerships help cover the practical costs of keeping
+        it that way.
       </p>
     </section>
 
     <section class="mt-14">
-      <h2 class="font-serif text-2xl font-semibold sm:text-3xl">Four ways in</h2>
+      <h2 class="font-serif text-2xl font-semibold sm:text-3xl">Ways to partner</h2>
+      <p class="mt-5 leading-relaxed text-muted-foreground">
+        Most partnerships begin with product. A named month adds visibility across the full event cycle and costs $350
+        CAD plus product.
+      </p>
       <div class="mt-6 space-y-4">
         {
           ways.map((way, index) => (
@@ -245,10 +272,51 @@ const faqJsonLd = {
           ))
         }
       </div>
-      <p class="mt-6 leading-relaxed text-muted-foreground">
-        Most of our partnerships are product rather than cash. Tell us roughly what you had in mind and we'll tell you
-        honestly what it gets.
-      </p>
+
+      <div class="mt-8 overflow-x-auto">
+        <table class="w-full min-w-[620px] border-collapse text-left text-sm">
+          <thead>
+            <tr class="border-b border-border">
+              <th class="py-3 pr-4 align-bottom font-medium">Included</th>
+              <th class="py-3 pr-4 align-bottom font-medium">Product for the room</th>
+              <th class="py-3 pr-4 align-bottom font-medium">Product to take home</th>
+              <th class="py-3 align-bottom font-medium">A month of your own</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              deliverables.map(([label, a, b, c]) => (
+                <tr class="border-b border-border/60 align-top">
+                  <th scope="row" class="py-3 pr-4 font-medium">{label}</th>
+                  <td class="py-3 pr-4 text-muted-foreground">{a}</td>
+                  <td class="py-3 pr-4 text-muted-foreground">{b}</td>
+                  <td class="py-3 text-muted-foreground">{c}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+
+      <div class="mt-10">
+        <h3 class="font-serif text-lg font-semibold">Support the room</h3>
+        <p class="mt-2 leading-relaxed text-muted-foreground">
+          We also work with brands that want to support practical costs such as plates, permits, printing, and the
+          website. These partnerships are shaped and priced case by case.
+        </p>
+      </div>
+
+      <div class="mt-10">
+        <h3 class="font-serif text-lg font-semibold">Pre-event product use</h3>
+        <p class="mt-2 leading-relaxed text-muted-foreground">
+          Some products are best experienced in the cooking itself. When a product naturally suits the featured
+          cookbook, we can arrange earlier distribution to interested members who want to try it before the event.
+        </p>
+        <p class="mt-4 leading-relaxed text-muted-foreground">
+          The number of participants, collection plan, and lead time are agreed case by case. Product use remains
+          optional, and we report what actually happened afterwards.
+        </p>
+      </div>
     </section>
 
     <section class="mt-14">
@@ -263,6 +331,10 @@ const faqJsonLd = {
           ))
         }
       </dl>
+      <p class="mt-6 text-sm leading-relaxed text-muted-foreground">
+        Cancellation, attendance, product handling, and full image-use terms are covered in a separate Partnership Terms
+        document and shared when the partnership moves forward.
+      </p>
       <figure class="mt-8 border-l-2 border-primary pl-5">
         <blockquote class="font-serif text-xl leading-relaxed">
           Love learning about cultures this way, thanks ladies for organizing.
@@ -285,10 +357,19 @@ const faqJsonLd = {
     </figure>
 
     <section class="mt-14">
-      <h2 class="font-serif text-2xl font-semibold sm:text-3xl">What you get afterwards</h2>
-      <ul class="mt-6 space-y-3 leading-relaxed text-muted-foreground">
-        {afterwards.map((item) => <li class="border-l-2 border-primary/40 pl-3">{item}</li>)}
-      </ul>
+      <h2 class="font-serif text-2xl font-semibold sm:text-3xl">What happens afterwards</h2>
+      <p class="mt-5 leading-relaxed text-muted-foreground">
+        Within seven days, every partner receives the final headcount and 5 to 10 selected photographs from the event.
+        We complete the newsletter and Instagram coverage included in the agreed package.
+      </p>
+      <p class="mt-4 leading-relaxed text-muted-foreground">
+        When feedback has been arranged in advance, we ask one short, voluntary question in our WhatsApp community and
+        share an anonymous summary.
+      </p>
+      <p class="mt-4 leading-relaxed text-muted-foreground">
+        Some members post their dishes or product experience and tag us. We reshare relevant posts when they appear.
+        Member-created content is always voluntary.
+      </p>
     </section>
 
     <section class="mt-14">
@@ -309,13 +390,13 @@ const faqJsonLd = {
     </section>
 
     <section id="form" class="mt-16 scroll-mt-24">
-      <h2 class="font-serif text-2xl font-semibold sm:text-3xl">Get in touch</h2>
+      <h2 class="font-serif text-2xl font-semibold sm:text-3xl">Fifteen minutes is enough to see whether it fits</h2>
       <p class="mt-4 leading-relaxed text-muted-foreground">
-        Happy to talk it through before you commit to anything. Give us fifteen minutes, tell us what you're working on,
-        and we'll tell you whether it fits.
+        Tell us what you are working on, which product you want people to experience, and roughly when you want to do
+        it. We will share the available months and cookbooks and recommend the format that suits the product best.
       </p>
       <p class="mt-4 leading-relaxed text-muted-foreground">
-        Nothing here is fixed. We'll shape it around what you actually want to do.
+        The core deliverables are clear, and the activation can be adjusted to suit the product.
       </p>
       <p class="mt-4 leading-relaxed text-muted-foreground">We reply within two days.</p>
       <div class="mt-6 rounded-lg bg-[#f2eeeb] p-4 dark:bg-[#f2eeeb] sm:p-6">

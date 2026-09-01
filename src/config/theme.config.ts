@@ -187,6 +187,10 @@ export const REACH = {
   subscribers: "400+",
   whatsappMembers: "130",
   openRate: "50–70%",
+  // Median across the seven most recent editorial newsletters, excluding
+  // early-access ticket emails. More precise than the range above, so it is
+  // what /partners shows.
+  openRateMedian: "64%",
 };
 
 // The proof line under the hero buttons. Reassures a first-timer, and is the
