@@ -3,125 +3,243 @@ import { Image } from "astro:assets";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Icon from "../components/Icon.astro";
 import { REACH, CONTACT } from "../config/theme.config.ts";
+import { sortedPosts } from "../lib/blog-data.js";
 import heroPhoto from "../assets/gallery/023636E4-7D7E-477F-9FF7-7B1AA2B47916.JPG";
 import kitchenPhoto from "../assets/gallery/IMG_8506.jpg";
 
-// Bump this when the money or the terms change, not on every edit. It is a
-// claim about the numbers below being current, and a stale one reads worse
-// than none. It also feeds dateModified in the page schema.
-const termsUpdated = "2026-08-27";
-const termsUpdatedLabel = new Date(`${termsUpdated}T12:00:00Z`).toLocaleDateString("en-CA", {
-  year: "numeric",
-  month: "long",
-  timeZone: "UTC",
-});
+// One recap per night, so the count of them is the count of nights.
+const posts = await sortedPosts();
+const nightsRun = posts.filter((post) => post.category === "event-recap").length;
 
+// Feeds dateModified in the page schema. The visible "terms updated" line is
+// gone: the confirmation note at the foot of the page says the same thing
+// without going stale.
+const termsUpdated = "2026-08-28";
+
+// Proof from the free club, kept separate from proof for the paid format.
 const stats = [
-  { label: "Sells out in", value: REACH.sellsOutIn },
-  { label: "Repeat members", value: REACH.repeatMembers },
-  { label: "Subscribers", value: REACH.subscribers },
-  { label: "Newsletter opens", value: REACH.openRate },
+  { label: "Cookbook-club events sold out", value: `${nightsRun}/${nightsRun}` },
+  { label: "Every event sold out within three days", value: REACH.sellsOutIn },
+  { label: "Unique members have attended at least twice", value: REACH.repeatMembers },
+  { label: "Median open rate across seven recent editorial newsletters", value: REACH.openRateMedian },
 ];
 
-const youBring = [
-  "A night you're open and quiet",
-  "Someone to lead the dish",
-  "Ingredients for the agreed headcount",
-  "Space for three small groups, plus sink and oven access",
-  "Whatever food you're serving alongside",
+const formats = [
+  {
+    title: "Technique workshop",
+    body: [
+      "One focused dish or technique. Guests make the hands-on component, eat what they make, and may leave with a take-home element.",
+      "This is the shorter, lighter format and works well for dumplings, patties, pasta shapes, breads, sauces, shaping, folding, and finishing techniques.",
+    ],
+  },
+  {
+    title: "Workshop with a meal",
+    body: [
+      "The restaurant teaches one dish, then serves it with an additional plate, side, or course.",
+      "This suits a technique that is interesting to learn but would not make a complete evening on its own. It needs more kitchen and service time, so the ticket price is normally higher.",
+    ],
+  },
+];
+
+const runOfNight = [
+  {
+    term: "Set-up",
+    detail:
+      "Tammy and Mady arrive early, set out name tags and approved recipe or technique cards, check the three table stations, and review the evening with the restaurant.",
+  },
+  {
+    term: "Guest arrival",
+    detail: "We check everyone in. Drinks are ordered and paid for directly through the restaurant.",
+  },
+  {
+    term: "Introduction and demonstration",
+    detail:
+      "The restaurant introduces the dish, the technique, and the people behind it. The demonstration normally takes 15 to 20 minutes.",
+  },
+  {
+    term: "Hands-on workshop",
+    detail:
+      "Guests work in three small groups at dining-room tables. The restaurant teaches the food; Sauté Sundays manages timing, questions, and guest flow.",
+  },
+  {
+    term: "Cooking and eating",
+    detail:
+      "Restaurant staff finish anything that requires the kitchen, oven, pass, or heat. Guests then sit down to the agreed food.",
+  },
+  {
+    term: "Close",
+    detail:
+      "Guests leave with any agreed recipe, technique notes, or take-home component. The restaurant and Sauté Sundays complete the cleanup responsibilities agreed before the event.",
+  },
+];
+
+const restaurantBrings = [
+  "A quiet date and the agreed use of the dining room",
+  "A lead cook, chef, or owner who can teach the dish",
+  "Ingredient ordering, weighing, portioning, and advance food preparation",
+  "Restaurant staff for the kitchen or pass, heat, bar, service, dishwashing, sanitation, and room reset as required",
+  "Three table workstations and the agreed equipment",
+  "Ingredient, allergen, storage, cooking, and take-home instructions",
+  "Confirmation that the proposed activity works for the premises, insurer, and food-safety setup before tickets go live",
 ];
 
 const weBring = [
-  "The guests, from our own community",
-  "All promotion: newsletter, Instagram, WhatsApp",
-  "Ticketing, sign-ups and payment handling",
-  "Headcount, dietary flags and allergy notes in advance",
-  "Both of us on site for the evening",
+  "Fifteen ticketed guests drawn first from our community",
+  "Promotion through the agreed newsletter, Instagram, WhatsApp, event listing, and recap",
+  "Ticketing, payment collection, attendee communication, and check-in",
+  "A sales checkpoint fourteen days before the event",
+  "Final paid headcount and dietary information ten days before the event",
+  "Name tags and restaurant-approved recipe or technique cards",
+  "Tammy and Mady on site to host, manage timing, and support the groups",
+  "Five to ten selected documentary photographs, plus final ticket and attendance numbers after the event",
 ];
 
-const openQuestions = [
+const payouts = [
+  ["$40 CAD", "Approximately $393 to the restaurant", "Approximately $503 to the restaurant"],
+  ["$50 CAD", "Approximately $504 to the restaurant", "Approximately $641 to the restaurant"],
+];
+
+const timeline = [
+  ["6 to 8 weeks before", "We visit the space and agree on the dish, guest tasks, format, working ticket price, date, and preliminary staffing."],
+  ["5 to 6 weeks before", "Both sides approve the Restaurant Night Confirmation and Terms. Insurance and food-safety requirements are confirmed."],
+  ["4 weeks before", "Tickets go live after the pre-launch conditions are complete."],
+  ["14 days before", "We review paid sales against the agreed minimum ticket number and minimum restaurant payout."],
+  ["10 days before", "We send the final paid headcount and dietary information. The first restaurant payment is made according to the agreement."],
+  ["3 to 5 days before", "We confirm the final event checklist: preparation, stations, equipment, staff, service, take-home items, cleanup, and emergency contacts."],
+  ["Event day", "The workshop takes place. The final restaurant payment follows the agreed schedule."],
+  ["Within 7 days afterwards", "We send selected photographs, final ticket and attendance figures, and the agreed follow-up coverage."],
+];
+
+const beforeLaunch = [
+  {
+    term: "Economics",
+    detail:
+      "We agree on the ticket price, capacity, minimum paid-ticket number, minimum restaurant payout, tax treatment, and payment schedule.",
+  },
+  {
+    term: "Food safety",
+    detail:
+      "We agree on the exact guest tasks, handwashing, sanitation, ingredient handling, temperature control, take-home food, and use of the dining room. The setup is confirmed with Toronto Public Health where needed.",
+  },
   {
     term: "Insurance",
     detail:
-      "Whether your policy covers non-staff in the kitchen, or whether we take out event coverage. We're happy to arrange that.",
+      "The restaurant confirms the proposed activity with its insurer or broker. If the format requires separate event insurance, organizer coverage, a waiver, or additional-insured status, we agree in writing who arranges it and who pays before tickets are released.",
   },
   {
-    term: "Public Health",
-    detail: "You hold the licence, so we'd follow your lead on what your inspector is comfortable with.",
-  },
-  { term: "The space", detail: "We'd like to visit before agreeing anything." },
-  {
-    term: "Your room",
+    term: "Allergies and dietary requirements",
     detail:
-      "Fifteen guests in three groups, plus the two of us on site. If you're the one teaching, you probably can't run normal service at the same time. Worth deciding early whether you're closed to walk-ins that night.",
+      "Sauté Sundays collects dietary and allergy information during registration. The restaurant confirms which requests it can safely accommodate and provides the ingredient and cross-contact information used in guest communication. We do not describe the workshop as allergen-free unless the restaurant expressly offers that environment.",
   },
   {
-    term: "The dish",
-    detail: "Which one, who's leading it, and whether you're happy for guests to take the recipe home.",
+    term: "Recipe and restaurant brand",
+    detail:
+      "The restaurant chooses whether guests receive a full recipe, a simplified home version, technique notes, or no recipe. It approves the dish name, wording, logo, ingredient information, and any proprietary method before publication or printing.",
   },
-  { term: "Drinks", detail: "During the cooking or after." },
-  { term: "Cleanup and leftovers", detail: "Who handles what." },
+  {
+    term: "Room and labour",
+    detail:
+      "We agree on staff, advance preparation, equipment, table layout, kitchen and pass support, bar operation, dishwashing, sanitation, cleanup, breakage, room reset, and whether the restaurant remains open to walk-ins.",
+  },
 ];
 
-const afterwards = [
-  "A written recap on our site with photographs, naming you",
-  "Coverage in our newsletter and on Instagram, before and after",
-  "Fifteen people who spent three hours in your kitchen and will tell people where they went",
+const promotion = [
+  "One announcement in the Sauté Sundays editorial newsletter",
+  "A ticket page naming the restaurant and dish",
+  "One Instagram feed or collaborative post",
+  "Launch, reminder, and event-night Instagram stories",
+  "One announcement in the Sauté Sundays WhatsApp community",
+  "A post-event website or newsletter recap naming the restaurant",
+  "Five to ten selected documentary photographs delivered within seven days",
+  "Final paid-ticket and attendance figures",
+  "An optional anonymous guest-feedback summary when agreed in advance",
 ];
 
 const faqs = [
   {
+    question: "Have you run this format before?",
+    answer:
+      "Restaurant Nights is a new paid format. Our thirteen sold-out cookbook-club events show that we can build, communicate with, and host the community. For each restaurant's first workshop, we use a small pilot, a minimum-sales checkpoint, and a written agreement before tickets go live.",
+  },
+  {
     question: "What kind of night should we offer you?",
     answer:
-      "A night you're already open and quiet. Tell us what's slow and we'll build around it.",
+      "A night that is already quiet for the restaurant. We visit the room, discuss what your kitchen could teach, and build the workshop around the dish, space, staffing, and service you already have.",
   },
   {
     question: "How many people, exactly?",
     answer:
-      "Fifteen guests. The two of us are there as hosts as well, so count on 17 people from Sauté Sundays before your staff. We won't add more guests without asking.",
+      "Fifteen ticketed guests. Tammy and Mady attend as hosts, so the restaurant prepares seventeen food portions at full capacity. We will not increase the guest capacity without the restaurant's written approval.",
+  },
+  {
+    question: "Does anyone enter the kitchen?",
+    answer:
+      "The default is no. Guests work at dining-room tables. Restaurant staff control the kitchen, pass, oven, heat, and final cooking. Any guest kitchen access or additional task must be specifically approved in the event agreement, food-safety plan, and insurance confirmation.",
   },
   {
     question: "Does it have to be a full meal?",
     answer:
-      "No. We run both versions. Some nights are technique-only: one dish, everyone makes it and eats what they made. Others teach a dish and serve a meal alongside it. Tell us which suits your kitchen and we'll price it accordingly.",
+      "No. A technique workshop focuses on one dish or skill. A workshop with a meal adds a side, plate, or course when the taught dish would not make a complete evening on its own. The format and ticket price are built around the food and labour each version requires.",
   },
   {
     question: "What if the owner is the one teaching?",
     answer:
-      "At a lot of the places we want to work with, the owner will be the one teaching. Just factor your own hour into the number you quote us, and decide whether you can run service at the same time.",
+      "That can work well. The restaurant should include the owner's preparation, teaching, service, and closing time when deciding the minimum payment it needs for the night. We also agree in advance whether the restaurant can remain open to regular customers during the workshop.",
+  },
+  {
+    question: "What if ticket sales are slow?",
+    answer:
+      "Fourteen days before the event, we compare paid sales with the agreed minimum ticket number and minimum restaurant payment. If either minimum has not been reached, the restaurant can choose to proceed, reschedule, or release the date.",
   },
   {
     question: "When do we get paid?",
     answer:
-      "Headcount is confirmed 10 days out. We can send half then if you need it for ingredients, with the balance on the night, or all of it on the night. Your call.",
+      "Our standard arrangement is 50% of the projected restaurant payment ten days before the event, followed by the remaining balance within one business day afterwards. The final amount is based on paid and non-refunded tickets and the actual transaction fees. A different schedule can be recorded in the event-specific agreement.",
   },
   {
-    question: "What if people cancel?",
+    question: "What if ticket holders cancel or do not attend?",
     answer:
-      "Tickets are non-refundable and non-transferable, so a late cancellation doesn't change what you're paid.",
+      "Each event has a written refund and transfer policy on the ticket page. The restaurant payment is calculated from paid, non-refunded tickets. A no-show after the refund deadline does not reduce the restaurant payment.",
   },
   {
     question: "What about the bar?",
-    answer: "Entirely yours. We don't take a cut and we don't bundle drinks into the ticket. Our members drink.",
+    answer:
+      "Guests order and pay for drinks directly through the restaurant. The restaurant keeps all bar revenue and tips. Drinks are not included in the ticket unless we agree otherwise, and Sauté Sundays does not promise a minimum beverage spend.",
   },
   {
-    question: "Do you need our liquor licence or food handling certification?",
+    question: "How are insurance, food safety, and licensing handled?",
     answer:
-      "You hold both, and we follow your lead. If your insurer needs event coverage for non-staff in the kitchen, we'll arrange it.",
+      "Before tickets go live, the restaurant confirms the specific workshop activity with its insurer or broker. We also agree on the food-safety setup and contact Toronto Public Health where needed. The restaurant retains control of its premises, kitchen, food handling, alcohol service, staff, and licences. Any additional insurance cost or requirement is agreed before the event is launched.",
+  },
+  {
+    question: "How are allergies and dietary requirements handled?",
+    answer:
+      "We collect the information during registration and send the final list to the restaurant ten days before the event. The restaurant confirms which requests it can safely accommodate. Guests remain responsible for providing complete information, and the event is not described as allergen-free unless the restaurant expressly confirms that.",
+  },
+  {
+    question: "Can guests bring their own filling or ingredient?",
+    answer:
+      "Only when the restaurant wants that format and the food-safety and insurance review supports it. The ticket page must state exactly what may be brought, how it should be prepared, labelled, transported, and checked at arrival, whether it may be shared, and what happens when an item cannot be accepted.",
   },
   {
     question: "Are these experienced cooks?",
     answer:
-      "Home cooks who choose to spend a Sunday cooking from a cookbook. Confident, curious, and not squeamish.",
+      "Most are confident, curious home cooks who voluntarily cook from a cookbook each month. The workshops are designed for people who are comfortable following a recipe. We still choose the guest tasks carefully and do not assume professional kitchen experience.",
   },
   {
-    question: "What do you get out of this?",
+    question: "Who controls the recipe or take-home instructions?",
     answer:
-      "A flat $45 a night for printing and admin. The rest of the ticket is yours, minus about 8% for Luma and Stripe processing.",
+      "The restaurant does. It chooses whether guests receive a full recipe, a simplified home version, technique notes, or no recipe. The restaurant approves the final dish name, recipe wording, dietary information, and logo use before anything is printed or published.",
+  },
+  {
+    question: "What does Sauté Sundays keep?",
+    answer:
+      "We keep a flat $45 per workshop for printing and administration. Actual platform and payment-processing fees are deducted separately. The remaining ticket proceeds go to the restaurant.",
   },
   {
     question: "How far ahead do we need to decide?",
-    answer: "About four weeks to confirm. We'd want to see the space before that.",
+    answer:
+      "Six to eight weeks is the usual lead time. That gives us time to visit the room, agree the economics and format, complete the insurance and food-safety checks, approve the ticket copy, and promote the event properly.",
   },
 ];
 
@@ -141,7 +259,7 @@ const faqJsonLd = {
 
 <BaseLayout
   title="Restaurant nights - Sauté Sundays"
-  description="We bring 15 home cooks into your restaurant on a quiet night. You teach them one dish, they cook it, then they stay and eat. You're paid per head and the bar is yours."
+  description="We bring fifteen ticketed guests into your restaurant on a quiet night. Your team teaches one dish at dining-room tables, and the ticket proceeds go to you."
   canonical="/restaurant-nights"
   ogImage="/og-restaurant-nights.jpg"
   ogImageWidth={1200}
@@ -156,14 +274,21 @@ const faqJsonLd = {
         Fill a quiet night with people who came for the food
       </h1>
       <p class="mt-6 text-lg leading-relaxed text-muted-foreground">
-        We bring 15 members into your room. You teach them one dish. They cook it, then stay to eat and drink. The two of
-        us are there too, running the night and cooking alongside them.
+        We bring fifteen ticketed guests from our cookbook community into your restaurant on a night that is already
+        quiet. Your team teaches one dish. Guests handle the agreed hands-on steps at dining-room tables, while your
+        staff retain control of the kitchen, heat, and final cooking.
       </p>
       <p class="mt-4 text-lg leading-relaxed text-muted-foreground">
-        There's no fee to us: you're paid per head from ticket sales, and the bar is yours.
+        Tammy and Mady are there too, hosting the evening and working alongside the group.
       </p>
-      <p class="mt-4 text-lg leading-relaxed text-muted-foreground">
-        Give us one of your quiet nights and we'll build around it.
+      <p class="mt-4 leading-relaxed text-muted-foreground">
+        The restaurant does not pay Sauté Sundays a venue or marketing fee. Guests buy tickets through us. After actual
+        ticketing and payment-processing fees, Sauté Sundays keeps a flat $45 for printing and administration, and the
+        remaining ticket proceeds go to the restaurant.
+      </p>
+      <p class="mt-4 leading-relaxed text-muted-foreground">All bar revenue and tips stay with you.</p>
+      <p class="mt-6 border-l-2 border-primary pl-4 font-medium">
+        15 ticketed guests + Tammy and Mady = 17 food portions at full capacity.
       </p>
       <a
         href="#form"
@@ -192,36 +317,90 @@ const faqJsonLd = {
       <dl class="mt-6 grid grid-cols-2 gap-3">
         {
           stats.map((stat) => (
-            <div class="rounded-lg border border-border bg-muted/40 px-4 py-5">
+            <div class="flex flex-col justify-between rounded-lg border border-border bg-muted/40 px-4 py-5">
               <dt class="text-xs uppercase tracking-wider text-muted-foreground">{stat.label}</dt>
-              <dd class="mt-1 font-serif text-2xl font-semibold sm:text-3xl">{stat.value}</dd>
+              <dd class="mt-2 font-serif text-2xl font-semibold sm:text-3xl">{stat.value}</dd>
             </div>
           ))
         }
       </dl>
       <p class="mt-6 leading-relaxed text-muted-foreground">
-        We've run the free monthly cookbook club at Jrew's on Niagara since 2025. Everyone who comes cooks a dish at home
-        and brings it. The 35 seats sell out every month, and the waitlist keeps growing.
+        These figures come from our free monthly cookbook club. At Jrew's, we now release 35 member places each month.
+      </p>
+      <p class="mt-4 leading-relaxed text-muted-foreground">
+        Our latest editorial newsletter went to 414 people and recorded a 63% open rate and a 5% click rate.
+        Early-access ticket emails are excluded from the newsletter benchmark.
+      </p>
+      <p class="mt-4 leading-relaxed text-muted-foreground">
+        The results show that we can build, communicate with, and host an engaged food community. The paid restaurant
+        workshop is a newer format, so we use a controlled first-night pilot and a sales checkpoint before the restaurant
+        commits its full food and staffing costs.
+      </p>
+    </section>
+
+    <section class="mt-14">
+      <h2 class="font-serif text-2xl font-semibold sm:text-3xl">A controlled first night</h2>
+      <p class="mt-5 leading-relaxed text-muted-foreground">
+        A restaurant's first workshop with us is treated as a pilot. Before tickets go live, we agree on the ticket
+        price, the minimum number of paid guests, and the minimum total payment the restaurant needs for the night to
+        proceed.
+      </p>
+      <p class="mt-4 leading-relaxed text-muted-foreground">
+        Fourteen days before the event, we compare actual paid sales with that minimum. The restaurant can proceed, move
+        the workshop to another date, or release the night if the agreed threshold has not been reached.
+      </p>
+    </section>
+
+    <section class="mt-14">
+      <h2 class="font-serif text-2xl font-semibold sm:text-3xl">Two ways to build the workshop</h2>
+      <div class="mt-6 space-y-4">
+        {
+          formats.map((format) => (
+            <div class="rounded-lg border border-border bg-muted/30 p-5">
+              <h3 class="font-serif text-lg font-semibold">{format.title}</h3>
+              {format.body.map((line) => (
+                <p class="mt-2 text-sm leading-relaxed text-muted-foreground">{line}</p>
+              ))}
+            </div>
+          ))
+        }
+      </div>
+      <p class="mt-6 leading-relaxed text-muted-foreground">
+        The restaurant decides what guests are allowed to handle. For a first workshop, we favour table work such as
+        shaping, folding, mixing, assembling, or finishing. Raw-protein handling and heat remain with restaurant staff
+        unless the specific activity has been approved before tickets go live.
+      </p>
+      <p class="mt-4 text-sm leading-relaxed text-muted-foreground/80">
+        Guest-supplied fillings or ingredients are offered only as a separately agreed ticket option, with written rules
+        for ingredients, allergens, transport, storage, check-in, sharing, and what happens when an item cannot be
+        accepted.
       </p>
     </section>
 
     <section class="mt-14">
       <h2 class="font-serif text-2xl font-semibold sm:text-3xl">How the night runs</h2>
       <p class="mt-5 leading-relaxed text-muted-foreground">
-        Guests arrive and get a drink. Whoever's leading introduces the dish and demonstrates. Everyone cooks in three
-        small groups. Then they sit down and eat what they made.
+        A typical workshop takes about three hours. The exact timing depends on the dish.
       </p>
-      <p class="mt-4 leading-relaxed text-muted-foreground">
-        They're home cooks, mostly confident, all there because they want to be. You won't be teaching knife grip.
+      <dl class="mt-6 space-y-4 text-sm leading-relaxed">
+        {
+          runOfNight.map((item) => (
+            <div class="border-l-2 border-border pl-3">
+              <dt class="font-medium text-foreground">{item.term}</dt>
+              <dd class="mt-1 text-muted-foreground">{item.detail}</dd>
+            </div>
+          ))
+        }
+      </dl>
+      <p class="mt-6 leading-relaxed text-muted-foreground">
+        Most attendees are confident, curious home cooks who voluntarily cook from a cookbook each month. The workshop
+        is designed for people who are comfortable following a recipe, rather than complete beginners learning basic
+        knife grip.
       </p>
       <figure class="mt-8 border-l-2 border-primary pl-5">
         <blockquote class="font-serif text-xl leading-relaxed">Everyone is such a good cook 🥰</blockquote>
         <figcaption class="mt-3 text-sm text-muted-foreground">Leena, February 2026</figcaption>
       </figure>
-      <p class="mt-8 text-sm leading-relaxed text-muted-foreground/80">
-        About three hours. You know your dish better than we do, so one of the first things we'll work out is how long the
-        cooking portion needs.
-      </p>
     </section>
 
     <figure class="mt-10 overflow-hidden rounded-lg bg-muted">
@@ -241,80 +420,108 @@ const faqJsonLd = {
       <h2 class="font-serif text-2xl font-semibold sm:text-3xl">What each side brings</h2>
       <div class="mt-6 grid gap-8 sm:grid-cols-2">
         <div>
-          <h3 class="text-xs font-medium uppercase tracking-wider text-muted-foreground">You</h3>
+          <h3 class="text-xs font-medium uppercase tracking-wider text-muted-foreground">The restaurant</h3>
           <ul class="mt-3 space-y-2 text-sm leading-relaxed text-muted-foreground">
-            {youBring.map((item) => <li class="border-l-2 border-border pl-3">{item}</li>)}
+            {restaurantBrings.map((item) => <li class="border-l-2 border-border pl-3">{item}</li>)}
           </ul>
         </div>
         <div>
-          <h3 class="text-xs font-medium uppercase tracking-wider text-muted-foreground">Us</h3>
+          <h3 class="text-xs font-medium uppercase tracking-wider text-muted-foreground">Sauté Sundays</h3>
           <ul class="mt-3 space-y-2 text-sm leading-relaxed text-muted-foreground">
             {weBring.map((item) => <li class="border-l-2 border-primary/40 pl-3">{item}</li>)}
           </ul>
         </div>
       </div>
-    </section>
-
-    <section class="mt-14">
-      <h2 class="font-serif text-2xl font-semibold sm:text-3xl">The money</h2>
-      <p class="mt-5 leading-relaxed text-muted-foreground">
-        You're paid per head from ticket sales, and the bar is entirely yours.
-      </p>
-      <p class="mt-4 leading-relaxed text-muted-foreground">
-        Most nights work out between $20 and $40 a guest for you, depending on what you're teaching. More technical dishes
-        can support a higher ticket price. Our members will pay more to learn something they can't pick up from a
-        video.
-      </p>
-      <p class="mt-4 leading-relaxed text-muted-foreground">
-        We keep a flat $45 per night for recipe-card printing and admin, regardless of ticket price. Luma and Stripe take
-        about 8% for processing. Everything else is yours.
-      </p>
-      <p class="mt-4 leading-relaxed text-muted-foreground">
-        There are two versions. Technique-only: one dish, everyone makes it and eats what they made. Or with a meal: you
-        teach one dish, then serve food alongside it. Tell us which suits your kitchen.
-      </p>
-      <p class="mt-4 leading-relaxed text-muted-foreground">
-        We confirm headcount 10 days out so you can shop and prep against a real number. If you need money up front for
-        ingredients, we'll send half then and the balance on the night. Whatever suits your cash flow.
-      </p>
-      <p class="mt-4 leading-relaxed text-muted-foreground">
-        Tickets are non-refundable and non-transferable, so a late cancellation doesn't change what you're paid.
-      </p>
-      <p class="mt-4 leading-relaxed text-muted-foreground">
-        The 15 guest spots are separate from us. Both of us are there for the night, running it and cooking alongside
-        everyone else.
-      </p>
-      <p class="mt-6 border-l-2 border-primary/40 pl-3 text-sm leading-relaxed text-muted-foreground">
-        This is our standard setup. We'll agree the specifics of your night on a call and confirm them in writing before
-        tickets go live.
-        <span class="mt-1 block text-muted-foreground/70">Terms updated {termsUpdatedLabel}.</span>
+      <p class="mt-6 text-sm leading-relaxed text-muted-foreground">
+        Setup, dishwashing, waste, table sanitation, room reset, breakage, and closing responsibilities are recorded
+        before the event so neither side discovers them on the night.
       </p>
     </section>
 
     <section class="mt-14">
-      <h2 class="font-serif text-2xl font-semibold sm:text-3xl">Confirming the date</h2>
+      <h2 class="font-serif text-2xl font-semibold sm:text-3xl">How the money works</h2>
       <p class="mt-5 leading-relaxed text-muted-foreground">
-        We'd confirm about four weeks ahead and hold ticket sales until then, so an early change costs nobody anything.
+        The restaurant does not pay Sauté Sundays a venue or marketing fee.
       </p>
       <p class="mt-4 leading-relaxed text-muted-foreground">
-        Once tickets are live, we'll ask that the date stays firm. If something unavoidable comes up on either side, we'd
-        reschedule so ticket holders don't lose out. If we've sent a deposit and the night can't go ahead, it comes back
-        to us.
+        We propose a public ticket price and show you what the restaurant payment looks like at the minimum sales
+        threshold and at full capacity. Before tickets go live, you approve both the ticket price and the minimum total
+        payment at which you are willing to run the night.
       </p>
       <p class="mt-4 leading-relaxed text-muted-foreground">
-        If we're under ten guests two weeks out, we'll come to you. You decide whether to run it or take the night back,
-        no hard feelings either way.
+        Actual ticketing and payment-processing fees are deducted first. Sauté Sundays keeps a flat $45 for printing and
+        administration. The remaining proceeds go to the restaurant.
       </p>
+      <p class="mt-4 leading-relaxed text-muted-foreground">All bar revenue and tips stay with the restaurant.</p>
+
+      <div class="mt-8 overflow-x-auto">
+        <table class="w-full min-w-[520px] border-collapse text-left text-sm">
+          <thead>
+            <tr class="border-b border-border">
+              <th class="py-3 pr-4 align-bottom font-medium">Working ticket price</th>
+              <th class="py-3 pr-4 align-bottom font-medium">12 paid guests / 14 food portions</th>
+              <th class="py-3 align-bottom font-medium">15 paid guests / 17 food portions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              payouts.map(([price, low, high]) => (
+                <tr class="border-b border-border/60 align-top">
+                  <th scope="row" class="py-3 pr-4 font-medium">{price}</th>
+                  <td class="py-3 pr-4 text-muted-foreground">{low}</td>
+                  <td class="py-3 text-muted-foreground">{high}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-4 text-sm leading-relaxed text-muted-foreground">
+        These figures are examples. The final restaurant payment is calculated from the actual event transaction report
+        after refunds, chargebacks, platform fees, processing fees, and the flat $45 Sauté Sundays amount. Applicable tax
+        treatment is agreed in writing before tickets go live.
+      </p>
+
+      <div class="mt-10">
+        <h3 class="font-serif text-lg font-semibold">The sales checkpoint</h3>
+        <p class="mt-2 leading-relaxed text-muted-foreground">
+          A standard starting point is twelve paid tickets, reviewed fourteen days before the event. The restaurant also
+          approves a minimum total payment for the selected workshop.
+        </p>
+        <p class="mt-4 leading-relaxed text-muted-foreground">
+          If either minimum has not been reached, the restaurant can choose to proceed, move the workshop to another
+          date, or release the night. Sauté Sundays does not automatically cover a shortfall.
+        </p>
+        <p class="mt-4 leading-relaxed text-muted-foreground">
+          Once the event is proceeding, our standard payment schedule is 50% of the projected restaurant payment ten
+          days before, based on paid and non-refunded tickets at that point, and the remaining balance within one
+          business day afterwards, calculated from paid and non-refunded tickets and the actual transaction fees.
+        </p>
+        <p class="mt-4 leading-relaxed text-muted-foreground">
+          A ticket-holder no-show after the event's refund deadline does not reduce the restaurant payment.
+        </p>
+      </div>
     </section>
 
     <section class="mt-14">
-      <h2 class="font-serif text-2xl font-semibold sm:text-3xl">Things we'd work out with you</h2>
-      <p class="mt-5 leading-relaxed text-muted-foreground">
-        We sort these details out before the night, so nobody is improvising them in the kitchen.
-      </p>
+      <h2 class="font-serif text-2xl font-semibold sm:text-3xl">From interest to the night</h2>
       <dl class="mt-6 space-y-4 text-sm leading-relaxed">
         {
-          openQuestions.map((item) => (
+          timeline.map(([when, what]) => (
+            <div class="border-l-2 border-primary/40 pl-3">
+              <dt class="font-medium text-foreground">{when}</dt>
+              <dd class="mt-1 text-muted-foreground">{what}</dd>
+            </div>
+          ))
+        }
+      </dl>
+    </section>
+
+    <section class="mt-14">
+      <h2 class="font-serif text-2xl font-semibold sm:text-3xl">Before tickets go live</h2>
+      <dl class="mt-6 space-y-4 text-sm leading-relaxed">
+        {
+          beforeLaunch.map((item) => (
             <div class="border-l-2 border-border pl-3">
               <dt class="font-medium text-foreground">{item.term}</dt>
               <dd class="mt-1 text-muted-foreground">{item.detail}</dd>
@@ -332,10 +539,17 @@ const faqJsonLd = {
     </figure>
 
     <section class="mt-14">
-      <h2 class="font-serif text-2xl font-semibold sm:text-3xl">What you get afterwards</h2>
-      <ul class="mt-6 space-y-3 leading-relaxed text-muted-foreground">
-        {afterwards.map((item) => <li class="border-l-2 border-primary/40 pl-3">{item}</li>)}
+      <h2 class="font-serif text-2xl font-semibold sm:text-3xl">Promotion and follow-up</h2>
+      <p class="mt-5 leading-relaxed text-muted-foreground">
+        The exact plan is confirmed for each workshop. A typical collaboration includes:
+      </p>
+      <ul class="mt-6 space-y-3 text-sm leading-relaxed text-muted-foreground">
+        {promotion.map((item) => <li class="border-l-2 border-primary/40 pl-3">{item}</li>)}
       </ul>
+      <p class="mt-6 leading-relaxed text-muted-foreground">
+        Member posts, recommendations, bar spending, sales, and repeat visits can happen naturally around the event. The
+        Restaurant Night Confirmation lists the promotional placements Sauté Sundays commits to delivering.
+      </p>
     </section>
 
     <section class="mt-14">
@@ -356,13 +570,19 @@ const faqJsonLd = {
     </section>
 
     <section id="form" class="mt-16 scroll-mt-24">
-      <h2 class="font-serif text-2xl font-semibold sm:text-3xl">Talk to us</h2>
+      <h2 class="font-serif text-2xl font-semibold sm:text-3xl">The next step is half an hour in your room</h2>
       <p class="mt-4 leading-relaxed text-muted-foreground">
-        Our monthly cookbook club stays free. Restaurant nights give people a chance to learn in a real kitchen.
+        We look at the space, discuss what you would want to teach, and build a simple projection for the minimum and
+        full night.
       </p>
       <p class="mt-4 leading-relaxed text-muted-foreground">
-        We reply within two days. Next step is half an hour in your room, no commitments.
+        We will also identify the guest tasks, restaurant staffing, equipment, food-safety setup, and any insurance
+        questions that need to be resolved.
       </p>
+      <p class="mt-4 leading-relaxed text-muted-foreground">
+        If the economics, workload, or format do not make sense, we will say so before either side commits.
+      </p>
+      <p class="mt-4 leading-relaxed text-muted-foreground">We reply within two days.</p>
       <div class="mt-6 rounded-lg bg-[#f2eeeb] p-4 dark:bg-[#f2eeeb] sm:p-6">
         <iframe
           src="https://tally.so/embed/LZxlJJ?alignLeft=1&hideTitle=1&transparentBackground=1"
@@ -378,6 +598,10 @@ const faqJsonLd = {
       <p class="mt-3 text-center text-sm text-muted-foreground">
         Form not loading? <a href="https://tally.so/r/LZxlJJ" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline">Open it in a new tab &#8599;</a>
         or email <a href={`mailto:${CONTACT.email}`} class="text-primary hover:underline">{CONTACT.email}</a>.
+      </p>
+      <p class="mt-6 border-l-2 border-border pl-4 text-sm leading-relaxed text-muted-foreground">
+        This page describes our standard Restaurant Night model. A workshop is confirmed only when both sides approve
+        the event-specific Restaurant Night Confirmation and Terms and the required pre-launch checks are complete.
       </p>
     </section>
 
