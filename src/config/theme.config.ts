@@ -141,7 +141,7 @@ export const NEXT_EVENT = {
   // `note` carries what replaces it.
   cookbook: "",
   cookbookAuthor: "",
-  note: "No featured cookbook. Bring a recipe you love, and build your own drink at the free DIY mocktail bar.",
+  note: "No featured cookbook. Cook a dish you love and build your own drink at the DIY mocktail bar.",
   rsvpLabel: "RSVP on Luma",
   rsvpUrl: "https://luma.com/pzevo4e5",
   // Swap `status` as you move through the cycle. Set it to "" to hide the line.
