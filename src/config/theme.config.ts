@@ -134,43 +134,42 @@ export const tags = [
 // Keep this filled in even when the event is sold out. "Sold out" is proof,
 // not a dead end. Set `title` to "" to hide the block entirely.
 export const NEXT_EVENT = {
-  title: "Mastering the Art of Japanese Home Cooking",
-  date: "Sunday, September 20",
+  title: "Friendsgiving",
+  date: "Sunday, October 18",
   location: "Jrew's, 165 Niagara St",
-  // The event title is the book's title here, so a "Cooking from ..." line
-  // would only repeat it. Fill these in when the book and the title differ.
+  // No featured book this month, so the "Cooking from ..." line stays off and
+  // `note` carries what replaces it.
   cookbook: "",
   cookbookAuthor: "",
-  // Optional. A muted line for anything not settled yet. Empty means no line.
-  note: "",
+  note: "No featured cookbook. Bring a recipe you love, and build your own drink at the free DIY mocktail bar.",
   rsvpLabel: "RSVP on Luma",
-  rsvpUrl: "https://luma.com/oz1ooaiv",
+  rsvpUrl: "https://luma.com/pzevo4e5",
   // Swap `status` as you move through the cycle. Set it to "" to hide the line.
   //   "Early access opens [DATE] for subscribers. Public RSVP [DATE]."
   //   "RSVPs open now. Spots go fast."
   //   "Sold out. Join the waitlist"      (pair with statusUrl)
   //   "Next event announced [MONTH]. Subscribe to get it first."
-  status: "Early access opens September 3 for subscribers. Public RSVP September 4.",
+  status: "Subscribers get early access before RSVPs open to everyone.",
   // Optional. When set, `status` renders as a link with a trailing arrow.
   statusUrl: "",
 
   // The fields below feed the Event structured data on the homepage, so search
   // engines can show the date. They are not rendered as visible copy.
   // ISO 8601 with the offset. Toronto is -04:00 on daylight time, -05:00 in winter.
-  startDateTime: "2026-09-20T18:15:00-04:00",
+  startDateTime: "2026-10-18T18:15:00-04:00",
   // When the night wraps. Google wants an end time on an Event.
-  endDateTime: "2026-09-20T20:30:00-04:00",
+  endDateTime: "2026-10-18T20:30:00-04:00",
   // When the public RSVP opens, in the same format. Feeds `validFrom` on the
   // Offer so the free ticket is not advertised as bookable before it is.
   // Optional: leave "" and the field is omitted.
-  rsvpOpensDateTime: "2026-09-04T00:00:00-04:00",
+  rsvpOpensDateTime: "",
   // The venue for this specific night. Leave "" and the schema falls back to
   // Toronto alone rather than naming a place we are not sure of.
   locationName: "Jrew's",
   // Optional street address for that venue. Omitted from the schema when "".
   locationStreet: "165 Niagara St",
   schemaDescription:
-    "Toronto's cookbook club at Jrew's, cooking Japanese home cooking together.",
+    "Friendsgiving at Jrew's. Toronto's cookbook club, with a free DIY mocktail bar and no featured cookbook this month.",
 };
 
 // Numbers shown on /restaurant-nights and /partners. Both pages are sent as
