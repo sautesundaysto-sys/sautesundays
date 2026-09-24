@@ -149,7 +149,7 @@ export const NEXT_EVENT = {
   //   "RSVPs open now. Spots go fast."
   //   "Sold out. Join the waitlist"      (pair with statusUrl)
   //   "Next event announced [MONTH]. Subscribe to get it first."
-  status: "Subscribers get early access before RSVPs open to everyone.",
+  status: "Early access opens October 1 for subscribers. Public RSVP October 2.",
   // Optional. When set, `status` renders as a link with a trailing arrow.
   statusUrl: "",
 
@@ -162,7 +162,7 @@ export const NEXT_EVENT = {
   // When the public RSVP opens, in the same format. Feeds `validFrom` on the
   // Offer so the free ticket is not advertised as bookable before it is.
   // Optional: leave "" and the field is omitted.
-  rsvpOpensDateTime: "",
+  rsvpOpensDateTime: "2026-10-02T00:00:00-04:00",
   // The venue for this specific night. Leave "" and the schema falls back to
   // Toronto alone rather than naming a place we are not sure of.
   locationName: "Jrew's",
