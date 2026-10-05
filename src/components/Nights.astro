@@ -1,0 +1,10 @@
+---
+import { eventNightsRun, spellNumber } from "../lib/blog-data.js";
+
+// So prose can state how many nights we have run without typing the number.
+// MDX cannot await at the top level, which is why this is a component rather
+// than an import in the article itself.
+const { spell = true } = Astro.props;
+const count = await eventNightsRun();
+---
+<Fragment>{spell ? spellNumber(count) : String(count)}</Fragment>
