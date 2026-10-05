@@ -2,12 +2,12 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Breadcrumbs from "../../components/Breadcrumbs.astro";
 import PostCard from "../../components/PostCard.astro";
-import { SITE, categories, sortedPosts } from "../../lib/blog-data.js";
+import { SITE, categories, sortedPosts, eventNightsRun } from "../../lib/blog-data.js";
 
 const posts = await sortedPosts();
 // Each night has two posts, a recap and a cookbook highlight, so posts.length
 // is roughly double the number of events. Count the recaps.
-const eventCount = posts.filter((post) => post.category === "event-recap").length;
+const eventCount = await eventNightsRun();
 ---
 
 <BaseLayout

@@ -45,6 +45,21 @@ export const featuredPost = async () => {
   const sorted = await sortedPosts();
   return sorted.find((post) => post.featured) ?? sorted[0];
 };
+// One recap per night, so the recaps are the nights. Every page that states
+// how many nights we have run reads this, which means publishing a recap is
+// the only step: no page carries a number that has to be remembered.
+export const eventNightsRun = async () =>
+  (await posts()).filter((post) => post.category === "event-recap").length;
+
+// Pages that state the count inside a sentence spell it, matching the prose
+// around it. Past the teens a numeral reads better anyway, so it falls back.
+const NUMBER_WORDS = [
+  "zero", "one", "two", "three", "four", "five", "six", "seven", "eight",
+  "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen",
+  "sixteen", "seventeen", "eighteen", "nineteen",
+];
+export const spellNumber = (value) => NUMBER_WORDS[value] ?? String(value);
+
 export const popularPosts = async () => (await sortedPosts()).slice(0, 4);
 export const relatedPosts = async (post, n = 3) =>
   (await sortedPosts())

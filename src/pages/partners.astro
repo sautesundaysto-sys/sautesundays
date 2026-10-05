@@ -3,14 +3,13 @@ import { Image } from "astro:assets";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Icon from "../components/Icon.astro";
 import { REACH, CONTACT } from "../config/theme.config.ts";
-import { sortedPosts } from "../lib/blog-data.js";
+import { eventNightsRun, spellNumber } from "../lib/blog-data.js";
 import heroPhoto from "../assets/gallery/IMG_9483.JPG";
 import roomPhoto from "../assets/gallery/C3D8722C-A122-4A1B-87AC-D46C5B11B5DD.JPG";
 
 // One recap per night, so the count of them is the count of nights. Derived
 // rather than typed, so it does not need remembering after each event.
-const posts = await sortedPosts();
-const nightsRun = posts.filter((post) => post.category === "event-recap").length;
+const nightsRun = await eventNightsRun();
 
 // Open rate first: it is a quality number. A raw audience size invites the
 // reach comparison this page does not want.

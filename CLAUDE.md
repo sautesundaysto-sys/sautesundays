@@ -40,9 +40,16 @@ the author's own words.
 - No hyphens or em dashes in body copy. Post titles may keep them. Compound
   words in ingredient lists (all-purpose, five-spice) are fine.
 - Numbers that appear in more than one place live in `theme.config.ts` and are
-  read from there, never retyped. `REACH.sellsOutIn` is the sell out claim,
-  `SITE.blurb` is the club description, event night counts are derived from the
-  number of `event-recap` posts.
+  read from there, never retyped. `REACH.sellsOutIn` is the sell out claim and
+  `SITE.blurb` is the club description.
+- **The number of nights we have run is never typed anywhere.** It is counted
+  from the `event-recap` posts by `eventNightsRun()` in `src/lib/blog-data.js`,
+  and every page that states it reads that. Publishing the recap after a night
+  is therefore the whole update: the homepage proof line, `/blog`, the sold out
+  tile on `/partners` and the prose and FAQ schema on `/restaurant-nights` all
+  move on their own. Use `spellNumber()` where the count sits inside a sentence
+  and the prose around it spells numbers out. If a typed count ever turns up in
+  a page, replace it with the derived one rather than correcting the digit.
 - Never invent dish names, recipe titles, or attendee names. Read them off the
   chalkboards in the event photos, or ask.
 

@@ -3,13 +3,12 @@ import { Image } from "astro:assets";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Icon from "../components/Icon.astro";
 import { REACH, CONTACT } from "../config/theme.config.ts";
-import { sortedPosts } from "../lib/blog-data.js";
+import { eventNightsRun, spellNumber } from "../lib/blog-data.js";
 import heroPhoto from "../assets/gallery/023636E4-7D7E-477F-9FF7-7B1AA2B47916.JPG";
 import kitchenPhoto from "../assets/gallery/IMG_8506.jpg";
 
 // One recap per night, so the count of them is the count of nights.
-const posts = await sortedPosts();
-const nightsRun = posts.filter((post) => post.category === "event-recap").length;
+const nightsRun = await eventNightsRun();
 
 // Feeds dateModified in the page schema. The visible "terms updated" line is
 // gone: the confirmation note at the foot of the page says the same thing
@@ -159,7 +158,7 @@ const faqs = [
   {
     question: "Have you run this format before?",
     answer:
-      "Restaurant Nights is a new paid format. Our thirteen sold-out cookbook-club events show that we can build, communicate with, and host the community. For each restaurant's first workshop, we use a small pilot, a minimum-sales checkpoint, and a written agreement before tickets go live.",
+      `Restaurant Nights is a new paid format. Our ${spellNumber(nightsRun)} sold-out cookbook-club events show that we can build, communicate with, and host the community. For each restaurant's first workshop, we use a small pilot, a minimum-sales checkpoint, and a written agreement before tickets go live.`,
   },
   {
     question: "What kind of night should we offer you?",

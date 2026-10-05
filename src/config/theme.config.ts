@@ -196,9 +196,10 @@ export const REACH = {
 // first thing a sponsor reads.
 // `sellOutTime` comes from your Luma registration timestamps. While it is "",
 // that sentence is left out rather than shipped with a placeholder in it.
+// No `tables` here on purpose: the number of nights is counted from the
+// event-recap posts (see eventNightsRun), so it can never fall behind.
 export const PROOF = {
   seats: 35,
-  tables: 13,
   since: 2025,
   sellOutTime: REACH.sellsOutIn,
 };

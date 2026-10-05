@@ -9,6 +9,7 @@ import autumnScene from "../assets/Website Banner.png";
 import { PROOF, NEXT_EVENT, REACH } from "../config/theme.config.ts";
 import {
   SITE,
+  eventNightsRun,
   categories,
   featuredPost,
   sortedPosts,
@@ -25,6 +26,7 @@ const featuredCategory = getCategory(featured.category);
 // (cookbook-<recap>); newer ones name the pair explicitly in frontmatter,
 // which frees the slugs to be written for search rather than for this lookup.
 const allPosts = await sortedPosts();
+const nightsRun = await eventNightsRun();
 const companionSlug = featured.companion || `cookbook-${featured.slug}`;
 const companion = allPosts.find((post) => post.slug === companionSlug);
 const latest = allPosts.filter(
@@ -137,7 +139,7 @@ const eventJsonLd = NEXT_EVENT.title && NEXT_EVENT.startDateTime
           </a>
         </div>
         <p class="mt-6 text-sm font-medium text-[#1a1c1a] dark:text-[#f2eeeb]">
-          {PROOF.seats} seats. {PROOF.tables} tables since {PROOF.since}.
+          {PROOF.seats} seats. {nightsRun} tables since {PROOF.since}.
           {PROOF.sellOutTime && ` Every one sold out in ${PROOF.sellOutTime}.`}
         </p>
       </div>
