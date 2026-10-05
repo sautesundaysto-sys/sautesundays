@@ -32,6 +32,11 @@ const blog = defineCollection({
           sourceUrl: z.string().url(),
         })
         .optional(),
+      // Rendered on the page and mirrored into FAQPage schema from one source,
+      // so the structured data can never drift from what a reader sees.
+      faqs: z
+        .array(z.object({ question: z.string(), answer: z.string() }))
+        .default([]),
       // Slug of the paired post for this night, so a recap and its cookbook
       // highlight stay linked even when their slugs are not name variants.
       companion: z.string().optional(),

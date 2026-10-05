@@ -49,8 +49,7 @@ const socialImage = post.thumbnail
   : undefined;
 const thumbnailUrl = socialImage ? new URL(socialImage.src, SITE.url).toString() : undefined;
 const shareUrl = canonicalUrl;
-const jsonLd = {
-  "@context": "https://schema.org",
+const blogPosting = {
   "@type": "BlogPosting",
   headline: post.title,
   description: post.excerpt,
@@ -67,6 +66,26 @@ const jsonLd = {
       url: new URL("/saute-sundays-logo.png", SITE.url).toString(),
     },
   },
+};
+
+// Only posts that carry questions get an FAQPage, and it is built from the same
+// array the page renders, so the markup always matches the visible answers.
+const faqs = post.faqs ?? [];
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": faqs.length
+    ? [
+        blogPosting,
+        {
+          "@type": "FAQPage",
+          mainEntity: faqs.map((faq) => ({
+            "@type": "Question",
+            name: faq.question,
+            acceptedAnswer: { "@type": "Answer", text: faq.answer },
+          })),
+        },
+      ]
+    : [blogPosting],
 };
 
 // Google shows roughly 60 characters. Several cookbook titles are long enough
@@ -168,6 +187,22 @@ const pageTitle = post.seoTitle ?? (brandedTitle.length <= 60 ? brandedTitle : p
         <div class="prose-article">
           <Content />
         </div>
+
+        {
+          faqs.length > 0 && (
+            <section class="mt-12" aria-labelledby="post-faq">
+              <h2 id="post-faq" class="font-serif text-2xl font-bold">Common questions</h2>
+              <dl class="mt-6 divide-y divide-border border-y border-border">
+                {faqs.map((faq) => (
+                  <div class="py-5">
+                    <dt class="font-semibold">{faq.question}</dt>
+                    <dd class="mt-2 text-muted-foreground">{faq.answer}</dd>
+                  </div>
+                ))}
+              </dl>
+            </section>
+          )
+        }
 
         <div class="mt-8 flex items-center gap-2 border-y border-border py-4">
           <span class="text-xs uppercase tracking-wider text-muted-foreground">Share</span>
