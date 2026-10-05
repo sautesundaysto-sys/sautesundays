@@ -1,4 +1,4 @@
-import { SITE, authors, categories, sortedPosts, tags } from "../lib/blog-data.js";
+import { SITE, authors, categories, sortedPosts } from "../lib/blog-data.js";
 
 const BASE_URL = SITE.url || "";
 
@@ -23,19 +23,14 @@ export async function GET() {
     })),
     // Listing pages with nothing in them are noindexed, so submitting them here
     // would contradict the page itself. They reappear with their first post.
+    // Tag pages are absent entirely: all of them are noindexed now, and
+    // submitting a page we ask Google not to index is a contradiction.
     ...categories
       .filter((category) => posts.some((post) => post.category === category.slug))
       .map((category) => ({
         path: `/categories/${category.slug}`,
         changefreq: "weekly",
         priority: "0.6",
-      })),
-    ...tags
-      .filter((tag) => posts.some((post) => post.tags.includes(tag.slug)))
-      .map((tag) => ({
-        path: `/tags/${tag.slug}`,
-        changefreq: "weekly",
-        priority: "0.4",
       })),
     ...authors.map((author) => ({
       path: `/authors/${author.slug}`,

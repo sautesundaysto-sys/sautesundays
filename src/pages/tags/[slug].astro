@@ -14,6 +14,12 @@ const list = await postsByTag(tag.slug);
 // works. It should not be advertised in the meantime: an empty listing is thin
 // content. Both this and the sitemap entry come back on their own.
 const isEmpty = list.length === 0;
+// Every tag page is noindexed, not just the empty ones. #toronto and
+// #cookbook-club hold the identical set of posts, and both duplicate /blog,
+// so indexing them asks Google to pick between three pages of ours for one
+// query. `follow` is the point: tags stay crawlable and keep passing link
+// equity to the posts, and readers browse them exactly as before. Categories
+// and author pages are genuinely distinct, so they stay indexed.
 const description = tag.description
   ? tag.description.replace("{count}", String(list.length))
   : `All writing tagged ${tag.name}.`;
@@ -23,7 +29,7 @@ const description = tag.description
   title={`#${tag.name} - ${SITE.name}`}
   description={description}
   canonical={`/tags/${tag.slug}`}
-  noindex={isEmpty}
+  noindex
 >
   <div class="mx-auto max-w-4xl px-5 py-12">
     <Breadcrumbs items={[{ label: "Home", to: "/" }, { label: "Tags" }, { label: `#${tag.name}` }]} />
