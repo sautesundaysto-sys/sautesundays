@@ -198,6 +198,12 @@ export const REACH = {
   // early-access ticket emails. More precise than the range above, so it is
   // what /partners shows.
   openRateMedian: "64%",
+  // The most recent editorial send, quoted on both work-with-us pages. The
+  // list grows between sends, so this trails `community` rather than matching
+  // it. Update all three together after a send.
+  latestSend: "435",
+  latestOpenRate: "63%",
+  latestClickRate: "5%",
 };
 
 // The proof line under the hero buttons. Reassures a first-timer, and is the
