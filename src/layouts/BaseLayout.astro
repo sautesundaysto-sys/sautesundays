@@ -42,6 +42,12 @@ const ogImageUrl = absoluteUrl(usingDefaultOgImage ? DEFAULT_OG_IMAGE : ogImage)
 // worse than omitting them, so a post's own cover stays undeclared.
 const ogWidth = ogImageWidth ?? (usingDefaultOgImage ? 1200 : undefined);
 const ogHeight = ogImageHeight ?? (usingDefaultOgImage ? 630 : undefined);
+
+// Google reads WebSite markup for the site name it shows in results, and its
+// guidance is that the block belongs on the homepage only.
+const bareSiteUrl = siteUrl.replace(/\/$/, "");
+const organizationId = `${bareSiteUrl}/#organization`;
+const isHomepage = Astro.url.pathname.replace(/\/$/, "") === "";
 ---
 
 <!doctype html>
@@ -99,8 +105,15 @@ const ogHeight = ogImageHeight ?? (usingDefaultOgImage ? 630 : undefined);
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
       "@type": "Organization",
+      "@id": organizationId,
       "name": SITE.name,
-      "alternateName": "Toronto Cookbook Club",
+      // The accentless spelling is how most people type us into search, and the
+      // long form is what partners and press tend to write.
+      "alternateName": [
+        "Toronto Cookbook Club",
+        "Saute Sundays",
+        "Sauté Sundays Cookbook Club"
+      ],
       "description": SITE.description,
       "url": siteUrl.replace(/\/$/, ""),
       "logo": absoluteUrl("/saute-sundays-logo.png"),
@@ -124,6 +137,21 @@ const ogHeight = ogImageHeight ?? (usingDefaultOgImage ? 630 : undefined);
       ],
       "founder": authors.map((author) => ({ "@type": "Person", "name": author.name }))
     })} />
+    {
+      isHomepage && (
+        <script type="application/ld+json" set:html={JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          "@id": `${bareSiteUrl}/#website`,
+          "name": SITE.name,
+          "alternateName": "Saute Sundays",
+          "url": `${bareSiteUrl}/`,
+          "description": SITE.description,
+          "inLanguage": SITE.language,
+          "publisher": { "@id": organizationId }
+        })} />
+      )
+    }
   </head>
   <body>
     <a href="#main-content" class="skip-link">Skip to content</a>
