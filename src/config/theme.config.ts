@@ -182,7 +182,9 @@ export const REACH = {
   // person can book, which is when early access opens. The single source for
   // this claim: the homepage proof line and both work-with-us pages read it.
   sellsOutIn: "3 days",
-  repeatMembers: "50+",
+  // Unique members who have come to two or more nights. An exact count, so no
+  // "+": it is a stronger claim than a rounded floor and it is checkable.
+  repeatMembers: "67",
   subscribers: "400+",
   whatsappMembers: "130",
   openRate: "50–70%",
