@@ -97,6 +97,7 @@ const pageTitle = post.seoTitle ?? (brandedTitle.length <= 60 ? brandedTitle : p
 
 <BaseLayout
   title={pageTitle}
+  ogTitle={post.title}
   description={post.seoDescription ?? post.excerpt}
   canonical={canonical}
   ogType="article"

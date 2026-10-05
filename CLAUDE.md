@@ -19,6 +19,22 @@ format: guests do cook in the restaurant's kitchen that evening.
 **The monthly potluck is free and always has been.** Nobody is ever charged to
 bring a dish. Partnerships pay for the room, never the plate.
 
+## Whose writing is whose
+
+Check `author` in the frontmatter before editing any post. **Mady's posts are
+hers and her words do not get rewritten**, not for SEO, not for tone, not to
+match a copy map. If a change would improve one of her posts, say so and leave
+it. Tammy's posts are open to editing.
+
+As of October 2026 Mady wrote eleven cookbook highlights; Tammy wrote all the
+event recaps plus the Endless Summer, Japanese and Moroccan highlights. The
+frontmatter is the source of truth, not this paragraph.
+
+Search metadata is not writing. `seoTitle` and `seoDescription` are fine to set
+on anyone's post, because `<title>` is written for a query. Anything a reader
+sees as the article, including the visible title and the share card, follows
+the author's own words.
+
 ## Copy conventions
 
 - No hyphens or em dashes in body copy. Post titles may keep them. Compound

@@ -7,6 +7,9 @@ import { CONTACT } from "../config/theme.config.ts";
 
 const {
   title = `${SITE.name} - Toronto's Cookbook Club`,
+  // A search title is written for a query; a share card is read by a person.
+  // Pages that need the two to differ pass this, and everything else inherits.
+  ogTitle,
   description = SITE.description,
   canonical,
   ogType = "website",
@@ -59,7 +62,7 @@ const isHomepage = Astro.url.pathname.replace(/\/$/, "") === "";
     <meta name="description" content={description} />
     {noindex && <meta name="robots" content="noindex, follow" />}
     <meta name="author" content={SITE.name} />
-    <meta property="og:title" content={title} />
+    <meta property="og:title" content={ogTitle ?? title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content={ogType} />
     <meta property="og:site_name" content={SITE.name} />
@@ -78,7 +81,7 @@ const isHomepage = Astro.url.pathname.replace(/\/$/, "") === "";
       content={ogImageAlt || (usingDefaultOgImage ? DEFAULT_OG_ALT : title)}
     />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={title} />
+    <meta name="twitter:title" content={ogTitle ?? title} />
     <meta name="twitter:description" content={description} />
     {ogImageUrl && <meta name="twitter:image" content={ogImageUrl} />}
     {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
