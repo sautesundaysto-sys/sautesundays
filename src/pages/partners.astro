@@ -16,9 +16,17 @@ const nightsRun = await eventNightsRun();
 const stats = [
   { label: "Median newsletter open rate", value: REACH.openRateMedian },
   { label: "Events sold out, each within three days", value: `${nightsRun}/${nightsRun}` },
+  { label: "People in the Sauté Sundays community", value: REACH.community },
+  { label: "Of them have been to a night", value: REACH.attendees },
   { label: "Unique members have attended at least twice", value: REACH.repeatMembers },
   { label: "Current member places at Jrew's", value: REACH.seats },
 ];
+
+// Divided rather than typed, so the claim cannot drift from the two tiles
+// above it the next time either number moves.
+const returnRate = Math.round(
+  (Number(REACH.repeatMembers) / Number(REACH.attendees)) * 100,
+);
 
 const ways = [
   {
@@ -193,6 +201,11 @@ const faqJsonLd = {
         }
       </dl>
       <p class="mt-6 leading-relaxed text-muted-foreground">
+        Those numbers are a funnel rather than a reach figure. About {REACH.community} people follow the club, around
+        {" "}{REACH.attendees} of them have been to a night, and {REACH.repeatMembers} of those have come back for
+        another. That is a {returnRate}% return rate on everyone who has walked through the door.
+      </p>
+      <p class="mt-4 leading-relaxed text-muted-foreground">
         Our newsletter is food writing: recipes, food thoughts, club updates, and recaps from previous events. Across
         our seven most recent editorial newsletters, excluding early-access ticket emails, the median open rate was 64%.
         The latest went to 414 people and recorded a 63% open rate and a 5% click rate.
