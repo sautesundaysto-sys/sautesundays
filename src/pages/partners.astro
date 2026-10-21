@@ -13,6 +13,36 @@ const nightsRun = await eventNightsRun();
 
 // Open rate first: it is a quality number. A raw audience size invites the
 // reach comparison this page does not want.
+// Product partners gave something in exchange for promotion. Google treats that
+// as a paid arrangement and asks for rel="sponsored" on those links, so they get
+// it. Venue and community partners are not paid placements and link normally.
+// Leave `url` empty until it is confirmed: a guessed address is worse than none.
+const productPartners = [
+  {
+    slug: "sunny-daze",
+    name: "Sunny Daze",
+    url: "",
+    summary:
+      "In June 2026, Sunny Daze supplied 30 lemonades for the room. Two team members joined as guests, brought dishes, and gave a short introduction. We featured the partnership in one newsletter section, one Instagram feed post, and one story. The lemonade stayed available throughout the evening and appeared naturally in the event photographs.",
+  },
+];
+
+const communityPartners = [
+  { slug: "jrews", name: "Jrew's", note: "our home on Niagara St", url: "" },
+  { slug: "danu-social-house", name: "Danu Social House", note: "", url: "" },
+];
+
+// A logo appears once a file named after the partner's slug is in
+// src/assets/partners/ (sunny-daze.png, jrews.svg, ...). No code change needed.
+const logoFiles = import.meta.glob("../assets/partners/*.{svg,png,jpg,jpeg,webp}", {
+  eager: true,
+  import: "default",
+});
+const logoFor = (slug) =>
+  Object.entries(logoFiles).find(
+    ([path]) => path.split("/").pop().replace(/\.[^.]+$/, "").toLowerCase() === slug,
+  )?.[1];
+
 const stats = [
   { label: "Median newsletter open rate", value: REACH.openRateMedian },
   { label: "Events sold out, each within three days", value: `${nightsRun}/${nightsRun}` },
@@ -227,21 +257,60 @@ const faqJsonLd = {
       <h2 class="font-serif text-2xl font-semibold sm:text-3xl">Who we've worked with</h2>
       <div class="mt-6">
         <h3 class="text-xs font-medium uppercase tracking-wider text-muted-foreground">Product partners</h3>
-        <div class="mt-3 border-l-2 border-primary/40 pl-4">
-          <p class="font-serif text-lg font-semibold">Sunny Daze</p>
-          <p class="mt-2 text-sm leading-relaxed text-muted-foreground">
-            In June 2026, Sunny Daze supplied 30 lemonades for the room. Two team members joined as guests, brought
-            dishes, and gave a short introduction. We featured the partnership in one newsletter section, one Instagram
-            feed post, and one story. The lemonade stayed available throughout the evening and appeared naturally in the
-            event photographs.
-          </p>
+        <div class="mt-3 space-y-6">
+          {
+            productPartners.map((partner) => {
+              const logo = logoFor(partner.slug);
+              return (
+                <div class="border-l-2 border-primary/40 pl-4">
+                  {logo && (
+                    <div class="mb-3 inline-flex h-14 items-center rounded-md bg-white px-3 ring-1 ring-border">
+                      <Image src={logo} alt={`${partner.name} logo`} height={64} class="h-8 w-auto" />
+                    </div>
+                  )}
+                  <p class="font-serif text-lg font-semibold">
+                    {partner.url ? (
+                      <a href={partner.url} target="_blank" rel="sponsored noopener" class="underline-offset-4 hover:text-primary hover:underline">
+                        {partner.name}
+                      </a>
+                    ) : (
+                      partner.name
+                    )}
+                  </p>
+                  <p class="mt-2 text-sm leading-relaxed text-muted-foreground">{partner.summary}</p>
+                </div>
+              );
+            })
+          }
         </div>
       </div>
       <div class="mt-8">
         <h3 class="text-xs font-medium uppercase tracking-wider text-muted-foreground">Community and venue partners</h3>
         <ul class="mt-3 space-y-2 text-sm leading-relaxed text-muted-foreground">
-          <li class="border-l-2 border-border pl-3">Jrew's, our home on Niagara St</li>
-          <li class="border-l-2 border-border pl-3">Danu Social House</li>
+          {
+            communityPartners.map((partner) => {
+              const logo = logoFor(partner.slug);
+              return (
+                <li class="flex items-center gap-3 border-l-2 border-border pl-3">
+                  {logo && (
+                    <span class="inline-flex h-10 items-center rounded bg-white px-2 ring-1 ring-border">
+                      <Image src={logo} alt={`${partner.name} logo`} height={48} class="h-6 w-auto" />
+                    </span>
+                  )}
+                  <span>
+                    {partner.url ? (
+                      <a href={partner.url} target="_blank" rel="noopener" class="text-foreground/80 underline-offset-4 hover:text-primary hover:underline">
+                        {partner.name}
+                      </a>
+                    ) : (
+                      partner.name
+                    )}
+                    {partner.note && `, ${partner.note}`}
+                  </span>
+                </li>
+              );
+            })
+          }
         </ul>
       </div>
     </section>
