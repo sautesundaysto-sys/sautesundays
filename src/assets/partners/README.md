@@ -16,3 +16,5 @@ of `src/pages/partners.astro`, then upload `<slug>.svg` here.
 - Logos sit on a small white tile, so a dark logo on transparent works in both
   light and dark mode. A white logo will disappear: send the dark version.
 - Use the partner's official file, not a screenshot.
+
+Also: Heartwood Farm → `heartwood-farm.svg`, Sobrii → `sobrii.svg`.
