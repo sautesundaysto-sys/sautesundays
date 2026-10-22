@@ -48,8 +48,11 @@ the author's own words.
   is therefore the whole update: the homepage proof line, `/blog`, the sold out
   tile on `/partners` and the prose and FAQ schema on `/restaurant-nights` all
   move on their own. Use `spellNumber()` where the count sits inside a sentence
-  and the prose around it spells numbers out. If a typed count ever turns up in
-  a page, replace it with the derived one rather than correcting the digit.
+  and the prose around it spells numbers out. In a post's frontmatter, write
+  `{nights}` in the title, seoTitle, excerpt or seoDescription; in MDX body copy,
+  use `<Nights />` (spelled) or `<Nights spell={false} />` (numeral). If a typed
+  count ever turns up in a page, replace it with the derived one rather than
+  correcting the digit.
 - Never invent dish names, recipe titles, or attendee names. Read them off the
   chalkboards in the event photos, or ask.
 

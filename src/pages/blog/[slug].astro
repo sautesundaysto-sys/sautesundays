@@ -15,6 +15,7 @@ import {
   relatedPosts,
   adjacentPosts,
   normalizePost,
+  eventNightsRun,
 } from "../../lib/blog-data.js";
 
 export async function getStaticPaths() {
@@ -23,7 +24,7 @@ export async function getStaticPaths() {
 }
 
 const { entry } = Astro.props;
-const post = normalizePost(entry);
+const post = normalizePost(entry, await eventNightsRun());
 const author = getAuthor(post.author);
 const category = getCategory(post.category);
 const { Content, headings } = await render(entry);

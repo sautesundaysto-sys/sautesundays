@@ -18,16 +18,33 @@ const estimateReadingTime = (text = "") => {
 
 export const imageSrc = (image) => (typeof image === "string" ? image : image?.src);
 
-export const normalizePost = (entry) => ({
-  slug: entry.id,
-  ...entry.data,
-  date: isoDate(entry.data.date),
-  updated: isoDate(entry.data.updated),
-  readingTime: entry.data.readingTime ?? estimateReadingTime(entry.body),
-});
+// Frontmatter can say {nights} where a title or description states how many
+// nights we have run, so a post titled around the count stays true after the
+// next recap goes up instead of contradicting its own body.
+const NIGHTS_FIELDS = ["title", "seoTitle", "excerpt", "seoDescription"];
+const isRecap = (entry) => entry.data.category === "event-recap";
 
-export const posts = async () =>
-  (await getCollection("blog", ({ data }) => !data.draft)).map(normalizePost);
+export const normalizePost = (entry, nights) => {
+  const data = { ...entry.data };
+  if (nights !== undefined) {
+    for (const field of NIGHTS_FIELDS) {
+      if (typeof data[field] === "string") data[field] = data[field].replaceAll("{nights}", String(nights));
+    }
+  }
+  return {
+    slug: entry.id,
+    ...data,
+    date: isoDate(entry.data.date),
+    updated: isoDate(entry.data.updated),
+    readingTime: entry.data.readingTime ?? estimateReadingTime(entry.body),
+  };
+};
+
+export const posts = async () => {
+  const entries = await getCollection("blog", ({ data }) => !data.draft);
+  const nights = entries.filter(isRecap).length;
+  return entries.map((entry) => normalizePost(entry, nights));
+};
 
 export const getPost = async (slug) => (await posts()).find((post) => post.slug === slug);
 export const getAuthor = (slug) => authors.find((author) => author.slug === slug);

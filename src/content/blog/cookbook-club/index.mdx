@@ -17,6 +17,7 @@ faqs:
     answer: "Spots are released on our Luma page. Newsletter subscribers get early access a day before they open to everyone, and nights have sold out within three days every time so far."
 ---
 
+import Nights from "../../../components/Nights.astro";
 import { REACH } from "../../../config/theme.config.ts";
 
 A cookbook club is a group that picks one cookbook, has each person make a different recipe from it, and then gets together to share all the dishes. That's how Sauté Sundays works. Mady and I started our cookbook club with nine people in 2025, and it's grown into a community of {REACH.community} people in Toronto, with {REACH.seats} seats every month and usually a waitlist on top of that.
@@ -104,4 +105,4 @@ If you're in Toronto, Sauté Sundays meets every month downtown. We pick a cookb
 
 ## Want to start your own cookbook club?
 
-We started with nine people and a spreadsheet, and we wrote down everything we've learned since in [How to Start a Cookbook Club: What 14 Events Taught Us](/blog/how-to-start-a-cookbook-club).
+We started with nine people and a spreadsheet, and we wrote down everything we've learned since in [How to Start a Cookbook Club: What <Nights spell={false} /> Events Taught Us](/blog/how-to-start-a-cookbook-club).
