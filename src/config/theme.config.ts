@@ -182,16 +182,15 @@ export const REACH = {
   // person can book, which is when early access opens. The single source for
   // this claim: the homepage proof line and both work-with-us pages read it.
   sellsOutIn: "3 days",
-  // The funnel, widest first. `community` is everyone who follows the club,
+  // The funnel, widest first. `community` is the newsletter subscriber count,
   // `attendees` is how many of them have actually been to a night, and
   // `repeatMembers` is how many of those came back. Kept together because the
   // return rate on /partners divides the last two, so they have to agree.
-  community: "450",
+  community: "475",
   attendees: "150",
   // Unique members who have come to two or more nights. An exact count, so no
   // "+": it is a stronger claim than a rounded floor and it is checkable.
   repeatMembers: "67",
-  subscribers: "400+",
   whatsappMembers: "130",
   openRate: "50–70%",
   // Median across the seven most recent editorial newsletters, excluding
