@@ -187,6 +187,12 @@ export const REACH = {
   // `repeatMembers` is how many of those came back. Kept together because the
   // return rate on /partners divides the last two, so they have to agree.
   community: "475",
+  // Growth as a dated comparison, never a rate: a count from a year ago stays
+  // true, a monthly percentage goes stale the first slow month. From the Luma
+  // member export (first_seen), which only holds people still on the list, so
+  // the old figure is a floor. Checked against two real sends: within 1%.
+  communityBefore: "136",
+  communityBeforeWhen: "October 2025",
   attendees: "150",
   // Unique members who have come to two or more nights. An exact count, so no
   // "+": it is a stronger claim than a rounded floor and it is checkable.
