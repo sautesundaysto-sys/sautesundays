@@ -139,7 +139,7 @@ export const NEXT_EVENT = {
   location: "Jrew's, 165 Niagara St",
   // Leave both empty in a month with no featured book; `note` then carries
   // what replaces the "Cooking from ..." line.
-  cookbook: "Simple",
+  cookbook: "Simple Too",
   cookbookAuthor: "Yotam Ottolenghi",
   note: "",
   rsvpLabel: "RSVP on Luma",
@@ -149,7 +149,7 @@ export const NEXT_EVENT = {
   //   "RSVPs open now. Spots go fast."
   //   "Sold out. Join the waitlist"      (pair with statusUrl)
   //   "Next event announced [MONTH]. Subscribe to get it first."
-  status: "Early access is open for subscribers. Public RSVP October 30.",
+  status: "Early access opens October 29 for subscribers. Public RSVP October 30.",
   // Optional. When set, `status` renders as a link with a trailing arrow.
   statusUrl: "",
 
@@ -169,7 +169,7 @@ export const NEXT_EVENT = {
   // Optional street address for that venue. Omitted from the schema when "".
   locationStreet: "165 Niagara St",
   schemaDescription:
-    "Ottolenghi Night at Jrew's. Toronto's free cookbook club cooks from Simple by Yotam Ottolenghi: everyone makes a recipe at home and brings it to share.",
+    "Ottolenghi Night at Jrew's. Toronto's free cookbook club cooks from Simple Too by Yotam Ottolenghi: everyone makes a recipe at home and brings it to share.",
 };
 
 // Numbers shown on /restaurant-nights and /partners. Both pages are sent as
@@ -186,7 +186,7 @@ export const REACH = {
   // `attendees` is how many of them have actually been to a night, and
   // `repeatMembers` is how many of those came back. Kept together because the
   // return rate on /partners divides the last two, so they have to agree.
-  community: "475",
+  community: "482",
   // Growth as a dated comparison, never a rate: a count from a year ago stays
   // true, a monthly percentage goes stale the first slow month. From the Luma
   // member export (first_seen), which only holds people still on the list, so
