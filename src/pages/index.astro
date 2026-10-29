@@ -35,7 +35,12 @@ const latest = allPosts.filter(
 
 // Event structured data, built from the same NEXT_EVENT entry the "Next up"
 // block renders, so there is only one place to update each month.
-const eventJsonLd = NEXT_EVENT.title && NEXT_EVENT.startDateTime
+// Only while the night is still ahead: the visible block hides itself once the
+// date passes, and the schema has to agree with it, or search engines keep
+// advertising a bookable ticket for a night that already happened.
+const eventEnds = new Date(NEXT_EVENT.endDateTime || NEXT_EVENT.startDateTime);
+const eventIsAhead = !Number.isNaN(eventEnds.valueOf()) && eventEnds.valueOf() > Date.now();
+const eventJsonLd = NEXT_EVENT.title && NEXT_EVENT.startDateTime && eventIsAhead
   ? {
       "@context": "https://schema.org",
       "@type": "Event",
