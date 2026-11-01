@@ -40,6 +40,13 @@ const latest = allPosts.filter(
 // advertising a bookable ticket for a night that already happened.
 const eventEnds = new Date(NEXT_EVENT.endDateTime || NEXT_EVENT.startDateTime);
 const eventIsAhead = !Number.isNaN(eventEnds.valueOf()) && eventEnds.valueOf() > Date.now();
+// The hero button goes straight to this month's event page while there is
+// one ahead, and to the Luma calendar in the gap between a night ending and
+// the next being entered. The script at the foot of the page makes the same
+// switch in the browser, so a page built before the night still flips after.
+const LUMA_CALENDAR = "https://lu.ma/sautesundaysto";
+const rsvpHref = eventIsAhead && NEXT_EVENT.rsvpUrl ? NEXT_EVENT.rsvpUrl : LUMA_CALENDAR;
+
 const eventJsonLd = NEXT_EVENT.title && NEXT_EVENT.startDateTime && eventIsAhead
   ? {
       "@context": "https://schema.org",
@@ -131,7 +138,10 @@ const eventJsonLd = NEXT_EVENT.title && NEXT_EVENT.startDateTime && eventIsAhead
         </p>
         <div class="mt-10 flex flex-wrap items-center gap-4">
           
-           <a href="https://lu.ma/sautesundaysto"
+           <a href={rsvpHref}
+            data-rsvp-next
+            data-rsvp-until={eventIsAhead ? eventEnds.toISOString() : undefined}
+            data-rsvp-fallback={LUMA_CALENDAR}
             class="inline-flex min-h-11 items-center gap-2 rounded-full bg-[#1a1c1a] px-6 py-3 text-sm font-semibold text-[#f2eeeb] transition-colors hover:opacity-90 dark:bg-[#f2eeeb] dark:text-[#1a1c1a]"
           >
             RSVP to the next event
@@ -352,5 +362,13 @@ const eventJsonLd = NEXT_EVENT.title && NEXT_EVENT.startDateTime && eventIsAhead
     buttons.forEach((button) => {
       button.addEventListener("click", () => filterCards(button.dataset.homeFilter || ""));
     });
+  }
+</script>
+
+<script>
+  const rsvp = document.querySelector<HTMLAnchorElement>("[data-rsvp-next]");
+  const until = rsvp?.dataset.rsvpUntil;
+  if (rsvp && until && new Date(until).valueOf() <= Date.now()) {
+    rsvp.href = rsvp.dataset.rsvpFallback ?? rsvp.href;
   }
 </script>
