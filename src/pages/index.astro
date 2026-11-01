@@ -82,7 +82,7 @@ const eventJsonLd = NEXT_EVENT.title && NEXT_EVENT.startDateTime && eventIsAhead
         "@type": "Offer",
         price: "0",
         priceCurrency: "CAD",
-        availability: "https://schema.org/InStock",
+        availability: NEXT_EVENT.soldOut ? "https://schema.org/SoldOut" : "https://schema.org/InStock",
         // rsvpUrl is relative while it points at /contact, between Luma pages.
         url: new URL(NEXT_EVENT.rsvpUrl, SITE.url).toString(),
         // Only set once we know the date, so we are not telling search engines

@@ -142,14 +142,18 @@ export const NEXT_EVENT = {
   cookbook: "Simple Too",
   cookbookAuthor: "Yotam Ottolenghi",
   note: "",
-  rsvpLabel: "RSVP on Luma",
+  // "Join the waitlist" once sold out: the Luma page is the waitlist then.
+  rsvpLabel: "Join the waitlist",
   rsvpUrl: "https://luma.com/wspo7q4g",
   // Swap `status` as you move through the cycle. Set it to "" to hide the line.
   //   "Early access opens [DATE] for subscribers. Public RSVP [DATE]."
   //   "RSVPs open now. Spots go fast."
-  //   "Sold out. Join the waitlist"      (pair with statusUrl)
+  //   "Sold out."                        (with rsvpLabel "Join the waitlist" and soldOut: true)
   //   "Next event announced [MONTH]. Subscribe to get it first."
-  status: "Early access opens October 29 for subscribers. Public RSVP October 30.",
+  status: "Sold out.",
+  // True once every seat is taken. Tells search engines the free ticket is
+  // sold out rather than still bookable. Set back to false for the next event.
+  soldOut: true,
   // Optional. When set, `status` renders as a link with a trailing arrow.
   statusUrl: "",
 
