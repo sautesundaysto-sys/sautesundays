@@ -53,6 +53,11 @@ the author's own words.
   use `<Nights />` (spelled) or `<Nights spell={false} />` (numeral). If a typed
   count ever turns up in a page, replace it with the derived one rather than
   correcting the digit.
+- Set a post's `updated` date only when what a reader sees changes: new
+  photos, rewritten copy, a count in the body moving. Never for metadata like
+  `seoTitle`, and never just to look fresh. It feeds `dateModified` and the
+  visible "updated" line, so a bumped date with no visible change is a false
+  claim to search and AI engines.
 - Never invent dish names, recipe titles, or attendee names. Read them off the
   chalkboards in the event photos, or ask.
 
