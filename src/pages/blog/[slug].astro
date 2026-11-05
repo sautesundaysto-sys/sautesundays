@@ -104,6 +104,7 @@ const pageTitle = post.seoTitle ?? (brandedTitle.length <= 60 ? brandedTitle : p
   canonical={canonical}
   ogType="article"
   ogImage={socialImage?.src}
+  ogImageAlt={post.thumbnailAlt || undefined}
   jsonLd={jsonLd}
   flushFooter
 >
