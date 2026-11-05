@@ -1,6 +1,6 @@
 import { getCollection } from "astro:content";
 export { SITE, authors, categories, tags } from "../config/theme.config.ts";
-import { authors, categories, tags } from "../config/theme.config.ts";
+import { SITE, authors, categories, tags } from "../config/theme.config.ts";
 
 const isoDate = (date) => date?.toISOString().slice(0, 10);
 const wordsPerMinute = 220;
@@ -48,6 +48,22 @@ export const posts = async () => {
 
 export const getPost = async (slug) => (await posts()).find((post) => post.slug === slug);
 export const getAuthor = (slug) => authors.find((author) => author.slug === slug);
+
+// The author as schema.org sees them. Posts and the author page both use this,
+// so a byline and a profile can never describe the same person differently.
+// `worksFor` points at the Organization the layout publishes on every page.
+export const personSchema = (author) =>
+  author && {
+    "@type": "Person",
+    "@id": `${SITE.url}/authors/${author.slug}#person`,
+    name: author.name,
+    url: `${SITE.url}/authors/${author.slug}`,
+    description: author.bio,
+    jobTitle: author.role,
+    image: author.avatar ? new URL(author.avatar, SITE.url).toString() : undefined,
+    worksFor: { "@id": `${SITE.url}/#organization` },
+    sameAs: author.sameAs?.length ? author.sameAs : undefined,
+  };
 export const getCategory = (slug) => categories.find((category) => category.slug === slug);
 export const getTag = (slug) => tags.find((tag) => tag.slug === slug);
 export const postsByCategory = async (slug) =>

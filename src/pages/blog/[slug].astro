@@ -16,6 +16,7 @@ import {
   adjacentPosts,
   normalizePost,
   eventNightsRun,
+  personSchema,
 } from "../../lib/blog-data.js";
 
 export async function getStaticPaths() {
@@ -57,7 +58,7 @@ const blogPosting = {
   datePublished: post.date,
   dateModified: post.updated || post.date,
   image: thumbnailUrl,
-  author: { "@type": "Person", name: author?.name },
+  author: personSchema(author),
   mainEntityOfPage: canonicalUrl,
   publisher: {
     "@type": "Organization",

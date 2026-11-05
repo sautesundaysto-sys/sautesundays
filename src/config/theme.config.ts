@@ -72,6 +72,9 @@ export const authors = [
       "Marketing by day. Also writes Clearing the Table, on food and travel.",
     ],
     avatar: "/avatars/tammy.jpeg",
+    // Other places this same person publishes. Feeds `sameAs` in the Person
+    // schema so search and AI engines can join her writing up across sites.
+    sameAs: ["https://clearingthetable.substack.com"],
   },
   {
     slug: "mady",
